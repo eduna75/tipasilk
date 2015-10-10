@@ -126,3 +126,4 @@ crashlytics-build.properties
 
 
 venv
+!app/static/assets/lib/
