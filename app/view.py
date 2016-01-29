@@ -4,18 +4,17 @@ __copyright__ = 'copyright @ Justus Ouwerling'
 
 
 from app import app
-from flask import render_template, request, url_for, redirect, send_from_directory
+from flask import render_template, request, send_from_directory
 
 
 @app.route('/')
-@app.route('/index')
 def index():
     return render_template('official/index.html')
 
 
 @app.route('/blog')
 def blog():
-    return 'blog'
+    return render_template('official/base.html')
 
 
 @app.route('/about')
