@@ -6,35 +6,37 @@ __copyright__ = 'copyright @ Justus Ouwerling'
 from app import app
 from flask import render_template, request, send_from_directory
 
+template = 'official/'
+
 
 @app.route('/')
 def index():
-    return render_template('official/index.html')
+    return render_template(template + 'index.html')
 
 
 @app.route('/blog')
 def blog():
-    return render_template('official/base.html')
+    return render_template(template + 'base.html')
 
 
 @app.route('/about')
 def about():
-    return render_template('official/about.html')
+    return render_template(template + 'about.html')
 
 
 @app.route('/contact')
 def contact():
-    return 'contact'
+    return render_template(template + 'contact.html')
 
 
 @app.route('/product')
 def product():
-    return 'catalog'
+    return render_template(template + 'product.html')
 
 
 @app.route('/faq')
 def faq():
-    return 'knowledge'
+    return render_template(template + 'faq.html')
 
 
 @app.route('/robots.txt')
