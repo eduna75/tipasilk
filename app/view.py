@@ -19,7 +19,7 @@ def blog():
 
 @app.route('/about')
 def about():
-    return 'about'
+    return render_template('official/about.html')
 
 
 @app.route('/contact')
@@ -27,13 +27,13 @@ def contact():
     return 'contact'
 
 
-@app.route('/catalog')
-def catalog():
+@app.route('/product')
+def product():
     return 'catalog'
 
 
-@app.route('/knowledge')
-def knowledge():
+@app.route('/faq')
+def faq():
     return 'knowledge'
 
 
