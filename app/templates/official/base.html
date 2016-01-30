@@ -2,10 +2,12 @@
 <html lang="en">
 <head >
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="msapplication-TileColor" content="#000000">
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#000000">
+    {% block meta %}{% endblock %}
 
     <title>{% block title %}{% endblock %}</title>
 
@@ -19,17 +21,20 @@
     {% block css %}{% endblock %}
 </head>
 
-<body data-spy=scroll data-target=#main-nav-collapse data-offset=100>
+<body id="null" data-spy=scroll data-target=#main-nav-collapse data-offset=100>
 {% block nav %}
     {% include 'official/nav.html' ignore missing %}
 {% endblock %}
 {% block content %}{% endblock %}
 
-{% block footer %}{% include 'official/footer.html' ignore missing %}{% endblock %}
+{% block footer %}
+    {% include 'official/footer.html' ignore missing %}
+{% endblock %}
 
     <script style="" src="assets/lib/components-modernizr/modernizr.js"></script>
     <script src="assets/lib/jquery/dist/jquery.js"></script>
     <script src="assets/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src=assets/js/main.js></script>
 {% block script %}{% endblock %}
 </body>
 </html>
