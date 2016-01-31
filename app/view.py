@@ -42,3 +42,8 @@ def faq():
 @app.route('/robots.txt')
 def robots():
     return send_from_directory(app.static_folder, request.path[1:])
+
+
+@app.route('/admin-blog')
+def admin_blog():
+    return render_template(template + 'admin.html')
