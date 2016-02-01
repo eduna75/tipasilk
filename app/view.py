@@ -44,6 +44,7 @@ def robots():
     return send_from_directory(app.static_folder, request.path[1:])
 
 
+# google site verification
 @app.route('/google91fe3a6d5fb60907.html')
 def google():
     return send_from_directory(app.static_folder, request.path[1:])
