@@ -1,14 +1,15 @@
 __author__ = 'justus'
 
+import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.compress import Compress
 
 app = Flask(__name__, static_path='')
-app.config.update(
-    DEBUG=True,
-    SQLALCHEMY_DATABASE_URI='postgresql://justus:73@Jul-7@127.0.0.1/tipasilk',
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
-)
+
+Compress(app)
+app.config.from_object(os.environ['APP_SETTINGS'])
+
 db = SQLAlchemy(app)
 
 from app import view
