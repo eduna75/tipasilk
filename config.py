@@ -12,7 +12,7 @@ class BaseConfig(object):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://justus:73@Jul-7@127.0.0.1/tipasilk'
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL'] + 'tipasilk'
 
 
 class ProductionConfig(BaseConfig):
