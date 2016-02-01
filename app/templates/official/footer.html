@@ -3,19 +3,22 @@
         <div class=row>
             <div class="col-md-3 col-sm-6">
                 <div class="content-wrap widget-text">
-                    <h4>About the reign</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores dolorum eius libero nihil.
-                        Fugiat ipsum officia reprehenderit rerum saepe. Assumenda distinctio, voluptatibus. At
-                        consectetur cumque enim error laudantium mollitia obcaecati!</p>
+                    <h4>About Tipasilk</h4>
+
+                    <p>Tipa silk comes from the Isaan part of Thailand.
+                        The silk is produced by locals and hand woven into scarfs and fabrics that’s been used to make
+                        the finest clothes.
+                        Isaan is pronounced e- saan and is a big area of Thailand that’s connected to Cambodia and
+                        Laos.</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="content-wrap widget-contact">
                     <h4>Contact info</h4>
                     <ul>
-                        <li><i class=ion-home></i> 13005 Greenville California.</li>
-                        <li><i class=ion-android-call></i> (303) 674-7750</li>
-                        <li><i class=ion-email></i> info@yoursite.com</li>
+                        <li><i class=ion-home></i> Moo 2 Saphonasung, Bangkok, Thailand</li>
+                        <li><i class=ion-android-call></i> +66 (0) 87 834 9344</li>
+                        <li><i class=ion-email></i> info@tipasilk.com</li>
                         <li><i class=ion-ios-location></i> Map and Direction</li>
                     </ul>
                 </div>
@@ -24,25 +27,24 @@
                 <div class="content-wrap widget-recent-posts">
                     <h4>Recent Posts</h4>
                     <ul>
-                        <li><a href=# class=post-title>Lorem ipsum dolor sit amet</a> by <a href=# class=author>Jhon
+                        {% for post in g.posts[-3:] %}
+                        <li><a href={{ url_for('post', post_id=post.id) }} class=post-title>{{ post.title }}</a> by <a href=# class=author>Jhon
                             Smith</a></li>
-                        <li><a href=# class=post-title>Lorem ipsum dolor sit amet</a> by <a href=# class=author>Jhon
-                            Smith</a></li>
-                        <li><a href=# class=post-title>Lorem ipsum dolor sit amet</a> by <a href=# class=author>Jhon
-                            Smith</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="content-wrap widget-gallery">
                     <h4>Photo Gallery</h4>
+
                     <div class=lightbox-gallery>
-                        <a href=assets/images/work/01.jpg><img src=assets/images/work/01.jpg></a>
-                        <a href=assets/images/work/02.jpg><img src=assets/images/work/02.jpg></a>
-                        <a href=assets/images/work/03.jpg><img src=assets/images/work/03.jpg></a>
-                        <a href=assets/images/work/04.jpg><img src=assets/images/work/04.jpg></a>
-                        <a href=assets/images/work/05.jpg><img src=assets/images/work/05.jpg></a>
-                        <a href=assets/images/work/06.jpg><img src=assets/images/work/06.jpg></a>
+                        <a href=/assets/images/work/01.jpg><img src=/assets/images/work/01.jpg></a>
+                        <a href=/assets/images/work/02.jpg><img src=/assets/images/work/02.jpg></a>
+                        <a href=/assets/images/work/03.jpg><img src=/assets/images/work/03.jpg></a>
+                        <a href=/assets/images/work/04.jpg><img src=/assets/images/work/04.jpg></a>
+                        <a href=/assets/images/work/05.jpg><img src=/assets/images/work/05.jpg></a>
+                        <a href=/assets/images/work/06.jpg><img src=/assets/images/work/06.jpg></a>
                     </div>
                 </div>
             </div>
@@ -57,12 +59,13 @@
             </div>
             <div class="col-md-5 col-sm-4">
                 <ul class=footer-social-block>
-                    <li><a href="https://www.facebook.com/Tipasilk/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.facebook.com/Tipasilk/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    </li>
                     <li><a href=#><i class="fa fa-twitter"></i></a></li>
-{#                    <li><a href=#><i class="fa fa-pinterest-p"></i></a></li>#}
-{#                    <li><a href=#><i class="fa fa-behance"></i></a></li>#}
-{#                    <li><a href=#><i class="fa fa-google-plus"></i></a></li>#}
-{#                    <li><a href=#><i class="fa fa-linkedin"></i></a></li>#}
+                    {#                    <li><a href=#><i class="fa fa-pinterest-p"></i></a></li>#}
+                    {#                    <li><a href=#><i class="fa fa-behance"></i></a></li>#}
+                    {#                    <li><a href=#><i class="fa fa-google-plus"></i></a></li>#}
+                    {#                    <li><a href=#><i class="fa fa-linkedin"></i></a></li>#}
                 </ul>
             </div>
             <div class="col-md-4 col-sm-4">

@@ -1,0 +1,54 @@
+{% extends 'official/base.html' %}
+
+{% block content %}
+
+    <header id=header class="header-inner home-parallax home-fade dark-bg">
+        <div class=color-overlay></div>
+        <div class=header-wrapper-inner>
+            <div class=container>
+                <div class=intro>
+                    <h1>Create Content</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id=about-us class="section about-us">
+        <div class=container>
+            <header class=section-heading>
+                <span>Here you can create all the content of this website!</span></header>
+            <div class=section-content>
+                <form id="create" name="title" method="POST" action="create">
+                    <input type="text" name="title" placeholder="Title">
+                    <textarea name="body"></textarea>
+                    <button type="submit" value="submit">Create</button>
+                </form>
+            </div>
+            <div class="panel-default">
+                {% for posts in g.posts %}
+                    <div class="panel  panel-default">
+                    <div class="panel-heading">
+                        <h2>{{ posts.title|safe }}</h2>
+                    </div>
+                    <div class="panel-body">
+                        <p>{{ posts.body|safe }}</p>
+                    </div>
+                    <div class="panel-footer">
+                        {{ posts.id }}
+                        <form id="update" method="POST" action="update">
+                            <input type="hidden" value="{{ posts.id }}">
+                            <input type="submit" value="Update">
+                        </form>
+                        <form id="delete" method="POST" action="delete">
+                            <input type="hidden" name="delete" value="{{ posts.id }}">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

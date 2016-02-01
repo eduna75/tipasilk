@@ -3,10 +3,16 @@ __created__ = '29-01-2016'
 __copyright__ = 'copyright @ Justus Ouwerling'
 
 
-from app import app
-from flask import render_template, request, send_from_directory
+from app import app, db
+from flask import render_template, request, send_from_directory, g, redirect, url_for
+from app.admin.models import Blog
 
 template = 'official/'
+
+
+@app.before_request
+def before_request():
+        g.posts = Blog.query.all()
 
 
 @app.route('/')
@@ -17,6 +23,12 @@ def index():
 @app.route('/blog')
 def blog():
     return render_template(template + 'blog.html')
+
+
+@app.route('/post/<int:post_id>')
+def post(post_id=None):
+    post = Blog.query.filter_by(id=post_id).first()
+    return render_template(template + 'post.html', post=post)
 
 
 @app.route('/about')
@@ -50,6 +62,32 @@ def google():
     return send_from_directory(app.static_folder, request.path[1:])
 
 
-@app.route('/admin-blog')
-def admin_blog():
-    return render_template(template + 'admin.html')
+@app.route('/create', methods=['POST', 'GET'])
+def create():
+    if request.method == 'POST':
+        post = Blog(request.form['title'], request.form['body'])
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('create'))
+    return render_template(template + 'listview.html')
+
+
+@app.route('/update', methods=['GET', 'POST'])
+def update():
+    post = Blog.query.get(request.form['id'])
+    if request.method == 'POST':
+        post.title = request.form['title']
+        post.body = request.form['body']
+        db.session.commit()
+
+    return redirect(url_for('create'))
+
+
+@app.route('/delete', methods=['POST', 'GET'])
+def delete():
+    if request.method == 'POST':
+        post = Blog.query.get(request.form['delete'])
+        db.session.delete(post)
+        db.session.commit()
+
+    return redirect(url_for('create'))

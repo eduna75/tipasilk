@@ -12,7 +12,3 @@ app.config.update(
 db = SQLAlchemy(app)
 
 from app import view
-
-# from the CRUD project
-from app.admin.admin import admin
-app.register_blueprint(admin)
