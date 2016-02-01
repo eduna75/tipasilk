@@ -6,7 +6,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, static_path='')
 
-app.config.from_object(os.environ['APP_SETTINGS'])
+app.config.from_object(os.environ['APP_CONFIG'])
 
 db = SQLAlchemy(app)
 
