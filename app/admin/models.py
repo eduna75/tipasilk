@@ -1,8 +1,6 @@
 __author__ = 'justus'
 
 from datetime import datetime
-
-
 from .. import db
 
 
@@ -41,3 +39,39 @@ class FAQ(db.Model):
 
     def __repr__(self):
         return '<FAQ - {}>'.format(self.title)
+
+
+class Products(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True)
+    sizes = db.Column(db.Enum('xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl', name='select_size'))
+    colors = db.Column(db.Enum('red', 'blue', 'green', 'brown', 'white', 'black', name='select_color'))
+    shortdesc = db.Column(db.String(100), nullable=False)
+    longdesc = db.Column(db.Text())
+    thumbnail = db.Column(db.String(255))
+    image = db.Column(db.String(255))
+    status = db.Column(db.Enum('active', 'inactive', name='set_status'), default='inactive')
+    category_id = db.Column(db.Integer())
+    featured = db.Column(db.Enum('true', 'false', name='set_featured'), default='false')
+    price = db.Column(db.Float(4, 2))
+    created_on = db.Column(db.DateTime(), default=datetime.utcnow)
+    updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
+    viewed = db.Column(db.Integer())
+    viewed_ip = db.Column(db.Integer())
+    product_nr = db.Column(db.Integer())
+
+    def __init__(self, name, shortdesc, longdesc, price):
+        self.name = name
+        self.shortdesc = shortdesc
+        self.longdesc = longdesc
+        # self.thumbnail = thumbnail
+        # self.image = image
+        # self.category_id = category_id
+        # self.featured = featured
+        self.price = price
+        # self.viewed = viewed
+        # self.viewed_ip = viewed_ip
+        # self.product_nr = product_nr
+
+    def __repr__(self):
+        return '<Products - {}>'.format(self.name, self.shortdesc, self.longdesc, self.category_id, self.price)

@@ -5,7 +5,7 @@ __copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
 from flask import render_template, request, send_from_directory, g, redirect, url_for
-from app.admin.models import Blog
+from app.admin.models import Blog, Products
 
 template = 'official/'
 
@@ -91,3 +91,15 @@ def delete():
         db.session.commit()
 
     return redirect(url_for('create'))
+
+
+@app.route('/add-product', methods=['GET', 'POST'])
+def add_product():
+    product_list = Products.query.all()
+    if request.method == 'POST':
+        print 'request.form: ', request.form['shortdesc']
+        prod = Products(request.form['name'], request.form['shortdesc'], request.form['longdesc'], request.form['price'])
+        db.session.add(prod)
+        db.session.commit()
+        return redirect(url_for('add_product'))
+    return render_template(template + 'add-product.html', product=product_list)
