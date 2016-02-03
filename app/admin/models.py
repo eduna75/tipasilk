@@ -75,3 +75,14 @@ class Products(db.Model):
 
     def __repr__(self):
         return '<Products - {}>'.format(self.name, self.shortdesc, self.longdesc, self.category_id, self.price)
+
+
+class Test(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.LargeBinary)
+
+    def __init__(self, image):
+        self.image = image
+
+    def __repr__(self):
+        return '<Test - {}>'.format(self.image)

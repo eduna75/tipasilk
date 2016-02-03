@@ -5,7 +5,7 @@ __copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
 from flask import render_template, request, send_from_directory, g, redirect, url_for
-from app.admin.models import Blog, Products
+from app.admin.models import Blog, Products, Test
 
 template = 'official/'
 
@@ -103,3 +103,15 @@ def add_product():
         db.session.commit()
         return redirect(url_for('add_product'))
     return render_template(template + 'add-product.html', product=product_list)
+
+
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    import base64
+    if request.method == 'POST':
+        print request.files
+        data = request.files['exampleInputFile']
+        image = base64.b64encode(data.stream.read())
+        print image
+    img = Test.query.all()
+    return render_template(template + 'test.html', img=img)
