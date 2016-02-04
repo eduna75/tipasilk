@@ -46,6 +46,14 @@ def product():
     return render_template(template + 'product.html', products=data)
 
 
+@app.route('/product-spec/<int:prod_id>')
+def product_spec(prod_id=None):
+    data = Products.query.filter_by(id=prod_id)
+    print data
+
+    return render_template(template + 'product-single.html', data=data)
+
+
 @app.route('/faq')
 def faq():
     return render_template(template + 'faq.html')

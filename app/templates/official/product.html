@@ -8,7 +8,7 @@
     <header id=header class="home-parallax home-fade dark-bg header-inner">
         <div class=color-overlay></div>
         <div class=container>
-            <h1>Portfolio</h1>
+            <h1>Products</h1>
 
             <div class=breadcrumb><a href=>Home</a> <i class="fa fa-angle-double-right"></i> <a href=#>Products</a>
             </div>
@@ -32,7 +32,7 @@
             <ul id=da-thumbs class="da-thumbs isotope">
                 {% for product in products %}
                     <li data-category=design class=design>
-                        <a href=portfolio__single.html>
+                        <a href="{{ url_for('product_spec', prod_id=product.id) }}">
                             {% for image in product.images[0:1] %}
                                 <img src="data:image/jpg;base64,{{ image.image }}">
                             {% endfor %}
