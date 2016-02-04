@@ -78,7 +78,7 @@ class Products(db.Model):
 
 
 class Test(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     image = db.Column(db.LargeBinary)
 
     def __init__(self, image):

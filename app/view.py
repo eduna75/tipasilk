@@ -109,9 +109,12 @@ def add_product():
 def test():
     import base64
     if request.method == 'POST':
-        print request.files
         data = request.files['exampleInputFile']
-        image = base64.b64encode(data.stream.read())
-        print image
-    img = Test.query.all()
+
+        db.session.add(Test(base64.b64encode(data.stream.read())))
+        db.session.commit()
+    try:
+        img = Test.query.all()
+    except BaseException as e:
+        print e
     return render_template(template + 'test.html', img=img)
