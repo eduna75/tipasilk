@@ -26,7 +26,11 @@
             </div>
             <div>
                 {% for i in img %}
-                    <img src="data:image/jpb;base64,{{ i.image }}"/>
+                    <img src="data:image/jpg;base64,{{ i.image }}"/>
+                    <form id="delete" method="POST" action="delete-test">
+                        <input type="hidden" name="delete" value="{{ i.id }}">
+                        <input type="submit" value="Delete {{ i.id }}">
+                    </form>
                 {% endfor %}
             </div>
         </div>

@@ -2,17 +2,16 @@ __author__ = 'justus'
 __created__ = '29-01-2016'
 __copyright__ = 'copyright @ Justus Ouwerling'
 
-
 from app import app, db
 from flask import render_template, request, send_from_directory, g, redirect, url_for
-from app.admin.models import Blog, Products, Test
+from app.admin.models import Blog, Products, Image, Test
 
 template = 'official/'
 
 
 @app.before_request
 def before_request():
-        g.posts = Blog.query.all()
+    g.posts = Blog.query.all()
 
 
 @app.route('/')
@@ -43,7 +42,8 @@ def contact():
 
 @app.route('/product')
 def product():
-    return render_template(template + 'product.html')
+    data = Products.query.all()
+    return render_template(template + 'product.html', products=data)
 
 
 @app.route('/faq')
@@ -86,8 +86,7 @@ def update():
 @app.route('/delete', methods=['POST', 'GET'])
 def delete():
     if request.method == 'POST':
-        post = Blog.query.get(request.form['delete'])
-        db.session.delete(post)
+        db.session.delete(Blog.query.get(request.form['delete']))
         db.session.commit()
 
     return redirect(url_for('create'))
@@ -97,24 +96,43 @@ def delete():
 def add_product():
     product_list = Products.query.all()
     if request.method == 'POST':
-        print 'request.form: ', request.form['shortdesc']
-        prod = Products(request.form['name'], request.form['shortdesc'], request.form['longdesc'], request.form['price'])
-        db.session.add(prod)
-        db.session.commit()
-        return redirect(url_for('add_product'))
+        try:
+            print 'request.form: ', request.form['shortdesc']
+            prod = Products(request.form['name'], request.form['shortdesc'], request.form['longdesc'], request.form['price'])
+            db.session.add(prod)
+            db.session.commit()
+            return redirect(url_for('add_product'))
+        except BaseException as e:
+            print e
     return render_template(template + 'add-product.html', product=product_list)
+
+
+@app.route('/delete-product', methods=['GET', 'POST'])
+def delete_product():
+    if request.method == 'POST':
+        print request.form
+        db.session.delete(Products.query.get(request.form['delete']))
+        db.session.commit()
+
+    return redirect(url_for('add_product'))
 
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     import base64
-    if request.method == 'POST':
-        data = request.files['exampleInputFile']
 
-        db.session.add(Test(base64.b64encode(data.stream.read())))
+    if request.method == 'POST':
+        data = request.files['imageInput']
+        data = base64.b64encode(data.stream.read())
+        db.session.add(Image(data, request.form['productId']))
         db.session.commit()
-    try:
-        img = Test.query.all()
-    except BaseException as e:
-        print e
-    return render_template(template + 'test.html', img=img)
+    return redirect(url_for('add_product'))
+
+
+@app.route('/delete-test', methods=['GET', 'POST'])
+def delete_test():
+    if request.method == "POST":
+        if request.form['delete']:
+            db.session.delete(Test.query.get(request.form['delete']))
+            db.session.commit()
+    return redirect(url_for('test'))

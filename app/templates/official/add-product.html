@@ -23,20 +23,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="shortdesc">Short product description</label>
-                                <input type="text" class="form-control" name="shortdesc" placeholder="Short Description">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
-                                <input type="file" name="exampleInputFile">
-
-                                <p class="help-block">Example block-level help text here.</p>
+                                <input type="text" class="form-control" name="shortdesc"
+                                       placeholder="Short Description">
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="longdesc">Long Description</label>
-                                <textarea class="form-control" name="longdesc" placeholder="Long description"></textarea>
+                                <textarea class="form-control" name="longdesc"
+                                          placeholder="Long description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
@@ -44,23 +40,49 @@
                             </div>
                         </div>
                     </form>
+                    <br/>
                 </div>
                 <div class="row">
 
-                {% for product in product|reverse %}
+                    {% for product in product|reverse %}
 
-                    <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3>{{ product.name }} <small>{{ product.created_on.strftime('%d %b %y') }}</small></h3>
+                        <div class="panel">
+                        <div class="panel-heading panel-info">
+                            <h3>{{ product.name }}
+                                <small>{{ product.created_on.strftime('%d %b %y') }}</small>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <h4>{{ product.shortdesc }}</h4>
+
+                            <p>{{ product.longdesc }}</p>
+                            {% for images in product.images %}
+                                <img src="data:image/jpg;base64,{{ images.image }}" style="max-height: 430px;"/>
+                                {% endfor %}
+
+                        </div>
+                        <div class="panel-footer panel-success">
+                            {{ product.price|float|round(2) }}
+                        </div>
+                        <form id="delete" method="POST" action="delete-product">
+                            <input type="hidden" name="delete" value="{{ product.id }}">
+                            <input type="submit" value="Delete Product">
+                        </form>
+
+                        <form method="POST" action="test" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input type="hidden" name="productId" value="{{ product.id }}">
+                                <input type="file" name="imageInput">
+
+                                <p class="help-block">Add an image to your product</p>
+                            </div>
+                            <input type="submit" value="Submit">
+                        </form>
+                        <br/>
+                    {% endfor %}
                     </div>
-                    <div class="panel-body">
-                    {{ product.shortdesc }}
-                    <p>{{ product.longdesc }}</p>
-                    </div>
-                    <div class="panel-footer">
-                    {{ product.price|float|round(2) }}
-                    </div>
-                {% endfor %}
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
         <div class=container>
             <h1>Portfolio</h1>
 
-            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a href=#>Products</a>
+            <div class=breadcrumb><a href=>Home</a> <i class="fa fa-angle-double-right"></i> <a href=#>Products</a>
             </div>
         </div>
     </header>
@@ -30,138 +30,22 @@
         </div>
         <div class="container portfolio-grid three-col">
             <ul id=da-thumbs class="da-thumbs isotope">
-                <li data-category=design class=design>
-                    <a href=portfolio__single.html><img src=assets/images/work/01.jpg>
+                {% for product in products %}
+                    <li data-category=design class=design>
+                        <a href=portfolio__single.html>
+                            {% for image in product.images[0:1] %}
+                                <img src="data:image/jpg;base64,{{ image.image }}">
+                            {% endfor %}
 
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
+                            <div class=portfolio-detail-overlay>
+                                <div class=middle-align-wrap>
+                                    <div class=middle-align-cell>
+                                        <h4>{{ product.name }}</h4><span>{{ product.shortdesc }}</span></div>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=marketing class=marketing>
-                    <a href=portfolio__single.html><img src=assets/images/work/02.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=wordpress class=wordpress>
-                    <a href=portfolio__single.html><img src=assets/images/work/03.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=design class=design>
-                    <a href=portfolio__single.html><img src=assets/images/work/04.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=marketing class=marketing>
-                    <a href=portfolio__single.html><img src=assets/images/work/05.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=wordpress class=wordpress>
-                    <a href=portfolio__single.html><img src=assets/images/work/06.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=design class=design>
-                    <a href=portfolio__single.html><img src=assets/images/work/07.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=marketing class=marketing>
-                    <a href=portfolio__single.html><img src=assets/images/work/08.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=brandidentity class=brandidentity>
-                    <a href=portfolio__single.html><img src=assets/images/work/09.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=marketing class=marketing>
-                    <a href=portfolio__single.html><img src=assets/images/work/10.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=brandidentity class=brandidentity>
-                    <a href=portfolio__single.html><img src=assets/images/work/11.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li data-category=brandidentity class=brandidentity>
-                    <a href=portfolio__single.html><img src=assets/images/work/12.jpg>
-
-                        <div class=portfolio-detail-overlay>
-                            <div class=middle-align-wrap>
-                                <div class=middle-align-cell>
-                                    <h4>Corporate Website</h4><span>Webdesign</span></div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </section>
