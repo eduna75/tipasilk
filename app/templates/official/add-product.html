@@ -22,6 +22,10 @@
                                 <input type="text" class="form-control" name="name" placeholder="Name Product">
                             </div>
                             <div class="form-group">
+                                <label for="name">product number</label>
+                                <input type="text" class="form-control" name="product_nr" placeholder="Product number">
+                            </div>
+                            <div class="form-group">
                                 <label for="shortdesc">Short product description</label>
                                 <input type="text" class="form-control" name="shortdesc"
                                        placeholder="Short Description">
@@ -58,7 +62,7 @@
                             <p>{{ product.longdesc }}</p>
                             {% for images in product.images %}
                                 <img src="data:image/jpg;base64,{{ images.image }}" style="max-height: 430px;"/>
-                                {% endfor %}
+                            {% endfor %}
 
                         </div>
                         <div class="panel-footer panel-success">
@@ -69,7 +73,7 @@
                             <input type="submit" value="Delete Product">
                         </form>
 
-                        <form method="POST" action="test" enctype="multipart/form-data">
+                        <form method="POST" action="add-image" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <label for="exampleInputFile">File input</label>
