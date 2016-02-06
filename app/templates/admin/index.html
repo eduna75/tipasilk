@@ -7,7 +7,7 @@
 		<div id="sidebar-left" class="col-xs-2 col-sm-2">
 			<ul class="nav main-menu">
 				<li>
-					<a href="{{ url_for('static', filename='admin/ajax/dashboard.html') }}" class="active ajax-link">
+					<a href="{{ url_for('static', filename='ajax/dashboard.html') }}" class="active ajax-link">
 						<i class="fa fa-dashboard"></i>
 						<span class="hidden-xs">Dashboard</span>
 					</a>
@@ -18,13 +18,13 @@
 						<span class="hidden-xs">Charts</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/charts_xcharts.html') }}">xCharts</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/charts_flot.html') }}">Flot Charts</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/charts_google.html') }}">Google Charts</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/charts_morris.html') }}">Morris Charts</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/charts_amcharts.html') }}">AmCharts</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/charts_chartist.html') }}">Chartist</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/charts_coindesk.html') }}">CoinDesk realtime</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/charts_xcharts.html') }}">xCharts</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/charts_flot.html') }}">Flot Charts</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/charts_google.html') }}">Google Charts</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/charts_morris.html') }}">Morris Charts</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/charts_amcharts.html') }}">AmCharts</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/charts_chartist.html') }}">Chartist</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/charts_coindesk.html') }}">CoinDesk realtime</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -33,9 +33,9 @@
 						 <span class="hidden-xs">Tables</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/tables_simple.html') }}">Simple Tables</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/tables_datatables.html') }}">Data Tables</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/tables_beauty.html') }}">Beauty Tables</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/tables_simple.html') }}">Simple Tables</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/tables_datatables.html') }}">Data Tables</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/tables_beauty.html') }}">Beauty Tables</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -44,9 +44,9 @@
 						 <span class="hidden-xs">Forms</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/forms_elements.html') }}">Elements</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/forms_layouts.html') }}">Layouts</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/forms_file_uploader.html') }}">File Uploader</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/forms_elements.html') }}">Elements</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/forms_layouts.html') }}">Layouts</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/forms_file_uploader.html') }}">File Uploader</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -55,11 +55,11 @@
 						 <span class="hidden-xs">UI Elements</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/ui_grid.html') }}">Grid</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/ui_buttons.html') }}">Buttons</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/ui_progressbars.html') }}">Progress Bars</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/ui_jquery-ui.html') }}">Jquery UI</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/ui_icons.html') }}">Icons</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/ui_grid.html') }}">Grid</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/ui_buttons.html') }}">Buttons</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/ui_progressbars.html') }}">Progress Bars</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/ui_jquery-ui.html') }}">Jquery UI</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/ui_icons.html') }}">Icons</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -68,18 +68,18 @@
 						 <span class="hidden-xs">Pages</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="{{ url_for('static', filename='admin/ajax/page_login.html') }}">Login</a></li>
-						<li><a href="{{ url_for('static', filename='admin/ajax/page_register.html') }}">Register</a></li>
-						<li><a id="locked-screen" class="submenu" href="{{ url_for('static', filename='admin/ajax/page_locked.html') }}">Locked Screen</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/page_contacts.html') }}">Contacts</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/page_feed.html') }}">Feed</a></li>
-						<li><a class="ajax-link add-full" href="{{ url_for('static', filename='admin/ajax/page_messages.html') }}">Messages</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/page_pricing.html') }}">Pricing</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/page_product.html') }}">Product</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/page_invoice.html') }}">Invoice</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/page_search.html') }}">Search Results</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/page_404.html') }}">Error 404</a></li>
-						<li><a href="{{ url_for('static', filename='admin/ajax/page_500.html') }}">Error 500</a></li>
+						<li><a href="{{ url_for('static', filename='ajax/page_login.html') }}">Login</a></li>
+						<li><a href="{{ url_for('static', filename='ajax/page_register.html') }}">Register</a></li>
+						<li><a id="locked-screen" class="submenu" href="{{ url_for('static', filename='ajax/page_locked.html') }}">Locked Screen</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/page_contacts.html') }}">Contacts</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/page_feed.html') }}">Feed</a></li>
+						<li><a class="ajax-link add-full" href="{{ url_for('static', filename='ajax/page_messages.html') }}">Messages</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/page_pricing.html') }}">Pricing</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/page_product.html') }}">Product</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/page_invoice.html') }}">Invoice</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/page_search.html') }}">Search Results</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/page_404.html') }}">Error 404</a></li>
+						<li><a href="{{ url_for('static', filename='ajax/page_500.html') }}">Error 500</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -88,9 +88,9 @@
 						<span class="hidden-xs">Maps</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/maps.html') }}">OpenStreetMap</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/map_fullscreen.html') }}">Fullscreen map</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/map_leaflet.html') }}">Leaflet</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/maps.html') }}">OpenStreetMap</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/map_fullscreen.html') }}">Fullscreen map</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/map_leaflet.html') }}">Leaflet</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -99,81 +99,30 @@
 						 <span class="hidden-xs">Gallery</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/gallery_simple.html') }}">Simple Gallery</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/gallery_flickr.html') }}">Flickr Gallery</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/gallery_simple.html') }}">Simple Gallery</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/gallery_flickr.html') }}">Flickr Gallery</a></li>
 					</ul>
 				</li>
 				<li>
-					 <a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/typography.html') }}">
+					 <a class="ajax-link" href="{{ url_for('static', filename='ajax/typography.html') }}">
 						 <i class="fa fa-font"></i>
 						 <span class="hidden-xs">Typography</span>
 					</a>
 				</li>
 				 <li>
-					<a class="ajax-link" href="{{ url_for('static', filename='admin/ajax/calendar.html') }}">
+					<a class="ajax-link" href="{{ url_for('static', filename='ajax/calendar.html') }}">
 						 <i class="fa fa-calendar"></i>
 						 <span class="hidden-xs">Calendar</span>
 					</a>
 				 </li>
-				<li class="dropdown">
+                <li class="dropdown">
 					<a href="#" class="dropdown-toggle">
 						<i class="fa fa-picture-o"></i>
-						 <span class="hidden-xs">Multilevel menu</span>
+						 <span class="hidden-xs">Products</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">First level menu</a></li>
-						<li><a href="#">First level menu</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle">
-								<i class="fa fa-plus-square"></i>
-								<span class="hidden-xs">Second level menu group</span>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Second level menu</a></li>
-								<li><a href="#">Second level menu</a></li>
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle">
-										<i class="fa fa-plus-square"></i>
-										<span class="hidden-xs">Three level menu group</span>
-									</a>
-									<ul class="dropdown-menu">
-										<li><a href="#">Three level menu</a></li>
-										<li><a href="#">Three level menu</a></li>
-										<li class="dropdown">
-											<a href="#" class="dropdown-toggle">
-												<i class="fa fa-plus-square"></i>
-												<span class="hidden-xs">Four level menu group</span>
-											</a>
-											<ul class="dropdown-menu">
-												<li><a href="#">Four level menu</a></li>
-												<li><a href="#">Four level menu</a></li>
-												<li class="dropdown">
-													<a href="#" class="dropdown-toggle">
-														<i class="fa fa-plus-square"></i>
-														<span class="hidden-xs">Five level menu group</span>
-													</a>
-													<ul class="dropdown-menu">
-														<li><a href="#">Five level menu</a></li>
-														<li><a href="#">Five level menu</a></li>
-														<li class="dropdown">
-															<a href="#" class="dropdown-toggle">
-																<i class="fa fa-plus-square"></i>
-																<span class="hidden-xs">Six level menu group</span>
-															</a>
-															<ul class="dropdown-menu">
-																<li><a href="#">Six level menu</a></li>
-																<li><a href="#">Six level menu</a></li>
-															</ul>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li><a href="#">Three level menu</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/tipasilk/products.html') }}">Add Products</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/edit-products.html') }}">Edit Products</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -188,7 +137,7 @@
 				</div>
 			</div>
 			<div class="preloader">
-				<img src="{{ url_for('static', filename='admin/img/devoops_getdata.gif') }}" class="devoops-getdata" alt="preloader"/>
+				<img src="{{ url_for('static', filename='img/devoops_getdata.gif') }}" class="devoops-getdata" alt="preloader"/>
 			</div>
 			<div id="ajax-content"></div>
 		</div>
@@ -196,3 +145,5 @@
 	</div>
 </div>
 {% endblock %}
+
+{% block script %}{% endblock %}
