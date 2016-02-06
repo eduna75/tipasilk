@@ -51,7 +51,7 @@ class Products(db.Model):
     price = db.Column(db.Float)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
-    product_nr = db.Column(db.Text)
+    product_nr = db.Column(db.Text, unique=True)
     images = db.relationship('Images', backref=db.backref('products', lazy='joined'), lazy='dynamic', cascade='all')
 
     def __init__(self, product_nr, name, shortdesc, longdesc, price, featured=True):

@@ -57,9 +57,9 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <h4>{{ product.shortdesc }}</h4>
+                            <h4>{{ product.shortdesc|safe }}</h4>
 
-                            <p>{{ product.longdesc }}</p>
+                            <p>{{ product.longdesc|safe }}</p>
                             {% for images in product.images %}
                                 <img src="data:image/jpg;base64,{{ images.image }}" style="max-height: 430px;"/>
                             {% endfor %}

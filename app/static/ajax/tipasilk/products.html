@@ -23,7 +23,7 @@
             <div class="box-header">
                 <div class="box-name">
                     <i class="fa fa-search"></i>
-                    <span>Registration form</span>
+                    <span>Product form</span>
                 </div>
                 <div class="box-icons">
                     <a class="collapse-link">
@@ -47,20 +47,24 @@
 
                         <div class="col-sm-4">
                             <input type="text" class="form-control" placeholder="Product CODE" data-toggle="tooltip"
-                                   data-placement="bottom" title="Type in your product code or number" name="product_nr">
+                                   data-placement="bottom" title="Type in your product code or number"
+                                   name="product_nr">
                         </div>
+                    </div>
+                    <div class="form-group has-feedback">
                         <label class="col-sm-2 control-label">Product name</label>
 
                         <div class="col-sm-4">
                             <input type="text" class="form-control" placeholder="Product name" data-toggle="tooltip"
-                                   data-placement="bottom" title="Type your product name" name="name">
+                                   data-placement="bottom" title="Type your product name" name="name" required="required">
                         </div>
                     </div>
-                    <div class="form-group has-success has-feedback">
+                    <div class="form-group">
+
                         <label class="col-sm-2 control-label">Description</label>
 
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Short Description" name="shortdesc">
+                            <input type="text" class="form-control" placeholder="Short Description" name="shortdesc" required="required">
                         </div>
                     </div>
                     <div class="form-group">
@@ -101,35 +105,35 @@
         </div>
     </div>
 </div>
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $(document).ready(function () {
-            // Run Select2 plugin on elements
-            function DemoSelect2() {
-                $('#s2_with_tag').select2({placeholder: "Select OS"});
-                $('#s2_country').select2();
-            }
+    $(document).ready(function () {
+        // Run Select2 plugin on elements
+        function DemoSelect2() {
+            $('#s2_with_tag').select2({placeholder: "Select OS"});
+            $('#s2_country').select2();
+        }
 
 // Run timepicker
-            function DemoTimePicker() {
-                $('#input_time').timepicker({setDate: new Date()});
-            }
+        function DemoTimePicker() {
+            $('#input_time').timepicker({setDate: new Date()});
+        }
 
-            // Create Wysiwig editor for textare
-            TinyMCEStart('#wysiwig_simple', null);
-            TinyMCEStart('#wysiwig_full', 'extreme');
-            // Add slider for change test input length
-            FormLayoutExampleInputLength($(".slider-style"));
-            // Initialize datepicker
-            $('#input_date').datepicker({setDate: new Date()});
-            // Load Timepicker plugin
-            LoadTimePickerScript(DemoTimePicker);
-            // Add tooltip to form-controls
-            $('.form-control').tooltip();
-            LoadSelect2Script(DemoSelect2);
-            // Load example of form validation
-            LoadBootstrapValidatorScript(DemoFormValidator);
-            // Add drag-n-drop feature to boxes
-            WinMove();
-        });
-    </script>
+        // Create Wysiwig editor for textare
+        TinyMCEStart('#wysiwig_simple', null);
+        TinyMCEStart('#wysiwig_full', 'extreme');
+        // Add slider for change test input length
+        FormLayoutExampleInputLength($(".slider-style"));
+        // Initialize datepicker
+        $('#input_date').datepicker({setDate: new Date()});
+        // Load Timepicker plugin
+        LoadTimePickerScript(DemoTimePicker);
+        // Add tooltip to form-controls
+        $('.form-control').tooltip();
+        LoadSelect2Script(DemoSelect2);
+        // Load example of form validation
+        LoadBootstrapValidatorScript(DemoFormValidator);
+        // Add drag-n-drop feature to boxes
+        WinMove();
+    });
+</script>

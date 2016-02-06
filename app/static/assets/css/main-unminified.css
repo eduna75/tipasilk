@@ -1610,7 +1610,7 @@ blockquote p {
 }
 
 .da-thumbs li a .portfolio-detail-overlay {
-    position: absolute;
+    position: relative;
     background: #fff;
     background: rgba(0, 0, 0, .9);
     padding: 20px;

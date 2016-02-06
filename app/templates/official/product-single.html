@@ -8,10 +8,41 @@
             <h1>Product Details</h1>
 
             <div class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> <i class="fa fa-angle-double-right"></i>
-                <a href="{{ url_for('product') }}">Products</a> <i class="fa fa-angle-double-right"></i><a href="#">Product details</a></div>
+                <a href="{{ url_for('product') }}">Products</a> <i class="fa fa-angle-double-right"></i><a href="#">Product
+                    details</a></div>
         </div>
     </header>
-
+    <section class="section single-portfolio" id="single-portfolio">
+        {% for products in data %}
+            <div class="container">
+                <div class="row">
+                        <div class="col-lg-2">
+                        {% for image in products.images %}
+                            <div class="small-product-image" style="padding: 5px;">
+                            <img src="data:image/jpg;base64,{{ image.image }}" style="box-shadow: 0 1px 2px black;">
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <div class="col-lg-4">
+                        {% for image in products.images[0:1] %}
+                            <img src="data:image/jpg;base64,{{ image.image }}" style="box-shadow: 0 1px 2px black;">
+                        {% endfor %}
+                        </div>
+                    <div class="col-lg-6">
+                        <div class="list-group label-important">
+                            <strong>{{ products.name|title }}</strong><br /> <span class="fa fa-dollar"></span> <i>{{ products.price|int }}</i>
+                        </div>
+                        <div class="list-group-item-heading">
+                            {{ products.shortdesc|safe|capitalize }}
+                        </div>
+                        <div class="list-group-item list-group-item-info list-group-item-text">
+                            {{ products.longdesc|safe|capitalize }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
 
 
 {% endblock %}
