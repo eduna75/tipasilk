@@ -19,3 +19,8 @@ todo
         
     And ofcourse the design it self.
     
+INSTALL
+-------
+    for installation make sure you have the following settings
+        system variables DATABASE_URL
+            export DATABASE_URL="postgresql://user:passwd@location/database"
