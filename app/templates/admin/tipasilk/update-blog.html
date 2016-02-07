@@ -1,0 +1,160 @@
+{% extends 'admin/tipasilk/base.html' %}
+
+{% block content %}
+    <div id="messages" class="container-fluid">
+        <div class="row">
+            <div id="breadcrumb" class="col-xs-12">
+                <a href="#" class="show-sidebar">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <ol class="breadcrumb pull-left">
+                    <li><a href="admin">Dashboard</a></li>
+                    <li><a href="#">Blog posts</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="row" id="test">
+            <div class="col-xs-12">
+                <div class="row">
+                    <ul id="messages-menu" class="nav msg-menu">
+                        <li>
+                            <a href="index.html" class="" id="msg-inbox">
+                                <i class="fa fa-inbox"></i>
+                                <span class="hidden-xs">Posts ({{ data|length }})</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="" id="msg-starred">
+                                <i class="fa fa-star"></i>
+                                <span class="hidden-xs">Starred</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="" id="msg-important">
+                                <i class="fa fa-bookmark"></i>
+                                <span class="hidden-xs">Important</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="" id="msg-sent">
+                                <i class="fa fa-reply"></i>
+                                <span class="hidden-xs">Sent Mail</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="" id="msg-draft">
+                                <i class="fa fa-pencil"></i>
+                                <span class="hidden-xs">Drafts (2)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="" id="msg-trash">
+                                <i class="fa fa-trash-o"></i>
+                                <span class="hidden-xs">Trash</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="messages-list" class="col-xs-10 col-xs-offset-2">
+                        {% for posts in data %}
+                            <div class="row one-list-message msg-inbox-item" id="msg-{{ posts.id }}">
+
+                                <div class="col-xs-1 checkbox">
+                                    <label>
+                                        <input type="checkbox"> Yana Z.
+                                        <i class="fa fa-square-o small"></i>
+                                    </label>
+                                </div>
+                                <div class="col-xs-9 message-title">
+                                    <b>{{ posts.title|striptags }}</b> {{ posts.body|striptags|truncate }}</div>
+                                <div class="col-xs-2 message-date">{{ posts.created_on.strftime('%d/%b/%y') }}</div>
+                            </div>
+
+                            <div class="row one-list-message msg-{{ posts.id }}-item" style="display: none;">
+                                <div class="box">
+                                    <div class="avatar">
+                                        <img src="img/avatar.jpg" alt="Jane"/>
+                                    </div>
+                                    <div class="page-feed-content">
+                                        <small class="time">
+                                            Tipasilk, {{ posts.updated_on.strftime('%d %b %Y') }}</small>
+
+                                        <form class="form-horizontal" role="form" method="POST" action="create-blog"
+                                              enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Blog Title</label>
+
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="{{ posts.title }}"
+                                                           data-toggle="tooltip"
+                                                           data-placement="bottom" title="The Title of your post"
+                                                           name="title">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="form-styles">Blog
+                                                    text</label>
+
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" rows="5" id="wysiwig_simple"
+                                                              name="body"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-2">
+                                                    <button type="cancel" class="btn btn-default btn-label-left">
+                                                        <span><i class="fa fa-clock-o txt-danger"></i></span>
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button type="submit" class="btn btn-primary btn-label-left">
+                                                        <span><i class="fa fa-clock-o"></i></span>
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+
+    <script type="text/javascript">
+        // Add listener for redraw menu when windows resized
+        window.onresize = MessagesMenuWidth;
+        $(document).ready(function () {
+            // Add class for correctly view of messages page
+            $('#content').addClass('full-content');
+            // Run script for change menu width
+            MessagesMenuWidth();
+            $('#content').on('click', '[id^=msg-]', function (e) {
+                e.preventDefault();
+                $('[id^=msg-]').removeClass('active');
+                $(this).addClass('active');
+                $('.one-list-message').slideUp('fast');
+                $('.' + $(this).attr('id') + '-item').slideDown('fast');
+            });
+            $('html').animate({scrollTop: 0}, 'slow');
+        });
+    </script>
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Create Wysiwig editor for textare
+        TinyMCEStart('#wysiwig_simple', null);
+        TinyMCEStart('#wysiwig_full', 'extreme');
+    });
+</script>
+{% endblock %}

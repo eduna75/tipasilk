@@ -92,31 +92,35 @@ def create_blog():
             db.session.commit()
 
         return redirect(url_for('admin'))
-    return render_template(template + 'listview.html')
+    return render_template('admin/tipasilk/create-blog.html')
 
 
-@app.route('/update', methods=['GET', 'POST'])
-def update():
-    posts = Blog.query.get(request.form['id'])
+@app.route('/update-blog')
+@app.route('/update-blog', methods=['GET', 'POST'])
+def update_blog():
+
     if request.method == 'POST':
+        posts = Blog.query.get(request.form['id'])
         posts.title = request.form['title']
         posts.body = request.form['body']
         db.session.commit()
+        return redirect(url_for('create_blog'))
+    else:
+        data = Blog.query.all()
+        return render_template('admin/tipasilk/update-blog.html', data=data)
 
-    return redirect(url_for('create'))
 
-
-@app.route('/delete', methods=['POST', 'GET'])
-def delete():
+@app.route('/delete-blog', methods=['POST', 'GET'])
+def delete_blog():
     if request.method == 'POST':
         db.session.delete(Blog.query.get(request.form['delete']))
         db.session.commit()
 
-    return redirect(url_for('create'))
+    return redirect(url_for('create_blog'))
 
 
-@app.route('/add-product', methods=['GET', 'POST'])
-def add_product():
+@app.route('/create-product', methods=['GET', 'POST'])
+def create_product():
     product_list = Products.query.all()
     if request.method == 'POST':
         try:
@@ -127,7 +131,12 @@ def add_product():
             return redirect(url_for('add_product'))
         except BaseException as e:
             print e
-    return render_template(template + 'add-product.html', product=product_list)
+    return render_template('admin/tipasilk/create-products.html', product=product_list)
+
+
+@app.route('/update-product', methods=['GET', 'POST'])
+def update_product():
+    pass
 
 
 @app.route('/delete-product', methods=['GET', 'POST'])
@@ -156,3 +165,11 @@ def delete_test():
             db.session.delete(Images.query.get(request.form['delete']))
             db.session.commit()
     return redirect(url_for('test'))
+
+
+@app.route('/test<page>')
+def admin_tool(page=None):
+    page = page
+    print page
+    data = Blog.query.all()
+    return render_template('admin/tipasilk/' + page + '.html', data=data)

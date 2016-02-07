@@ -121,8 +121,8 @@
 						 <span class="hidden-xs">Blog</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/tipasilk/blog.html') }}">Add Blog</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/edit-blog.html') }}">Edit Blog</a></li>
+						<li><a class="ajax-link" href="{{ url_for('create_blog') }}">Add Blog</a></li>
+						<li><a class="ajax-link" href="{{ url_for('update_blog') }}">Edit Blog</a></li>
 					</ul>
 				</li>
                 <li class="dropdown">
@@ -131,8 +131,8 @@
 						 <span class="hidden-xs">Products</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/tipasilk/products.html') }}">Add Products</a></li>
-						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/edit-products.html') }}">Edit Products</a></li>
+						<li><a class="ajax-link" href="{{ url_for('create_product') }}">Add Products</a></li>
+						<li><a class="ajax-link" href="{{ url_for('update_product') }}">Edit Products</a></li>
 					</ul>
 				</li>
 			</ul>
