@@ -117,7 +117,17 @@
 				 </li>
                 <li class="dropdown">
 					<a href="#" class="dropdown-toggle">
-						<i class="fa fa-picture-o"></i>
+						<i class="fa fa-pencil-square-o"></i>
+						 <span class="hidden-xs">Blog</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/tipasilk/blog.html') }}">Add Blog</a></li>
+						<li><a class="ajax-link" href="{{ url_for('static', filename='ajax/edit-blog.html') }}">Edit Blog</a></li>
+					</ul>
+				</li>
+                <li class="dropdown">
+					<a href="#" class="dropdown-toggle">
+						<i class="fa fa-shopping-cart"></i>
 						 <span class="hidden-xs">Products</span>
 					</a>
 					<ul class="dropdown-menu">

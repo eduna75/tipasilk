@@ -18,7 +18,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="row blog-post">
                         <div class=col-md-12>
-                            <div class=featured-image><img src=/assets/images/blog/featured_standard_01.jpg
+                            <div class=featured-image><img src='data:image/jpg;base64,{{ post.image }}'
                                                            class=img-responsive></div>
                             <h2 class=post-title><a href={{ url_for('post', post_id=post.id) }}>{{ post.title }}</a>
                             </h2>

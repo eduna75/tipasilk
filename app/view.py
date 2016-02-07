@@ -76,13 +76,22 @@ def admin():
     return render_template('admin/index.html')
 
 
-@app.route('/create', methods=['POST', 'GET'])
-def create():
+@app.route('/create-blog', methods=['POST', 'GET'])
+def create_blog():
     if request.method == 'POST':
-        post = Blog(request.form['title'], request.form['body'])
-        db.session.add(post)
+        post_title = request.form['title']
+        data = request.files['imageInput']
+        data = base64.b64encode(data.stream.read())
+        posts = Blog(title=request.form['title'], body=request.form['body'], image=data)
+        db.session.add(posts)
         db.session.commit()
-        return redirect(url_for('create'))
+        if request.files:
+            blog_id = [post.id for post in Blog.query.filter_by(title=post_title)]
+            image = Images(image=data, blog_id=blog_id[0])
+            db.session.add(image)
+            db.session.commit()
+
+        return redirect(url_for('admin'))
     return render_template(template + 'listview.html')
 
 
