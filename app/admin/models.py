@@ -12,10 +12,12 @@ class Blog(db.Model):
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
     image = db.Column(db.LargeBinary)
+    test_image = db.relationship('Images', backref=db.backref('blog', lazy='joined'), lazy='dynamic')
 
-    def __init__(self, title="", body=""):
+    def __init__(self, image, title="", body=""):
         self.title = title
         self.body = body
+        self.image = image
 
     def __repr__(self):
         return '<Blogpost - {}>'.format(self.title)
@@ -51,7 +53,7 @@ class Products(db.Model):
     price = db.Column(db.Float)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
-    product_nr = db.Column(db.Text)
+    product_nr = db.Column(db.Text, unique=True)
     images = db.relationship('Images', backref=db.backref('products', lazy='joined'), lazy='dynamic', cascade='all')
 
     def __init__(self, product_nr, name, shortdesc, longdesc, price, featured=True):
@@ -75,13 +77,15 @@ class Images(db.Model):
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'))
 
-    def __init__(self, image, product_id):
+    def __init__(self, image, product_id=None, blog_id=None):
         self.image = image
         self.product_id = product_id
+        self.blog_id = blog_id
 
     def __repr__(self):
-        return '<Image  -{}'.format(self.image, self.product_id)
+        return '<Image  -{}'.format(self.image, self.product_id, self.blog_id)
 
 
 class Categories(db.Model):

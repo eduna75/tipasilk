@@ -1,3 +1,6 @@
+{% extends 'admin/tipasilk/base.html' %}
+
+{% block content %}
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
         <a href="#" class="show-sidebar">
@@ -105,6 +108,10 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -137,3 +144,4 @@
         WinMove();
     });
 </script>
+{% endblock %}
