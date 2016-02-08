@@ -21,7 +21,9 @@
                             <header>
                                 <h4 class=date>{{ post.created_on.strftime('%d') }}<br>{{ post.created_on.strftime('%b') }}</h4>
 
-                                <div class=blog-element><img class=img-responsive src='data:image/jpg;base64,{{ post.image }}'></div>
+                                {% for image in post.test_image %}
+                                    <div class=blog-element><img class=img-responsive src='data:image/jpg;base64,{{ image.image }}'></div>
+                                    {% endfor %}
                             </header>
                             <div class=blog-content>
                                 <h4><a href={{ url_for('post', post_id=post.id) }}>{{ post.title }}</a></h4>

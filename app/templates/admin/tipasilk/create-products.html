@@ -1,147 +1,156 @@
 {% extends 'admin/tipasilk/base.html' %}
 
 {% block content %}
-<div class="row">
-    <div id="breadcrumb" class="col-xs-12">
-        <a href="#" class="show-sidebar">
-            <i class="fa fa-bars"></i>
-        </a>
-        <ol class="breadcrumb pull-left">
-            <li><a href="{{ url_for('admin') }}">Dashboard</a></li>
-            <li><a href="#">Forms</a></li>
-            <li><a href="#">Forms layouts</a></li>
-        </ol>
-        <div id="social" class="pull-right">
-            <a href="#"><i class="fa fa-google-plus"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-youtube"></i></a>
+    <div class="row">
+        <div id="breadcrumb" class="col-xs-12">
+            <a href="#" class="show-sidebar">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ol class="breadcrumb pull-left">
+                <li><a href="{{ url_for('admin') }}">Dashboard</a></li>
+                <li><a href="#">Forms</a></li>
+                <li><a href="#">Forms layouts</a></li>
+            </ol>
+            <div id="social" class="pull-right">
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-youtube"></i></a>
+            </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-sm-12">
-        <div class="box">
-            <div class="box-header">
-                <div class="box-name">
-                    <i class="fa fa-search"></i>
-                    <span>Product form</span>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="box-name">
+                        <i class="fa fa-search"></i>
+                        <span>Product form</span>
+                    </div>
+                    <div class="box-icons">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="expand-link">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                    <div class="no-move"></div>
                 </div>
-                <div class="box-icons">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="expand-link">
-                        <i class="fa fa-expand"></i>
-                    </a>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-                <div class="no-move"></div>
-            </div>
-            <div class="box-content">
-                <h4 class="page-header">Add Products</h4>
+                <div class="box-content">
+                    <h4 class="page-header">Add Products</h4>
 
-                <form class="form-horizontal" role="form" method="POST" action="create-product">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Product CODE</label>
+                    <form class="form-horizontal" role="form" method="POST" action="create-product"
+                          enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Product CODE</label>
 
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Product CODE" data-toggle="tooltip"
-                                   data-placement="bottom" title="Type in your product code or number"
-                                   name="product_nr">
-                        </div>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <label class="col-sm-2 control-label">Product name</label>
-
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Product name" data-toggle="tooltip"
-                                   data-placement="bottom" title="Type your product name" name="name" required="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                        <label class="col-sm-2 control-label">Description</label>
-
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Short Description" name="shortdesc" required="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="form-styles">Long Description</label>
-
-                        <div class="col-sm-10">
-                            <textarea class="form-control" rows="5" id="wysiwig_simple" name="longdesc"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Product price</label>
-
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-money"></i></span>
-                                <input type="number" class="form-control" placeholder="Price" name="price">
-                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="Product CODE" data-toggle="tooltip"
+                                       data-placement="bottom" title="Type in your product code or number"
+                                       name="product_nr">
                             </div>
                         </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-2">
-                            <button type="cancel" class="btn btn-default btn-label-left">
-                                <span><i class="fa fa-clock-o txt-danger"></i></span>
-                                Cancel
-                            </button>
+                        <div class="form-group has-feedback">
+                            <label class="col-sm-2 control-label">Product name</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="Product name" data-toggle="tooltip"
+                                       data-placement="bottom" title="Type your product name" name="name"
+                                       required="required">
+                            </div>
                         </div>
-                        <div class="col-sm-2">
-                            <button type="submit" class="btn btn-primary btn-label-left">
-                                <span><i class="fa fa-clock-o"></i></span>
-                                Submit
-                            </button>
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">Description</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="Short Description" name="shortdesc"
+                                       required="required">
+                            </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-styles">Long Description</label>
+
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="5" id="wysiwig_simple" name="longdesc"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Product price</label>
+
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                    <input type="number" class="form-control" placeholder="Price" name="price">
+                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Product image</label>
+                            <div class="col-sm-2">
+                                    <input type="file" name="imageInput">
+
+                                    <p class="help-block">Add an image to your product</p>
+                                </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-2">
+                                <button type="cancel" class="btn btn-default btn-label-left">
+                                    Cancel
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn btn-primary btn-label-left">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block script %}
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $(document).ready(function () {
-        // Run Select2 plugin on elements
-        function DemoSelect2() {
-            $('#s2_with_tag').select2({placeholder: "Select OS"});
-            $('#s2_country').select2();
-        }
+        $(document).ready(function () {
+            // Run Select2 plugin on elements
+            function DemoSelect2() {
+                $('#s2_with_tag').select2({placeholder: "Select OS"});
+                $('#s2_country').select2();
+            }
 
 // Run timepicker
-        function DemoTimePicker() {
-            $('#input_time').timepicker({setDate: new Date()});
-        }
+            function DemoTimePicker() {
+                $('#input_time').timepicker({setDate: new Date()});
+            }
 
-        // Create Wysiwig editor for textare
-        TinyMCEStart('#wysiwig_simple', null);
-        TinyMCEStart('#wysiwig_full', 'extreme');
-        // Add slider for change test input length
-        FormLayoutExampleInputLength($(".slider-style"));
-        // Initialize datepicker
-        $('#input_date').datepicker({setDate: new Date()});
-        // Load Timepicker plugin
-        LoadTimePickerScript(DemoTimePicker);
-        // Add tooltip to form-controls
-        $('.form-control').tooltip();
-        LoadSelect2Script(DemoSelect2);
-        // Load example of form validation
-        LoadBootstrapValidatorScript(DemoFormValidator);
-        // Add drag-n-drop feature to boxes
-        WinMove();
-    });
-</script>
+            // Create Wysiwig editor for textare
+            TinyMCEStart('#wysiwig_simple', null);
+            TinyMCEStart('#wysiwig_full', 'extreme');
+            // Add slider for change test input length
+            FormLayoutExampleInputLength($(".slider-style"));
+            // Initialize datepicker
+            $('#input_date').datepicker({setDate: new Date()});
+            // Load Timepicker plugin
+            LoadTimePickerScript(DemoTimePicker);
+            // Add tooltip to form-controls
+            $('.form-control').tooltip();
+            LoadSelect2Script(DemoSelect2);
+            // Load example of form validation
+            LoadBootstrapValidatorScript(DemoFormValidator);
+            // Add drag-n-drop feature to boxes
+            WinMove();
+        });
+    </script>
 {% endblock %}

@@ -12,14 +12,14 @@ class Blog(db.Model):
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
     image = db.Column(db.LargeBinary)
-    test_image = db.relationship('Images', backref=db.backref('blog', lazy='joined'), lazy='dynamic')
+    test_image = db.relationship('Images', backref=db.backref('blog', lazy='joined'), lazy='dynamic', cascade='all')
 
-    def __init__(self, image, title="", body=""):
+    def __init__(self, title="", body=""):
         self.title = title
         self.body = body
-        self.image = image
 
     def __repr__(self):
+
         return '<Blogpost - {}>'.format(self.title)
 
 

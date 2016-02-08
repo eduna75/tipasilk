@@ -82,7 +82,7 @@ def create_blog():
         post_title = request.form['title']
         data = request.files['imageInput']
         data = base64.b64encode(data.stream.read())
-        posts = Blog(title=request.form['title'], body=request.form['body'], image=data)
+        posts = Blog(title=request.form['title'], body=request.form['body'])
         db.session.add(posts)
         db.session.commit()
         if request.files:
@@ -91,20 +91,18 @@ def create_blog():
             db.session.add(image)
             db.session.commit()
 
-        return redirect(url_for('admin'))
+        return redirect(url_for('admin', _anchor='/create-blog'))
     return render_template('admin/tipasilk/create-blog.html')
 
 
-@app.route('/update-blog')
 @app.route('/update-blog', methods=['GET', 'POST'])
 def update_blog():
-
     if request.method == 'POST':
-        posts = Blog.query.get(request.form['id'])
+        posts = Blog.query.get(request.form['post_id'])
         posts.title = request.form['title']
         posts.body = request.form['body']
         db.session.commit()
-        return redirect(url_for('create_blog'))
+        return redirect(url_for('admin', _anchor='/update-blog'))
     else:
         data = Blog.query.all()
         return render_template('admin/tipasilk/update-blog.html', data=data)
@@ -112,11 +110,12 @@ def update_blog():
 
 @app.route('/delete-blog', methods=['POST', 'GET'])
 def delete_blog():
+    print request.form
     if request.method == 'POST':
-        db.session.delete(Blog.query.get(request.form['delete']))
+        db.session.delete(Blog.query.get(request.form['post_id']))
         db.session.commit()
 
-    return redirect(url_for('create_blog'))
+    return redirect(url_for('admin', _anchor='/update-blog'))
 
 
 @app.route('/create-product', methods=['GET', 'POST'])
@@ -124,11 +123,19 @@ def create_product():
     product_list = Products.query.all()
     if request.method == 'POST':
         try:
-            prod = Products(request.form['product_nr'], request.form['name'], request.form['shortdesc'],
-                            request.form['longdesc'], request.form['price'])
+            prod_name = request.form['name']
+            prod = Products(product_nr=request.form['product_nr'], name=request.form['name'],
+                            shortdesc=request.form['shortdesc'], longdesc=request.form['longdesc'],
+                            price=request.form['price'])
             db.session.add(prod)
             db.session.commit()
-            return redirect(url_for('create_product'))
+            if request.files:
+                product_image = base64.b64encode(request.files['imageInput'].stream.read())
+                prod_id = [prod.id for prod in Products.query.filter_by(name=prod_name)]
+                image = Images(image=product_image, product_id=prod_id[0])
+                db.session.add(image)
+                db.session.commit()
+            return redirect(url_for('admin', _anchor='/create-product'))
         except BaseException as e:
             print e
     return render_template('admin/tipasilk/create-products.html', product=product_list)
@@ -136,16 +143,22 @@ def create_product():
 
 @app.route('/update-product', methods=['GET', 'POST'])
 def update_product():
-    pass
+    if request.method == 'POST':
+        product_data = Products.query.get(request.form['product_id'])
+        db.session.add(product_data)
+        db.session.commit()
+    else:
+        data = Products.query.all()
+    return render_template('admin/tipasilk/update-product.html', data=data)
 
 
 @app.route('/delete-product', methods=['GET', 'POST'])
 def delete_product():
     if request.method == 'POST':
-        db.session.delete(Products.query.get(request.form['delete']))
+        product_data = Products.query.get(request.form['product_id'])
+        db.session.delete(product_data)
         db.session.commit()
-
-    return redirect(url_for('add_product'))
+    return redirect(url_for('admin', _anchor='update-product'))
 
 
 @app.route('/add-image', methods=['GET', 'POST'])
@@ -165,11 +178,3 @@ def delete_test():
             db.session.delete(Images.query.get(request.form['delete']))
             db.session.commit()
     return redirect(url_for('test'))
-
-
-@app.route('/test<page>')
-def admin_tool(page=None):
-    page = page
-    print page
-    data = Blog.query.all()
-    return render_template('admin/tipasilk/' + page + '.html', data=data)

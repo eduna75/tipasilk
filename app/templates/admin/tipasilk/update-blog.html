@@ -78,17 +78,15 @@
                                         <small class="time">
                                             Tipasilk, {{ posts.updated_on.strftime('%d %b %Y') }}</small>
 
-                                        <form class="form-horizontal" role="form" method="POST" action="create-blog"
-                                              enctype="multipart/form-data">
+                                        <form class="form-horizontal" role="form" method="POST" action="update-blog">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Blog Title</label>
 
                                                 <div class="col-sm-4">
-                                                    <input type="text" class="form-control"
-                                                           placeholder="{{ posts.title }}"
-                                                           data-toggle="tooltip"
-                                                           data-placement="bottom" title="The Title of your post"
-                                                           name="title">
+                                                    <input type="text" class="form-control" placeholder="Blog title"
+                                                           data-toggle="tooltip" data-placement="bottom"
+                                                           title="The Title of your post" name="title"
+                                                           value="{{ posts.title }}">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -97,34 +95,40 @@
 
                                                 <div class="col-sm-10">
                                                     <textarea class="form-control" rows="5" id="wysiwig_simple"
-                                                              name="body"></textarea>
+                                                              name="body">{{ posts.body }}</textarea>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="post_id" value="{{ posts.id }}">
+
                                             <div class="clearfix"></div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-2">
-                                                    <button type="cancel" class="btn btn-default btn-label-left">
-                                                        <span><i class="fa fa-clock-o txt-danger"></i></span>
-                                                        Cancel
+                                            <div class="form-group form-horizontal">
+                                                <div class="col-sm-offset-2 col-sm-3">
+                                                    <button type="reset" class="btn btn-default">
+                                                        Clear
                                                     </button>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <button type="submit" class="btn btn-primary btn-label-left">
-                                                        <span><i class="fa fa-clock-o"></i></span>
-                                                        Submit
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Update
                                                     </button>
                                                 </div>
                                             </div>
                                         </form>
-
+                                        <div class="col-sm-2">
+                                            <form method="POST" action="delete-blog">
+                                                <input type="hidden" name="post_id" value="{{ posts.id }}">
+                                                <button type="submit" class="btn btn-danger" name="delete">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         {% endfor %}
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}
 
@@ -150,11 +154,11 @@
     </script>
     <script type="text/javascript">
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        // Create Wysiwig editor for textare
-        TinyMCEStart('#wysiwig_simple', null);
-        TinyMCEStart('#wysiwig_full', 'extreme');
-    });
-</script>
+            // Create Wysiwig editor for textare
+            TinyMCEStart('#wysiwig_simple', null);
+            TinyMCEStart('#wysiwig_full', 'extreme');
+        });
+    </script>
 {% endblock %}
