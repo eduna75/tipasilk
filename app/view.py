@@ -128,7 +128,7 @@ def create_product():
                             request.form['longdesc'], request.form['price'])
             db.session.add(prod)
             db.session.commit()
-            return redirect(url_for('add_product'))
+            return redirect(url_for('create_product'))
         except BaseException as e:
             print e
     return render_template('admin/tipasilk/create-products.html', product=product_list)
