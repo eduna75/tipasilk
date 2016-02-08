@@ -144,9 +144,19 @@ def create_product():
 @app.route('/update-product', methods=['GET', 'POST'])
 def update_product():
     if request.method == 'POST':
-        product_data = Products.query.get(request.form['product_id'])
-        db.session.add(product_data)
-        db.session.commit()
+        print request.form
+        try:
+            product_data = Products.query.get(request.form['product_id'])
+            product_data.product_nr = request.form['product_nr']
+            product_data.name = request.form['name']
+            product_data.shortdesc = request.form['shortdesc']
+            product_data.longdesc = request.form['longdesc']
+            product_data.price = request.form['price']
+            db.session.add(product_data)
+            db.session.commit()
+        except BaseException as e:
+            print e
+        return redirect(url_for('admin', _anchor='update-product'))
     else:
         data = Products.query.all()
     return render_template('admin/tipasilk/update-product.html', data=data)
@@ -164,17 +174,20 @@ def delete_product():
 @app.route('/add-image', methods=['GET', 'POST'])
 def add_image():
     if request.method == 'POST':
+        page = request.form['page']
         data = request.files['imageInput']
         data = base64.b64encode(data.stream.read())
-        db.session.add(Images(data, request.form['productId']))
+        db.session.add(Images(image=data, product_id=request.form['page_id']))
         db.session.commit()
-    return redirect(url_for('add_product'))
+    return redirect(url_for('admin', _anchor=page))
 
 
 @app.route('/delete-image', methods=['GET', 'POST'])
-def delete_test():
+def delete_image():
     if request.method == "POST":
+        print request.form
+        page = request.form['page']
         if request.form['delete']:
-            db.session.delete(Images.query.get(request.form['delete']))
+            db.session.delete(Images.query.get(request.form['image_id']))
             db.session.commit()
-    return redirect(url_for('test'))
+    return redirect(url_for('admin', _anchor=page))
