@@ -8,6 +8,8 @@
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
     <title>Admin pages | Tipasilk</title>
 
+    <link href="{{ url_for('static', filename='plugins/bootstrap/bootstrap.css') }}" rel="stylesheet">
+
 </head>
 <body>
 {% block nav %}
@@ -15,7 +17,7 @@
 {% endblock %}
 {% block content %}{% endblock %}
 
-    <link href="{{ url_for('static', filename='plugins/bootstrap/bootstrap.css') }}" rel="stylesheet">
+
     <link href="{{ url_for('static', filename='plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>

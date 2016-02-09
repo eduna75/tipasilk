@@ -10,8 +10,8 @@
     {% block meta %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/main-unminified.css" type="text/css" property="stylesheet">
+    <link href="{{ url_for('static', filename='plugins/bootstrap/bootstrap.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/main-unminified.css') }}" type="text/css" property="stylesheet">
 
 </head>
 
@@ -23,12 +23,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:100,300,400">
-    <link rel="stylesheet" href="/assets/css/ie_fix.css" type="text/css" property="stylesheet">
+{#    <link rel="stylesheet" href="/assets/css/ie_fix.css" type="text/css" property="stylesheet">#}
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src=/assets/js/main.js></script>
+    <script type="text/javascript" src={{ url_for('static', filename='/assets/js/main.js') }}></script>
 {% block css %}{% endblock %}
 {% block script %}{% endblock %}
 </body>
