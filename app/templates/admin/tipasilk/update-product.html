@@ -156,35 +156,47 @@
                             <div class="row one-list-message msg-{{ posts.id }}-item" style="display: none;">
                                 <div class="box">
                                     <div class="page-feed-content">
-                                        <div class="">
+                                        <div class="row">
                                             <form id="uploadImg" method="POST" action="add-image"
                                                   enctype="multipart/form-data">
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">Product image</label>
 
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-3">
                                                         <input type="file" name="imageInput">
 
                                                         <p class="help-block">Add an image to your product</p>
+                                                        <input type="hidden" name="page" value="update-product">
+                                                        <input type="hidden" name="page_id" value="{{ posts.id }}">
+
+                                                        <input type="submit" name="add-image" value="Upload">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="page" value="update-product">
-                                                <input type="hidden" name="page_id" value="{{ posts.id }}">
-                                                <input type="submit" name="add-image" value="Upload">
+
                                             </form>
                                         </div>
 
                                         {% for image in posts.images %}
                                             <form class="form-horizontal" role="form" method="POST"
                                                   action="delete-image">
-                                                <img src="data:image/jpg;base64,{{ image.image }}"
-                                                     style="max-height: 250px;">
-                                                <input type="hidden" name="image_id" value="{{ image.id }}">
-                                                <input type="hidden" name="page" value="update-product">
+                                                <div class="col-xs-12 col-sm-3">
+                                                    <div class="box box-pricing">
+                                                        <div class="thumbnail">
+                                                            <img src="data:image/jpg;base64,{{ image.image }}"
+                                                                 style="max-height: 250px;">
 
-                                                <div class="form-group">
-                                                    <input type="submit" name="delete" value="Delete"
-                                                           class="btn btn-danger">
+                                                            <div class="caption">
+                                                                <input type="hidden" name="image_id"
+                                                                       value="{{ image.id }}">
+                                                                <input type="hidden" name="page" value="update-product">
+
+                                                                <div class="form-group">
+                                                                    <input type="submit" name="delete" value="Delete"
+                                                                           class="btn btn-danger">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </form>
                                         {% endfor %}
