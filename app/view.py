@@ -6,6 +6,9 @@ from app import app, db
 from flask import render_template, request, send_from_directory, g, redirect, url_for
 from app.admin.models import Blog, Products, Images
 import base64
+from PIL import Image
+import StringIO
+
 
 template = 'official/'
 
@@ -131,8 +134,9 @@ def create_product():
             db.session.commit()
             if request.files:
                 product_image = base64.b64encode(request.files['imageInput'].stream.read())
+                thumbnail = resize_image(product_image)
                 prod_id = [prod.id for prod in Products.query.filter_by(name=prod_name)]
-                image = Images(image=product_image, product_id=prod_id[0])
+                image = Images(image=product_image, product_id=prod_id[0], thumbnail=thumbnail)
                 db.session.add(image)
                 db.session.commit()
             return redirect(url_for('admin', _anchor='/create-product'))
@@ -175,9 +179,14 @@ def delete_product():
 def add_image():
     if request.method == 'POST':
         page = request.form['page']
+
         data = request.files['imageInput']
         data = base64.b64encode(data.stream.read())
-        db.session.add(Images(image=data, product_id=request.form['page_id']))
+        thumb_data = request.files['imageInput']
+
+        thumbnail = resize_image(thumb_data)
+        thumbnail = base64.b64encode(thumbnail)
+        db.session.add(Images(thumbnail=thumbnail, image=data, product_id=request.form['page_id']))
         db.session.commit()
     return redirect(url_for('admin', _anchor=page))
 
@@ -191,3 +200,14 @@ def delete_image():
             db.session.delete(Images.query.get(request.form['image_id']))
             db.session.commit()
     return redirect(url_for('admin', _anchor=page))
+
+
+def resize_image(data):
+
+    size = (200, 200)
+    image = Image.open(data)
+    image.thumbnail(size)
+    result = StringIO.StringIO()
+    image.save(result, format='JPEG')
+
+    return result.getvalue()

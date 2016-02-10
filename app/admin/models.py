@@ -79,13 +79,14 @@ class Images(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'))
 
-    def __init__(self, image, product_id=None, blog_id=None):
+    def __init__(self, thumbnail, image, product_id=None, blog_id=None):
+        self.thumbnail = thumbnail
         self.image = image
         self.product_id = product_id
         self.blog_id = blog_id
 
     def __repr__(self):
-        return '<Image  -{}'.format(self.image, self.product_id, self.blog_id)
+        return '<Image  -{}'.format(self.thumbnail, self.image, self.product_id, self.blog_id)
 
 
 class Categories(db.Model):
