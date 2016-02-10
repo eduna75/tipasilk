@@ -39,12 +39,9 @@
                     <h4>Photo Gallery</h4>
 
                     <div class=lightbox-gallery>
-                        <a href=/assets/images/work/01.jpg><img src=/assets/images/work/01.jpg></a>
-                        <a href=/assets/images/work/02.jpg><img src=/assets/images/work/02.jpg></a>
-                        <a href=/assets/images/work/03.jpg><img src=/assets/images/work/03.jpg></a>
-                        <a href=/assets/images/work/04.jpg><img src=/assets/images/work/04.jpg></a>
-                        <a href=/assets/images/work/05.jpg><img src=/assets/images/work/05.jpg></a>
-                        <a href=/assets/images/work/06.jpg><img src=/assets/images/work/06.jpg></a>
+                        {% for image in g.thumbnail[0:7] %}
+                            <a href=#><img src="data:image/jpg;base64,{{ image.thumbnail }}"></a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

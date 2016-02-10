@@ -16,6 +16,7 @@ template = 'official/'
 @app.before_request
 def before_request():
     g.posts = Blog.query.all()
+    g.thumbnail = Images.query.all()
 
 
 @app.route('/')
