@@ -28,8 +28,9 @@
                     <h4>Recent Posts</h4>
                     <ul>
                         {% for post in g.posts[-3:] %}
-                        <li><a href={{ url_for('post', post_id=post.id) }} class=post-title>{{ post.title }}</a> by <a href=# class=author>Jhon
-                            Smith</a></li>
+                        <li><a href={{ url_for('post', post_id=post.id) }} class=post-title>{{ post.title }}</a>
+                            by
+                            <a href=# class=author>Tipasilk</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -38,9 +39,13 @@
                 <div class="content-wrap widget-gallery">
                     <h4>Photo Gallery</h4>
 
-                    <div class=lightbox-gallery>
-                        {% for image in g.thumbnail[0:7] %}
-                            <a href=#><img src="data:image/jpg;base64,{{ image.thumbnail }}"></a>
+                    <div class="lightbox-gallery">
+                        {% for image in g.thumbnail %}
+                            {% if image.thumbnail %}
+                                <a href="{{ url_for('product_spec', prod_id=image.product_id) }}">
+                                    <img src="data:image/jpg;base64,{{ image.thumbnail }}" alt="{{ image.id }}">
+                                </a>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>

@@ -149,7 +149,6 @@ def create_product():
 @app.route('/update-product', methods=['GET', 'POST'])
 def update_product():
     if request.method == 'POST':
-        print request.form
         try:
             product_data = Products.query.get(request.form['product_id'])
             product_data.product_nr = request.form['product_nr']

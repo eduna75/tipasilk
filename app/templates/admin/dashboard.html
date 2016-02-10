@@ -1,3 +1,6 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
 <!--Start Breadcrumb-->
 <div class="row">
 	<div id="breadcrumb" class="col-xs-12">
@@ -508,6 +511,10 @@
 </div>
 <!--End Dashboard 2 -->
 <div style="height: 40px;"></div>
+
+{% endblock %}
+
+{% block script %}
 <script type="text/javascript">
 // Array for random data for Sparkline
 var sparkline_arr_1 = SparklineTestData();
@@ -530,3 +537,4 @@ $(document).ready(function() {
 	CreateStockPage();
 });
 </script>
+{% endblock %}
