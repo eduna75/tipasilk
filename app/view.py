@@ -92,7 +92,7 @@ def create_blog():
         db.session.commit()
         if request.files:
             blog_id = [post.id for post in Blog.query.filter_by(title=post_title)]
-            image = Images(image=data, blog_id=blog_id[0])
+            image = Images(image=data, blog_id=blog_id[0], thumbnail='')
             db.session.add(image)
             db.session.commit()
 
