@@ -7,153 +7,41 @@
         <div class=container>
             <h1>Blog</h1>
 
-            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a href=#>Blog</a></div>
+            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a
+                    href=#>Blog</a></div>
         </div>
     </header>
     <section id=blog class="section blog">
         <div class=container>
             <div id=blogContent class=section-content>
-
                 <div class=row>
                     {% for post in g.posts[0:6] %}
-                    <div class="col-sm-6 col-md-4">
-                        <div class=blog-post>
-                            <header>
-                                <h4 class=date>{{ post.created_on.strftime('%d') }}<br>{{ post.created_on.strftime('%b') }}</h4>
+                        <div class="col-sm-6 col-md-4">
+                            <div class=blog-post>
+                                <header>
+                                    <h4 class=date>{{ post.created_on.strftime('%d') }}<br>{{ post.created_on.strftime('%b') }}
+                                    </h4>
 
-                                {% for image in post.test_image %}
-                                    <div class=blog-element><img class=img-responsive src='data:image/jpg;base64,{{ image.image }}'></div>
+                                    {% for image in post.test_image %}
+                                        <div class=blog-element><img class=img-responsive
+                                                                     src='data:image/jpg;base64,{{ image.image }}'>
+                                        </div>
                                     {% endfor %}
-                            </header>
-                            <div class=blog-content>
-                                <h4><a href={{ url_for('post', post_id=post.id) }}>{{ post.title }}</a></h4>
+                                </header>
+                                <div class=blog-content>
+                                    <h4><a href={{ url_for('post', post_id=post.id) }}>{{ post.title }}</a></h4>
 
-                                <div class=post-meta><span>By <a href=#>Tipasilk</a></span> <span>{{ post.created_on.strftime('%d/%m/%y') }}</span>
+                                    <div class=post-meta><span>By <a href=#>Tipasilk</a></span>
+                                        <span>{{ post.created_on.strftime('%d/%m/%y') }}</span>
+                                    </div>
+                                    <p>{{ post.body|safe|truncate(178) }}</p>
                                 </div>
-                                <p>{{ post.body|safe|truncate(178) }}</p>
                             </div>
                         </div>
-                    </div>
                     {% endfor %}
-{#                    <div class="col-sm-6 col-md-4">#}
-{#                        <div class=blog-post>#}
-{#                            <header>#}
-{#                                <h4 class=date>29<br>Aug</h4>#}
-{##}
-{#                                <div class=blog-element><img class=img-responsive src=assets/images/blog/2.jpg></div>#}
-{#                            </header>#}
-{#                            <div class=blog-content>#}
-{#                                <h4><a href=#>Web agency template released</a></h4>#}
-{##}
-{#                                <div class=post-meta><span>By <a href=#>John Snow</a></span> <span><a href=#>30#}
-{#                                    Comments</a></span></div>#}
-{#                                <p>Data from the Centers for Medicare Medicaid Services include payments and ..</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col-sm-6 col-md-4">#}
-{#                        <div class=blog-post>#}
-{#                            <header>#}
-{#                                <h4 class=date>29<br>Aug</h4>#}
-{##}
-{#                                <div class=blog-element><img class=img-responsive src=assets/images/blog/3.jpg></div>#}
-{#                            </header>#}
-{#                            <div class=blog-content>#}
-{#                                <h4><a href=#>A companytour to lake powel, arizona</a></h4>#}
-{##}
-{#                                <div class=post-meta><span>By <a href=#>Tailor</a></span> <span><a href=#>30#}
-{#                                    Comments</a></span></div>#}
-{#                                <p>Lake Powell is a reservoir on the Colorado River, straddling the border between#}
-{#                                    ...</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col-sm-6 col-md-4 visible-sm">#}
-{#                        <div class=blog-post>#}
-{#                            <header>#}
-{#                                <h4 class=date>29<br>Aug</h4>#}
-{##}
-{#                                <div class=blog-element><img class=img-responsive src=assets/images/blog/1.jpg></div>#}
-{#                            </header>#}
-{#                            <div class=blog-content>#}
-{#                                <h4><a href=#>Why Billionaires join Gates Giving Pledge</a></h4>#}
-{##}
-{#                                <div class=post-meta><span>By <a href=#>Prium</a></span> <span><a href=#>30 Comments</a></span>#}
-{#                                </div>#}
-{#                                <p>They signed the Giving Pledge -- an effort started in 2010 by ...</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-                <div class=row>
-{#                    <div class="col-sm-6 col-md-4">#}
-{#                        <div class=blog-post>#}
-{#                            <header>#}
-{#                                <h4 class=date>29<br>Aug</h4>#}
-{##}
-{#                                <div class=blog-element><img class=img-responsive src=assets/images/blog/1.jpg></div>#}
-{#                            </header>#}
-{#                            <div class=blog-content>#}
-{#                                <h4><a href=#>Why Billionaires join Gates Giving Pledge</a></h4>#}
-{##}
-{#                                <div class=post-meta><span>By <a href=#>Prium</a></span> <span><a href=#>30 Comments</a></span>#}
-{#                                </div>#}
-{#                                <p>They signed the Giving Pledge -- an effort started in 2010 by ...</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col-sm-6 col-md-4">#}
-{#                        <div class=blog-post>#}
-{#                            <header>#}
-{#                                <h4 class=date>29<br>Aug</h4>#}
-{##}
-{#                                <div class=blog-element><img class=img-responsive src=assets/images/blog/2.jpg></div>#}
-{#                            </header>#}
-{#                            <div class=blog-content>#}
-{#                                <h4><a href=#>Web agency template released</a></h4>#}
-{##}
-{#                                <div class=post-meta><span>By <a href=#>John Snow</a></span> <span><a href=#>30#}
-{#                                    Comments</a></span></div>#}
-{#                                <p>Data from the Centers for Medicare Medicaid Services include payments and ..</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col-sm-6 col-md-4">#}
-{#                        <div class=blog-post>#}
-{#                            <header>#}
-{#                                <h4 class=date>29<br>Aug</h4>#}
-{##}
-{#                                <div class=blog-element><img class=img-responsive src=assets/images/blog/3.jpg></div>#}
-{#                            </header>#}
-{#                            <div class=blog-content>#}
-{#                                <h4><a href=#>A companytour to lake powel, arizona</a></h4>#}
-{##}
-{#                                <div class=post-meta><span>By <a href=#>Tailor</a></span> <span><a href=#>30#}
-{#                                    Comments</a></span></div>#}
-{#                                <p>Lake Powell is a reservoir on the Colorado River, straddling the border between#}
-{#                                    ...</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col-sm-6 col-md-4 visible-sm">#}
-{#                        <div class=blog-post>#}
-{#                            <header>#}
-{#                                <h4 class=date>29<br>Aug</h4>#}
-{##}
-{#                                <div class=blog-element><img class=img-responsive src=assets/images/blog/1.jpg></div>#}
-{#                            </header>#}
-{#                            <div class=blog-content>#}
-{#                                <h4><a href=#>Why Billionaires join Gates Giving Pledge</a></h4>#}
-{##}
-{#                                <div class=post-meta><span>By <a href=#>Prium</a></span> <span><a href=#>30 Comments</a></span>#}
-{#                                </div>#}
-{#                                <p>They signed the Giving Pledge -- an effort started in 2010 by ...</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
+                    <div class=text-center><a id=loadBlogPosts class="btn btn-dark">Load More <span class=caret></span></a>
+                    </div>
                 </div>
-            </div>
-            <div class=text-center><a id=loadBlogPosts class="btn btn-dark">Load More <span class=caret></span></a>
             </div>
         </div>
     </section>
