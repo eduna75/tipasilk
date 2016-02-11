@@ -10,7 +10,8 @@
         <div class=container>
             <h1>FAQ</h1>
 
-            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a href=#>FAQ</a></div>
+            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a
+                    href=#>FAQ</a></div>
         </div>
     </header>
     <section id=faq class="section faq">
@@ -19,199 +20,93 @@
                 <div class="col-sm-8 col-sm-offset-2">
                     <div role=tabpanel>
                         <ul class="nav nav-tabs font-alt" role=tablist>
-                            <li class=active><a href=#support data-toggle=tab><span class=ion-heart></span> Support</a>
+                            <li class=active>
+                                <a href=#support data-toggle=tab>
+                                    <span class=ion-heart></span>
+                                    Support
+                                </a>
                             </li>
-                            <li><a href=#sales data-toggle=tab><span class=ion-ios-cart></span> Sales</a></li>
-                            <li><a href=#notice data-toggle=tab><span class=ion-speakerphone></span> Notice</a></li>
+                            <li>
+                                <a href=#sales data-toggle=tab>
+                                    <span class=ion-ios-cart></span>
+                                    Sales
+                                </a>
+                            </li>
+                            <li>
+                                <a href=#notice data-toggle=tab>
+                                    <span class=ion-speakerphone></span>
+                                    Notice
+                                </a>
+                            </li>
                         </ul>
                         <div class=tab-content>
                             <div class="tab-pane active" id=support>
                                 <div class=panel-group id=accordion>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion href=#support1>Support
-                                                Question 1</a></h4></div>
-                                        <div id=support1 class="panel-collapse collapse in">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
+                                    {% for faq in faqs %}
+                                        {% if faq.section == 'support' %}
+                                            <div class="panel panel-default">
+                                                <div class=panel-heading>
+                                                    <h4 class="panel-title font-alt">
+                                                        <a data-toggle=collapse data-parent=#accordion
+                                                           href=#{{ faq.id }}>
+                                                            {{ faq.title|safe }}
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="{{ faq.id }}" class="panel-collapse collapse">
+                                                    <div class=panel-body>
+                                                        {{ faq.body|safe }}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion href=#support2
-                                                                                class=collapsed>Support Question 2</a>
-                                            </h4></div>
-                                        <div id=support2 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion href=#support3
-                                                                                class=collapsed>Support Question 3</a>
-                                            </h4></div>
-                                        <div id=support3 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion href=#support4
-                                                                                class=collapsed>Support Question 4</a>
-                                            </h4></div>
-                                        <div id=support4 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
-                            <div class=tab-pane id=sales>
+                            <div class="tab-pane active" id=sales>
                                 <div class=panel-group id=accordion2>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion2 href=#sales1>Sales
-                                                Question 1</a></h4></div>
-                                        <div id=sales1 class="panel-collapse collapse in">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
+                                    {% for faq in faqs %}
+                                        {% if faq.section == 'sales' %}
+                                            <div class="panel panel-default">
+                                                <div class=panel-heading>
+                                                    <h4 class="panel-title font-alt">
+                                                        <a data-toggle=collapse data-parent=#accordion2
+                                                           href=#{{ faq.id }}>
+                                                            {{ faq.title|safe }}
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="{{ faq.id }}" class="panel-collapse collapse">
+                                                    <div class=panel-body>
+                                                        {{ faq.body|safe }}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion2 href=#sales2
-                                                                                class=collapsed>Sales Question 2</a>
-                                            </h4></div>
-                                        <div id=sales2 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion2 href=#sales3
-                                                                                class=collapsed>Sales Question 3</a>
-                                            </h4></div>
-                                        <div id=sales3 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion2 href=#sales4
-                                                                                class=collapsed>Sales Question 4</a>
-                                            </h4></div>
-                                        <div id=sales4 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
-                            <div class=tab-pane id=notice>
+                            <div class="tab-pane active" id=notice>
                                 <div class=panel-group id=accordion3>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion3 href=#notice1>Notice
-                                                Item 1</a></h4></div>
-                                        <div id=notice1 class="panel-collapse collapse in">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
+                                    {% for faq in faqs %}
+                                        {% if faq.section == 'notice' %}
+                                            <div class="panel panel-default">
+                                                <div class=panel-heading>
+                                                    <h4 class="panel-title font-alt">
+                                                        <a data-toggle=collapse data-parent=#accordion3
+                                                           href=#{{ faq.id }}>
+                                                            {{ faq.title|safe }}
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="{{ faq.id }}" class="panel-collapse collapse">
+                                                    <div class=panel-body>
+                                                        {{ faq.body|safe }}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion3 href=#notice2
-                                                                                class=collapsed>Notice Item 2</a></h4>
-                                        </div>
-                                        <div id=notice2 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion3 href=#notice3
-                                                                                class=collapsed>Notice Item 3</a></h4>
-                                        </div>
-                                        <div id=notice3 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class=panel-heading>
-                                            <h4 class="panel-title font-alt"><a data-toggle=collapse
-                                                                                data-parent=#accordion3 href=#notice4
-                                                                                class=collapsed>Notice Item 4</a></h4>
-                                        </div>
-                                        <div id=notice4 class="panel-collapse collapse">
-                                            <div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-                                                cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                                single-origin coffee nulla assumenda shoreditch et.
-                                            </div>
-                                        </div>
-                                    </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ __copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
 from flask import render_template, request, send_from_directory, g, redirect, url_for
-from app.admin.models import Blog, Products, Images
+from app.admin.models import Blog, Products, Images, Faq
 import base64
 from PIL import Image
 import StringIO
@@ -60,7 +60,8 @@ def product_spec(prod_id=None):
 
 @app.route('/faq')
 def faq():
-    return render_template(template + 'faq.html')
+    faqs = Faq.query.all()
+    return render_template(template + 'faq.html', faqs=faqs)
 
 
 @app.route('/robots.txt')
@@ -202,6 +203,28 @@ def delete_image():
     return redirect(url_for('admin', _anchor=page))
 
 
+@app.route('/settings')
+def settings():
+    return render_template('admin/tipasilk/settings.html')
+
+
+@app.route('/edit-faq', methods=['POST', 'GET'])
+def edit_faq():
+    if request.method == 'POST':
+        if 'add-faq' in request.form:
+            print request.form
+            faq_data = Faq(title=request.form['title'], body=request.form['body'], section=request.form['section'])
+            db.session.add(faq_data)
+            db.session.commit()
+        elif 'delete-faq' in request.form:
+            db.session.delete(Faq.query.get(request.form['delete-faq']))
+            db.session.commit()
+        return redirect(url_for('admin', _anchor='edit-faq'))
+    faqs = Faq.query.all()
+    return render_template('admin/tipasilk/edit-faq.html', faqs=faqs)
+
+
+# not a view but a function goes below
 def resize_image(data):
 
     size = (200, 200)

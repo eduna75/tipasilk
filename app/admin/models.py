@@ -27,6 +27,7 @@ class Faq(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), unique=True)
     body = db.Column(db.Text())
+    section = db.Column(db.String(12), nullable=False)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow)
     created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
