@@ -4,11 +4,13 @@ __copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
 from flask import render_template, request, send_from_directory, g, redirect, url_for, session
-from app.admin.models import Blog, Products, Images, Faq
+from app.admin.models import Blog, Products, Images, Faq, Users
+from app.decorators import requires_login
+from werkzeug.security import check_password_hash
 import base64
 from PIL import Image
 import StringIO
-from app.decorators import requires_login
+from datetime import timedelta
 
 
 template = 'official/'
@@ -20,7 +22,7 @@ def before_request():
     g.thumbnail = Images.query.all()
     g.user = None
     if 'user_id' in session:
-        g.user = session['user_id']
+        g.user = Users.query.get(session['user_id'])
 
 
 @app.route('/')
@@ -229,12 +231,15 @@ def edit_faq():
     return render_template('admin/tipasilk/edit-faq.html', faqs=faqs)
 
 
+# login and logout
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        print request.form['username']
-        session['user_id'] = request.form['username']
-        print g.user, session
+        user = Users.query.filter_by(email=request.form['username']).first()
+        if user and check_password_hash(user.password, request.form['password']):
+            session.permanent = True
+            app.permanent_session_lifetime = timedelta(minutes=10)
+            session['user_id'] = user.id
         return redirect(url_for('admin'))
     return render_template('admin/login.html')
 

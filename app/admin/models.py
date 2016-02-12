@@ -128,13 +128,15 @@ class Users(db.Model):
     role = db.Column(db.Integer, default=2)
     status = db.Column(db.Integer, default=2)
 
-    def __init__(self, name, last_name, user_name, password, email, phone):
+    def __init__(self, name, last_name, user_name, password, email, phone, role, status):
         self.name = name
         self.last_name = last_name
         self.user_name = user_name
         self.password = password
         self.email = email
         self.phone = phone
+        self.role = role
+        self.status = status
 
     def __repr__(self):
-        return '<Users - {}'.format(self.name, self.last_name, self.user_name, self.email, self.phone)
+        return '<Users - {}'.format(self.name, self.last_name, self.user_name, self.email, self.phone, self.role, self.status)
