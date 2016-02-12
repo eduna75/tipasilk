@@ -7,6 +7,7 @@ _basedir = os.path.abspath(os.path.dirname(__file__))
 class BaseConfig(object):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = ''
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 
 class DevelopmentConfig(BaseConfig):

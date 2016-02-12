@@ -3,11 +3,12 @@ __created__ = '29-01-2016'
 __copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
-from flask import render_template, request, send_from_directory, g, redirect, url_for
+from flask import render_template, request, send_from_directory, g, redirect, url_for, session
 from app.admin.models import Blog, Products, Images, Faq
 import base64
 from PIL import Image
 import StringIO
+from app.decorators import requires_login
 
 
 template = 'official/'
@@ -17,6 +18,9 @@ template = 'official/'
 def before_request():
     g.posts = Blog.query.all()
     g.thumbnail = Images.query.all()
+    g.user = None
+    if 'user_id' in session:
+        g.user = session['user_id']
 
 
 @app.route('/')
@@ -77,6 +81,7 @@ def google():
 
 # Admin related content
 @app.route('/admin')
+@requires_login
 def admin():
     return render_template('admin/index.html')
 
@@ -222,6 +227,24 @@ def edit_faq():
         return redirect(url_for('admin', _anchor='edit-faq'))
     faqs = Faq.query.all()
     return render_template('admin/tipasilk/edit-faq.html', faqs=faqs)
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        print request.form['username']
+        session['user_id'] = request.form['username']
+        print g.user, session
+        return redirect(url_for('admin'))
+    return render_template('admin/login.html')
+
+
+@app.route('/logout')
+def logout():
+    if session:
+        session.pop('user_id', None)
+        session.clear()
+        return redirect(url_for('index'))
 
 
 # not a view but a function goes below

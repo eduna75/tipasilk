@@ -11,7 +11,6 @@ class Blog(db.Model):
     created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
-    image = db.Column(db.LargeBinary)
     test_image = db.relationship('Images', backref=db.backref('blog', lazy='joined'), lazy='dynamic', cascade='all')
 
     def __init__(self, title="", body=""):
@@ -117,6 +116,25 @@ class Viewed(db.Model):
 
 class Users(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.Text)
+    name = db.Column(db.String(15))
+    last_name = db.Column(db.String(20))
+    user_name = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String, nullable=False)
+    email = db.Column(db.String(30), nullable=False)
+    phone = db.Column(db.String(15))
+    signup_ip = db.Column(db.String(15))
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
-    upqdated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow())
+    updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow())
+    role = db.Column(db.Integer, default=2)
+    status = db.Column(db.Integer, default=2)
+
+    def __init__(self, name, last_name, user_name, password, email, phone):
+        self.name = name
+        self.last_name = last_name
+        self.user_name = user_name
+        self.password = password
+        self.email = email
+        self.phone = phone
+
+    def __repr__(self):
+        return '<Users - {}'.format(self.name, self.last_name, self.user_name, self.email, self.phone)
