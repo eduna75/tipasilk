@@ -93,7 +93,8 @@ def google():
 @app.route('/admin')
 @requires_login
 def admin():
-    return render_template('admin/index.html')
+    email = Emails.query.filter_by(status=0).count()
+    return render_template('admin/index.html', emails=email)
 
 
 @app.route('/create-blog', methods=['POST', 'GET'])
@@ -221,6 +222,12 @@ def delete_image():
 @app.route('/settings')
 def settings():
     return render_template('admin/tipasilk/settings.html')
+
+
+@app.route('/emails')
+def emails():
+    email = Emails.query.all()
+    return render_template('admin/tipasilk/emails.html', email=email)
 
 
 @app.route('/edit-faq', methods=['POST', 'GET'])

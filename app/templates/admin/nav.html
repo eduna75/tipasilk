@@ -54,10 +54,10 @@
                                     </a>
                                 </li>
                                 <li class="hidden-xs">
-                                    <a href="{{ url_for('static', filename='ajax/page_messages.html') }}"
+                                    <a href="{{ url_for('emails') }}"
                                        class="ajax-link">
                                         <i class="fa fa-envelope"></i>
-                                        <span class="badge">7</span>
+                                        <span class="badge">{{ emails|int }}</span>
                                     </a>
                                 </li>
                                 <li class="dropdown">
@@ -81,7 +81,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ url_for('static', filename='ajax/page_messages.html') }}"
+                                            <a href="{{ url_for('emails') }}"
                                                class="ajax-link">
                                                 <i class="fa fa-envelope"></i>
                                                 <span>Messages</span>

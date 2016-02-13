@@ -149,6 +149,7 @@ class Emails(db.Model):
     body = db.Column(db.Text, nullable=False)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow())
     senders_ip = db.Column(db.String(15))
+    status = db.Column(db.Integer, default=0)
 
     def __init__(self, name, email, body, senders_ip):
         self.name = name
