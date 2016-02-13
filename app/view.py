@@ -3,8 +3,8 @@ __created__ = '29-01-2016'
 __copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
-from flask import render_template, request, send_from_directory, g, redirect, url_for, session
-from app.admin.models import Blog, Products, Images, Faq, Users
+from flask import render_template, request, send_from_directory, g, redirect, url_for, session, flash
+from app.admin.models import Blog, Products, Images, Faq, Users, Emails
 from app.decorators import requires_login
 from werkzeug.security import check_password_hash
 import base64
@@ -46,8 +46,16 @@ def about():
     return render_template(template + 'about.html')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['POST', 'GET'])
 def contact():
+    if request.method == 'POST':
+        print request.remote_addr
+        email = Emails(name=request.form['name'], email=request.form['email'], body=request.form['body'],
+                       senders_ip=request.remote_addr)
+        db.session.add(email)
+        db.session.commit()
+        flash(u'Your message has been send, thank you and have a great day.!')
+        return redirect(url_for('contact'))
     return render_template(template + 'contact.html')
 
 
@@ -254,7 +262,6 @@ def logout():
 
 # not a view but a function goes below
 def resize_image(data):
-
     size = (200, 200)
     image = Image.open(data)
     image.thumbnail(size)

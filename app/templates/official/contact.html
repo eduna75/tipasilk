@@ -9,19 +9,30 @@
         <div class=container>
             <h1>Contact us</h1>
 
-            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a href=#>Contact us</a>
+            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a
+                    href=#>Contact us</a>
             </div>
         </div>
     </header>
 
     <section id=contact class="section contact">
         <div class=container>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success">
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <div class=section-content>
                 <div class=row>
                     <div class="col-md-6 col-sm-5">
                         <h5>Feel free to drop us a line!</h5>
 
-                        <form action=php/contact-form.php class=contact-form id=contactForm method=post name=contactform
+                        <form action="contact" class=contact-form method="POST"
                               role=form>
                             <div class=form-group>
                                 <input class=form-control id=name name=name placeholder="Your Name" type=text required>
@@ -31,7 +42,7 @@
                                        required>
                             </div>
                             <div class=form-group>
-                                <textarea class=form-control id=message name=massage
+                                <textarea class=form-control id=message name="body"
                                           placeholder="Type your message here" rows=5 required></textarea>
                             </div>
                             <div id=contactFormResponse></div>
@@ -40,6 +51,32 @@
                             </button>
                         </form>
                     </div>
+                    <div class="col-md-6 col-sm-7">
+                        <h5>Find us on Google map</h5>
+
+                        <div class=google-map>
+                            <div id=map></div>
+                        </div>
+                        <div class="row contact-info-wrap">
+                            <div class=col-sm-6>
+                                <div>
+                                    <h5>Office Address</h5>
+                                    <address class=contact-info><span>95/5 Saphansung</span><br><span>Bangkok</span>,
+                                        <span></span> - <span>10240</span><br><span>Thailand</span></address>
+                                </div>
+                            </div>
+                            <div class=col-sm-6>
+                                <div>
+                                    <h5>Contact Information</h5>
+
+                                    <div class=contact-info>Local: +66 (0) 87 834 9344
+                                        <br>Mobile: +66 (0) 87 834 9344
+                                        <br>info@tipasilk.com
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,4 +84,13 @@
 
 {% endblock %}
 
-{% block script %}{% endblock %}
+{% block script %}
+    <!--[if lt IE 10]>
+        <script>
+         $('input, textarea').placeholder();
+        </script>
+    <![endif]-->
+    <script type=text/javascript src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src=assets/js/main.js></script>
+    <!--[if lt IE 10]>
+{% endblock %}

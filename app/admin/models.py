@@ -140,3 +140,21 @@ class Users(db.Model):
 
     def __repr__(self):
         return '<Users - {}'.format(self.name, self.last_name, self.user_name, self.email, self.phone, self.role, self.status)
+
+
+class Emails(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(30), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    created_on = db.Column(db.DateTime(), default=datetime.utcnow())
+    senders_ip = db.Column(db.String(15))
+
+    def __init__(self, name, email, body, senders_ip):
+        self.name = name
+        self.email = email
+        self.body = body
+        self.senders_ip = senders_ip
+
+    def __repr__(self):
+        return 'Emails - {}'.format(self.name, self.email, self.body, self.senders_ip, self.created_on)
