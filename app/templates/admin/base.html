@@ -16,8 +16,6 @@
     {% include 'admin/nav.html' ignore missing %}
 {% endblock %}
 {% block content %}{% endblock %}
-
-
     <link href="{{ url_for('static', filename='plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
@@ -45,6 +43,8 @@
 <script src="{{ url_for('static', filename='plugins/tinymce/jquery.tinymce.min.js') }}"></script>
 <!-- All functions fadmin/or this theme + document.ready processing -->
 <script src="{{ url_for('static', filename='js/devoops.js') }}"></script>
+
+<script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
 {% block script %}{% endblock %}
 
 </body>
