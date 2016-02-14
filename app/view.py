@@ -3,7 +3,7 @@ __created__ = '29-01-2016'
 __copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
-from flask import render_template, request, send_from_directory, g, redirect, url_for, session, flash
+from flask import render_template, request, send_from_directory, g, redirect, url_for, session, flash, jsonify
 from app.admin.models import Blog, Products, Images, Faq, Users, Emails
 from app.decorators import requires_login
 from werkzeug.security import check_password_hash
@@ -276,3 +276,12 @@ def resize_image(data):
     image.save(result, format='JPEG')
 
     return result.getvalue()
+
+
+@app.route('/load-image')
+def load_image():
+    a = request.args.get('a', 0, type=str)
+    a = int(a.replace('thumbnail-', ''))
+    image = Images.query.get(a)
+    image = image.image
+    return jsonify(result=image)
