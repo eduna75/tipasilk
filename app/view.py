@@ -159,7 +159,8 @@ def create_product():
                 db.session.commit()
             return redirect(url_for('admin', _anchor='/create-product'))
         except BaseException as e:
-            print e
+            print e, ': something went wrong'
+            return redirect(url_for('admin', _anchor='/create-product'))
     return render_template('admin/tipasilk/create-products.html', product=product_list)
 
 
@@ -211,7 +212,6 @@ def add_image():
 @app.route('/delete-image', methods=['GET', 'POST'])
 def delete_image():
     if request.method == "POST":
-        print request.form
         page = request.form['page']
         if request.form['delete']:
             db.session.delete(Images.query.get(request.form['image_id']))
@@ -234,7 +234,6 @@ def emails():
 def edit_faq():
     if request.method == 'POST':
         if 'add-faq' in request.form:
-            print request.form
             faq_data = Faq(title=request.form['title'], body=request.form['body'], section=request.form['section'])
             db.session.add(faq_data)
             db.session.commit()

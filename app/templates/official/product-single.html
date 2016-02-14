@@ -28,7 +28,7 @@
                         <div class="image-wrapper" style="width: 600px;min-height: 400px; float: left;">
                             <div class="thumbnails" style="width: 120px; height: 400px; padding: 0 10px; float: left; border-right: solid 1px #DDDDDD; ">
                                 {% for image in products.images %}
-                                    <img id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}" style="padding: 5px 0 2px 0;">
+                                    <img id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}" style="padding: 5px 0 2px 0; cursor: pointer;">
                                 {% endfor %}
                             </div>
                             <div class="main-image">
