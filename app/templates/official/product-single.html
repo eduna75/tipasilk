@@ -17,7 +17,7 @@
             <div class=section-content>
                 {% for products in data %}
                     <div class="productInfo">
-                        <div class="product-header-wrapper" style="margin: 20px 15px 20px; border-bottom: solid 1px #DDDDDD">
+                        <div class="product-header-wrapper">
                             <div class="header-title">
                                 <strong><a href="#">{{ products.name|safe|title }} </a>
                                     <small>{{ products.shortdesc|safe|capitalize }}</small>
@@ -25,36 +25,38 @@
                             </div>
                         </div>
 
-                        <div class="image-wrapper" style="width: 600px;min-height: 400px; float: left;">
-                            <div class="thumbnails" style="width: 120px; height: 400px; padding: 0 10px; float: left; border-right: solid 1px #DDDDDD; ">
+                        <div class="image-wrapper">
+                            <div class="thumbnails">
                                 {% for image in products.images %}
-                                    <img id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}" style="padding: 5px 0 2px 0; cursor: pointer;">
+                                    <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">
                                 {% endfor %}
                             </div>
                             <div class="main-image">
                                 {% for image in products.images[0:1] %}
-                                    <img id="product-image" src="data:image/jpg;base64,{{ image.image }}" style="padding: 5px 15px 0 70px; max-height: 400px;">
+                                    <div id="main-image-wrapper">
+                                        <img id="product-image" src="data:image/jpg;base64,{{ image.image }}">
+                                    </div>
                                 {% endfor %}
                             </div>
                         </div>
 
                         <div class="product-content-wrapper">
-                            <div class="product-left-content" style="float: left; width: 250px; height: 400px;  padding-left: 10px;">
-                                <div class="product-content" style="max-height: 60px; border-bottom: 1px solid #DDDDDD; padding-bottom: 10px;">
-                                    <ul style="font-size: 13px; margin: 0;">
+                            <div class="product-left-content">
+                                <div class="product-content">
+                                    <ul id="tags">
                                         <li>test</li>
                                         <li>test</li>
                                     </ul>
                                 </div>
 
-                                <div class="promotions" style="border-bottom: 1px solid #DDDDDD; color: #5CB6C2; max-height: 60px; padding: 5px 0 5px 0;">
+                                <div id="promotions">
                                     <span class="fa fa-gift"></span> if any promotions show here! and no where else.
                                 </div>
 
-                                <div class="options" style="border-bottom: 1px solid #DDDDDD; font-size: small; min-height: 100px;">
+                                <div id="options">
                                     options goes in here!
                                     <div class="col-md-6">
-                                        <select class="form-control" style="font-size: x-small;">
+                                        <select id="options-select" class="form-control">
                                             <optgroup label="select size">
                                                 <option>SM</option>
                                                 <option>LG</option>
@@ -63,20 +65,20 @@
                                     </div>
                                 </div>
 
-                                <div class="product-price" style="padding-top: 5px; line-height: 30px; border-bottom: 1px solid #DDDDDD">
-                                    <p style="font-size: 24px; color: #333;">{{ products.price|int }} <span>฿</span></p>
+                                <div id="product-price">
+                                    <p id="product-price-price">{{ products.price|int }} <span>฿</span></p>
 
-                                    <p style="font-size: 13px; line-height: 16px; color: #646464;">{{ products.longdesc|safe|capitalize }}</p>
+                                    <p id="product-longdesc">{{ products.longdesc|safe|capitalize }}</p>
                                 </div>
-                                <div class="add-to-cart" style="padding: 30px;">
+                                <div class="add-to-cart">
                                     <form>
                                         <input type="submit" class="btn btn-primary" value="ADD TO CART">
                                     </form>
                                 </div>
                             </div>
-                            <div class="product-right-content" style=" width: 250px; height: 400px; float: left; padding-left: 15px;">
-                                <div class="right-content" style="background-color: #d3d3d3; height: 400px;">
-                                    <div class="side-header" style="border-bottom: 1px solid #FFFFFF; padding: 5px;">
+                            <div class="product-right-content">
+                                <div class="right-content">
+                                    <div class="side-header">
                                         <p>Some text about how to order should be here!</p>
                                     </div>
                                 </div>
@@ -91,12 +93,13 @@
 {% endblock %}
 
 {% block script %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/product-temp.css') }}">
     <script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
     <script type="text/javascript">
         $("[id^=thumbnail-]").click('[id^=thumbnail-]', function () {
             $.getJSON($SCRIPT_ROOT + '/load-image', {
                 a: $(this).attr('id')
-            }, function(data){
+            }, function (data) {
                 $("#product-image").attr('src', 'data:image/jpg;base64,' + data.result);
             });
             return false;
