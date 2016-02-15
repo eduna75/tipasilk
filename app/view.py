@@ -152,14 +152,16 @@ def create_product():
             db.session.commit()
             if request.files:
                 product_image = base64.b64encode(request.files['imageInput'].stream.read())
-                thumbnail = resize_image(product_image)
+
+                thumbnail = resize_image(request.files['imageInput'])
+                thumbnail = base64.b64encode(thumbnail)
                 prod_id = [prod.id for prod in Products.query.filter_by(name=prod_name)]
-                image = Images(image=product_image, product_id=prod_id[0], thumbnail=thumbnail)
-                db.session.add(image)
+                print prod_id[0]
+                db.session.add(Images(image=product_image, product_id=prod_id[0], thumbnail=thumbnail))
                 db.session.commit()
             return redirect(url_for('admin', _anchor='/create-product'))
         except BaseException as e:
-            print e, ': something went wrong'
+            print e, ' Something didn\'t worked that well'
             return redirect(url_for('admin', _anchor='/create-product'))
     return render_template('admin/tipasilk/create-products.html', product=product_list)
 
@@ -268,11 +270,14 @@ def logout():
 
 # not a view but a function goes below
 def resize_image(data):
-    size = (200, 200)
-    image = Image.open(data)
-    image.thumbnail(size)
-    result = StringIO.StringIO()
-    image.save(result, format='JPEG')
+    try:
+        size = (200, 200)
+        image = Image.open(data)
+        image.thumbnail(size)
+        result = StringIO.StringIO()
+        image.save(result, format='JPEG')
+    except BaseException as e:
+        print e, ' resize image:'
 
     return result.getvalue()
 
