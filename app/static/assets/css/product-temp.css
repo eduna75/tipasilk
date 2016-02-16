@@ -4,14 +4,14 @@
 }
 
 .image-wrapper {
-    width: 600px;
-    min-height: 400px;
+    /*width: 600px;*/
+    min-height: 475px;
     float: left;
 }
 
 .thumbnails {
     width: 120px;
-    height: 400px;
+    /*height: 400px;*/
     padding: 0 10px;
     float: left;
     border-right: solid 1px #DDDDDD;
@@ -33,7 +33,7 @@
     transition: all .5s ease-out;
 }
 
-#product-image:hover {
+#product-image:active {
     transform: scale(1.8);
     margin-top: -100px;
     z-index: 4;

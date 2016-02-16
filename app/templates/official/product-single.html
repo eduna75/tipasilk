@@ -14,6 +14,7 @@
 
     <section id=about-us class="section about-us">
         <div class=container>
+
             <div class=section-content>
                 {% for products in data %}
                     <div class="productInfo">
@@ -24,62 +25,67 @@
                                 </strong>
                             </div>
                         </div>
-
-                        <div class="image-wrapper">
-                            <div class="thumbnails">
-                                {% for image in products.images %}
-                                    <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">
-                                {% endfor %}
-                            </div>
-                            <div class="main-image">
-                                {% for image in products.images[0:1] %}
-                                    <div id="main-image-wrapper">
-                                        <img id="product-image" src="data:image/jpg;base64,{{ image.image }}">
+                        <div class="row">
+                            <div class="col-sm-8 col-md-6">
+                                <div class="image-wrapper">
+                                    <div class="col-sm-3 col-md-12 thumbnails">
+                                        {% for image in products.images %}
+                                            <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">
+                                        {% endfor %}
                                     </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                        <div class="product-content-wrapper">
-                            <div class="product-left-content">
-                                <div class="product-content">
-                                    <ul id="tags">
-                                        <li>test</li>
-                                        <li>test</li>
-                                    </ul>
-                                </div>
-
-                                <div id="promotions">
-                                    <span class="fa fa-gift"></span> if any promotions show here! and no where else.
-                                </div>
-
-                                <div id="options">
-                                    options goes in here!
-                                    <div class="col-md-6">
-                                        <select id="options-select" class="form-control">
-                                            <optgroup label="select size">
-                                                <option>SM</option>
-                                                <option>LG</option>
-                                            </optgroup>
-                                        </select>
+                                    <div class="main-image">
+                                        {% for image in products.images[0:1] %}
+                                            <div id="main-image-wrapper">
+                                                <img id="product-image" src="data:image/jpg;base64,{{ image.image }}">
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
-
-                                <div id="product-price">
-                                    <p id="product-price-price">{{ products.price|int }} <span>฿</span></p>
-
-                                    <p id="product-longdesc">{{ products.longdesc|safe|capitalize }}</p>
-                                </div>
-                                <div class="add-to-cart">
-                                    <form>
-                                        <input type="submit" class="btn btn-primary" value="ADD TO CART">
-                                    </form>
-                                </div>
                             </div>
-                            <div class="product-right-content">
-                                <div class="right-content">
-                                    <div class="side-header">
-                                        <p>Some text about how to order should be here!</p>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="product-content-wrapper">
+                                    <div class="product-left-content">
+                                        <div class="product-content">
+                                            <ul id="tags">
+                                                <li>test</li>
+                                                <li>test</li>
+                                            </ul>
+                                        </div>
+
+                                        <div id="promotions">
+                                            <span class="fa fa-gift"></span> if any promotions show here! and no where
+                                            else.
+                                        </div>
+
+                                        <div id="options">
+                                            options goes in here!
+                                            <div class="col-md-6">
+                                                <select id="options-select" class="form-control">
+                                                    <optgroup label="select size">
+                                                        <option>SM</option>
+                                                        <option>LG</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div id="product-price">
+                                            <p id="product-price-price">{{ products.price|int }} <span>฿</span></p>
+
+                                            <p id="product-longdesc">{{ products.longdesc|safe|capitalize }}</p>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <form>
+                                                <input type="submit" class="btn btn-primary" value="ADD TO CART">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="product-right-content">
+                                        <div class="right-content">
+                                            <div class="side-header">
+                                                <p>Some text about how to order should be here!</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
