@@ -34,13 +34,13 @@
                     <li data-category=design class=design>
                         <a href="{{ url_for('product_spec', prod_id=product.id) }}">
                             {% for image in product.images[0:1] %}
-                                <img src="data:image/jpg;base64,{{ image.image }}">
+                                <img class="product-select" src="data:image/jpg;base64,{{ image.thumbnail }}">
                             {% endfor %}
 
                             <div class=portfolio-detail-overlay>
                                 <div class=middle-align-wrap>
                                     <div class=middle-align-cell>
-                                        <h4>{{ product.name }}</h4><span>{{ product.shortdesc|safe }}</span></div>
+                                        <h4>{{ product.name }}</h4><span>{{ product.shortdesc|safe|truncate(25) }}</span></div>
                                 </div>
                             </div>
                         </a>

@@ -306,6 +306,10 @@ img {
     max-width: 100%
 }
 
+.product-select {
+    min-height: 404px;
+}
+
 .form-control {
     border-radius: 2px;
     border: 1px solid #DFDFDF;
@@ -1569,35 +1573,35 @@ blockquote p {
 
 @media only screen and (max-width: 992px) {
     .da-thumbs li {
-        width: 33%
+        /*width: 33%*/
     }
 }
 
 @media only screen and (max-width: 767px) {
     .da-thumbs li {
-        width: 50%
+        /*width: 50%*/
     }
 }
 
 .portfolio-grid.three-col li {
-    width: 33.333%
+    /*width: 33.333%*/
 }
 
 @media only screen and (max-width: 992px) {
     .portfolio-grid.three-col li {
-        width: 33%
+        /*width: 33%*/
     }
 }
 
 @media only screen and (max-width: 767px) {
     .portfolio-grid.three-col li {
-        width: 50%
+        /*width: 50%*/
     }
 }
 
 .da-thumbs li.x2,
 .portfolio-grid.two-col li {
-    width: 50%
+    /*width: 50%*/
 }
 
 .da-thumbs li a,

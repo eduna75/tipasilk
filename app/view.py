@@ -270,8 +270,9 @@ def logout():
 
 # not a view but a function goes below
 def resize_image(data):
+
     try:
-        size = (200, 200)
+        size = (450, 600)
         image = Image.open(data)
         image.thumbnail(size)
         result = StringIO.StringIO()
