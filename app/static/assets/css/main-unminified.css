@@ -1586,6 +1586,7 @@ blockquote p {
 
 .portfolio-grid.three-col li {
     /*width: 33.333%*/
+    width: 280px;
 }
 
 @media only screen and (max-width: 992px) {
