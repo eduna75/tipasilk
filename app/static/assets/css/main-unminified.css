@@ -308,6 +308,7 @@ img {
 
 .product-select {
     min-height: 404px;
+    max-height: 404px;
 }
 
 .form-control {

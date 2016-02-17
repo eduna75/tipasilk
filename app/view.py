@@ -156,7 +156,6 @@ def create_product():
                 thumbnail = resize_image(request.files['imageInput'])
                 thumbnail = base64.b64encode(thumbnail)
                 prod_id = [prod.id for prod in Products.query.filter_by(name=prod_name)]
-                print prod_id[0]
                 db.session.add(Images(image=product_image, product_id=prod_id[0], thumbnail=thumbnail))
                 db.session.commit()
             return redirect(url_for('admin', _anchor='/create-product'))
@@ -200,13 +199,12 @@ def add_image():
     if request.method == 'POST':
         page = request.form['page']
 
-        data = request.files['imageInput']
-        data = base64.b64encode(data.stream.read())
-        thumb_data = request.files['imageInput']
+        image_data = request.files['imageInput']
+        preprocessor = resize_image(image_data)
+        image = base64.b64encode(preprocessor[0])
 
-        thumbnail = resize_image(thumb_data)
-        thumbnail = base64.b64encode(thumbnail)
-        db.session.add(Images(thumbnail=thumbnail, image=data, product_id=request.form['page_id']))
+        thumbnail = base64.b64encode(preprocessor[1])
+        db.session.add(Images(thumbnail=thumbnail, image=image, product_id=request.form['page_id']))
         db.session.commit()
     return redirect(url_for('admin', _anchor=page))
 
@@ -270,17 +268,24 @@ def logout():
 
 # not a view but a function goes below
 def resize_image(data):
-
     try:
         size = (450, 600)
         image = Image.open(data)
         image.thumbnail(size)
         result = StringIO.StringIO()
         image.save(result, format='JPEG')
+
+        small_size = (150, 200)
+        thumbnail = Image.open(data)
+        thumbnail.thumbnail(small_size)
+        result2 = StringIO.StringIO()
+        thumbnail.save(result2, format='JPEG')
+
+        reply = [result.getvalue(), result2.getvalue()]
     except BaseException as e:
         print e, ' resize image:'
 
-    return result.getvalue()
+    return reply
 
 
 @app.route('/load-image')

@@ -31,10 +31,10 @@
         <div class="container portfolio-grid three-col">
             <ul id=da-thumbs class="da-thumbs isotope">
                 {% for product in products %}
-                    <li data-category=design class=design>
+                    <li data-category=web class=web>
                         <a href="{{ url_for('product_spec', prod_id=product.id) }}">
                             {% for image in product.images[0:1] %}
-                                <img class="product-select" src="data:image/jpg;base64,{{ image.thumbnail }}">
+                                <img class="product-select" src="data:image/jpg;base64,{{ image.image }}">
                             {% endfor %}
 
                             <div class=portfolio-detail-overlay>
@@ -52,4 +52,6 @@
 
 {% endblock %}
 
-{% block script %}{% endblock %}
+{% block script %}
+    <script src=assets/lib/isotope/dist/isotope.pkgd.min.js></script>
+{% endblock %}
