@@ -8,6 +8,7 @@ class BaseConfig(object):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = ''
     SECRET_KEY = os.environ['SECRET_KEY']
+    ADMIN_MENU = 'production'
 
 
 class DevelopmentConfig(BaseConfig):
@@ -21,3 +22,4 @@ class ProductionConfig(BaseConfig):
     DEBUG = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    ADMIN_MENU = 'production'
