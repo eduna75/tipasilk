@@ -93,7 +93,7 @@ def google():
 @app.route('/admin')
 @requires_login
 def admin():
-    admin_menu = app.config['ADMIN_MENU']
+    admin_menu = app.config['ADMIN_MENU']  # will show more or less options depending on development / production
     email = Emails.query.filter_by(status=0).count()
     return render_template('admin/index.html', emails=email, admin_menu=admin_menu)
 
