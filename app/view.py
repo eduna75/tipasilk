@@ -93,8 +93,9 @@ def google():
 @app.route('/admin')
 @requires_login
 def admin():
+    admin_menu = app.config['ADMIN_MENU']
     email = Emails.query.filter_by(status=0).count()
-    return render_template('admin/index.html', emails=email)
+    return render_template('admin/index.html', emails=email, admin_menu=admin_menu)
 
 
 @app.route('/create-blog', methods=['POST', 'GET'])
@@ -266,7 +267,7 @@ def logout():
         return redirect(url_for('index'))
 
 
-# not a view but a function goes below
+# not a view but a function
 def resize_image(data):
     try:
         size = (450, 600)
@@ -288,6 +289,7 @@ def resize_image(data):
     return reply
 
 
+# AJAX response to load image in product page
 @app.route('/load-image')
 def load_image():
     a = request.args.get('a', 0, type=str)
