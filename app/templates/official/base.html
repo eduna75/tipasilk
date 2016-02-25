@@ -27,8 +27,8 @@
 {#    <link rel="stylesheet" href="/assets/css/ie_fix.css" type="text/css" property="stylesheet">#}
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='plugin/jquery/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='plugin/bootstrap/bootstrap-min.css') }}"></script>
 <script type="text/javascript" src={{ url_for('static', filename='/assets/js/main.js') }}></script>
 <script>
     (function (i, s, o, g, r, a, m) {
