@@ -93,7 +93,7 @@
                                                     text</label>
 
                                                 <div class="col-sm-10">
-                                                    <textarea class="form-control" rows="5" id="wysiwig_simple"
+                                                    <textarea class="form-control" rows="5" id="wysiwig_{{ posts.id }}"
                                                               name="body">{{ posts.body }}</textarea>
                                                 </div>
                                             </div>
@@ -153,10 +153,8 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
             // Create Wysiwig editor for textare
-            TinyMCEStart('#wysiwig_simple', null);
-            TinyMCEStart('#wysiwig_full', 'extreme');
+            TinyMCEStart('[id^=wysiwig_]', null);
         });
     </script>
 {% endblock %}
