@@ -89,10 +89,12 @@
     </section>
 
 {% endblock %}
-
-{% block script %}
+{% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/product-temp.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='/plugins/fancybox/jquery.fancybox.css') }}" media="screen"/>
+{% endblock %}
+
+{% block script %}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
     <script type="text/javascript">

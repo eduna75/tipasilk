@@ -11,8 +11,7 @@
     <title>{% block title %}{% endblock %}</title>
 
     <link href="{{ url_for('static', filename='plugins/bootstrap/bootstrap.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/main-unminified.css') }}" type="text/css"
-          property="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/main-unminified.css') }}" type="text/css">
 
 </head>
 
@@ -20,34 +19,34 @@
 {% block nav %}{% include 'official/nav.html' ignore missing %}{% endblock %}
 {% block content %}{% endblock %}
 {% block footer %}{% include 'official/footer.html' ignore missing %}{% endblock %}
-<link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:100,300,400">
+    <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:100,300,400">
 {#    <link rel="stylesheet" href="/assets/css/ie_fix.css" type="text/css" property="stylesheet">#}
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='plugin/jquery/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='plugin/bootstrap/bootstrap-min.css') }}"></script>
-<script type="text/javascript" src={{ url_for('static', filename='/assets/js/main.js') }}></script>
-<script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-73692853-1', 'auto');
-    ga('send', 'pageview');
-
-</script>
 {% block css %}{% endblock %}
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/plugins/bootstrap/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src={{ url_for('static', filename='/assets/js/main.js') }}></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-73692853-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 {% block script %}{% endblock %}
 </body>
 </html>
