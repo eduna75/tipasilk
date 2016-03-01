@@ -14,7 +14,7 @@ class BaseConfig(object):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL'] + 'tipasilk'
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL_TS']
     ADMIN_MENU = 'development'
 
 

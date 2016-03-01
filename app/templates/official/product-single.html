@@ -28,18 +28,10 @@
                         <div class="row">
                             <div class="col-sm-8 col-md-6">
                                 <div class="image-wrapper">
-                                    <div class="col-sm-3 col-md-12 thumbnails">
-                                        {% for image in products.images %}
-                                            <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">
-                                        {% endfor %}
-                                    </div>
-                                    <div class="main-image">
-                                        {% for image in products.images[0:1] %}
-                                            <div id="main-image-wrapper">
-                                                <img id="product-image" src="data:image/jpg;base64,{{ image.image }}">
-                                            </div>
-                                        {% endfor %}
-                                    </div>
+                                    {% for image in products.images %}
+                                        {#  <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
+                                        <a href="data:image/jpg;base64,{{ image.image }}" class="fancybox" rel="gallery" title="Sample title"><img src="data:image/jpg;base64,{{ image.thumbnail }}"/></a>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
@@ -100,6 +92,8 @@
 
 {% block script %}
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/product-temp.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/plugins/fancybox/jquery.fancybox.css') }}" media="screen"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
     <script type="text/javascript">
         $("[id^=thumbnail-]").click('[id^=thumbnail-]', function () {
@@ -109,6 +103,23 @@
                 $("#product-image").attr('src', 'data:image/jpg;base64,' + data.result);
             });
             return false;
+        });
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                helpers: {
+                    title: {
+                        type: 'inside'
+                    },
+                    overlay: {
+                        css: {
+                            'background': 'rgba(255,255,255,0.5)'
+                        }
+                    }
+                }
+            });
         });
     </script>
 {% endblock %}
