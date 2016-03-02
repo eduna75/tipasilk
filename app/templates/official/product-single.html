@@ -27,10 +27,12 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-8 col-md-6">
-                                <div class="image-wrapper">
+                                <div id="basicExample" class="image-wrapper">
                                     {% for image in products.images %}
                                         {#  <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
-                                        <a href="data:image/jpg;base64,{{ image.image }}" class="fancybox" rel="gallery" title="Sample title"><img src="data:image/jpg;base64,{{ image.thumbnail }}"/></a>
+                                        <a href="data:image/jpg;base64,{{ image.image }}" class="fancybox" rel="gallery" title="Sample title">
+                                            <img src="data:image/jpg;base64,{{ image.thumbnail }}" alt="{{ products.name }}"/>
+                                        </a>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -97,6 +99,8 @@
 {% block script %}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
+
     <script type="text/javascript">
         $("[id^=thumbnail-]").click('[id^=thumbnail-]', function () {
             $.getJSON($SCRIPT_ROOT + '/load-image', {
@@ -107,7 +111,7 @@
             return false;
         });
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $(".fancybox").fancybox({
