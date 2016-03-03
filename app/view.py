@@ -3,7 +3,8 @@ __created__ = '29-01-2016'
 __copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
-from flask import render_template, request, send_from_directory, g, redirect, url_for, session, flash, jsonify
+from flask import render_template, request, send_from_directory, g, redirect, url_for, session, flash, jsonify, \
+    send_file
 from app.admin.models import Blog, Products, Images, Faq, Users, Emails
 from app.decorators import requires_login
 from werkzeug.security import check_password_hash
@@ -11,6 +12,7 @@ import base64
 from PIL import Image
 import StringIO
 from datetime import timedelta
+from io import BytesIO
 
 
 template = 'official/'
@@ -297,3 +299,31 @@ def load_image():
     image = Images.query.get(a)
     image = image.image
     return jsonify(result=image)
+
+
+@app.route('/image/<int:img_id>.jpg')
+def image(img_id=None):
+    img = Images.query.filter_by(id=img_id)
+    th = []
+    for i in img:
+        th.append(i.image)
+    byte_io = BytesIO()
+    a = StringIO.StringIO(th[0].decode('base64'))
+    i = Image.open(a)
+    i.save(byte_io, 'JPEG')
+    byte_io.seek(0)
+    return send_file(byte_io, mimetype='image/jpeg')
+
+
+@app.route('/thumbnail/<int:img_id>.jpg')
+def thumbnail(img_id=None):
+    img = Images.query.filter_by(id=img_id)
+    th = []
+    for i in img:
+        th.append(i.thumbnail)
+    byte_io = BytesIO()
+    a = StringIO.StringIO(th[0].decode('base64'))
+    i = Image.open(a)
+    i.save(byte_io, 'JPEG')
+    byte_io.seek(0)
+    return send_file(byte_io, mimetype='image/jpeg')
