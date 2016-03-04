@@ -20,7 +20,7 @@
                         <div class=col-md-12>
                             <div class=featured-image>
                                 {% for image in post.test_image %}
-                                <img src='data:image/jpg;base64,{{ image.image }}' class=img-responsive>
+                                <img src='{{ url_for('image', size='image', img_id=image.id) }}' class=img-responsive>
                                 {% endfor %}
                             </div>
                             <h2 class=post-title><a href={{ url_for('post', post_id=post.id) }}>{{ post.title }}</a>

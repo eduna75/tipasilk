@@ -30,8 +30,8 @@
                                 <div id="basicExample" class="image-wrapper">
                                     {% for image in products.images %}
 {#                                          <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
-                                        <a href="{{ url_for('image', img_id=image.id) }}" class="fancybox" rel="gallery" title="Sample title">
-                                        <img src="{{ url_for('thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
+                                        <a href="{{ url_for('image', size='image', img_id=image.id) }}" class="fancybox" rel="gallery" title="Sample title">
+                                        <img src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
                                         </a>
                                     {% endfor %}
                                 </div>

@@ -301,26 +301,16 @@ def load_image():
     return jsonify(result=image)
 
 
-@app.route('/image/<int:img_id>.jpg')
-def image(img_id=None):
+@app.route('/image/<size>/<int:img_id>.jpg')
+def image(size, img_id=None):
     img = Images.query.filter_by(id=img_id)
     th = []
-    for i in img:
-        th.append(i.image)
-    byte_io = BytesIO()
-    a = StringIO.StringIO(th[0].decode('base64'))
-    i = Image.open(a)
-    i.save(byte_io, 'JPEG')
-    byte_io.seek(0)
-    return send_file(byte_io, mimetype='image/jpeg')
-
-
-@app.route('/thumbnail/<int:img_id>.jpg')
-def thumbnail(img_id=None):
-    img = Images.query.filter_by(id=img_id)
-    th = []
-    for i in img:
-        th.append(i.thumbnail)
+    if 'thumbnail' in size:
+        for i in img:
+            th.append(i.thumbnail)
+    elif 'image' in size:
+        for i in img:
+            th.append(i.image)
     byte_io = BytesIO()
     a = StringIO.StringIO(th[0].decode('base64'))
     i = Image.open(a)

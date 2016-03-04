@@ -43,7 +43,7 @@
                         {% for image in g.thumbnail[-2:] %}
                             {% if image.thumbnail %}
                                 <a href="{{ url_for('product_spec', prod_id=image.product_id) }}">
-                                    <img src="data:image/jpg;base64,{{ image.thumbnail }}" alt="{{ image.id }}" style="max-height: 125px;">
+                                    <img src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ image.id }}" style="max-height: 125px;">
                                 </a>
                             {% endif %}
                         {% endfor %}

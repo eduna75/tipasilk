@@ -24,7 +24,7 @@
 
                                     {% for image in post.test_image %}
                                         <div class=blog-element><img class=img-responsive
-                                                                     src='data:image/jpg;base64,{{ image.image }}'>
+                                                                     src='{{ url_for('image', size='image', img_id=image.id) }}'>
                                         </div>
                                     {% endfor %}
                                 </header>

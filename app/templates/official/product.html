@@ -34,7 +34,7 @@
                     <li data-category=web class=web>
                         <a href="{{ url_for('product_spec', prod_id=product.id) }}">
                             {% for image in product.images[0:1] %}
-                                <img class="product-select" src="data:image/jpg;base64,{{ image.image }}">
+                                <img class="product-select" src="{{ url_for('image', size='image', img_id=image.id) }}">
                             {% endfor %}
 
                             <div class=portfolio-detail-overlay>
