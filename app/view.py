@@ -5,7 +5,7 @@ __copyright__ = 'copyright @ Justus Ouwerling'
 from app import app, db
 from flask import render_template, request, send_from_directory, g, redirect, url_for, session, flash, jsonify, \
     send_file
-from app.admin.models import Blog, Products, Images, Faq, Users, Emails
+from app.admin.models import Blog, Products, Images, Faq, Users, Emails, Categories
 from app.decorators import requires_login
 from werkzeug.security import check_password_hash
 import base64
@@ -145,12 +145,13 @@ def delete_blog():
 @app.route('/create-product', methods=['GET', 'POST'])
 def create_product():
     product_list = Products.query.all()
+    category = Categories.query.all()
     if request.method == 'POST':
         try:
             prod_name = request.form['name']
             prod = Products(product_nr=request.form['product_nr'], name=request.form['name'],
                             shortdesc=request.form['shortdesc'], longdesc=request.form['longdesc'],
-                            price=request.form['price'])
+                            price=request.form['price'], category_id=request.form['category'])
             db.session.add(prod)
             db.session.commit()
             if request.files:
@@ -165,7 +166,7 @@ def create_product():
         except BaseException as e:
             print e, ' Something didn\'t worked that well'
             return redirect(url_for('admin', _anchor='/create-product'))
-    return render_template('admin/tipasilk/create-products.html', product=product_list)
+    return render_template('admin/tipasilk/create-products.html', product=product_list, category=category)
 
 
 @app.route('/update-product', methods=['GET', 'POST'])

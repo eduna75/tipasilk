@@ -56,12 +56,12 @@ class Products(db.Model):
     product_nr = db.Column(db.Text, unique=True)
     images = db.relationship('Images', backref=db.backref('products', lazy='joined'), lazy='dynamic', cascade='all')
 
-    def __init__(self, product_nr, name, shortdesc, longdesc, price, featured=True):
+    def __init__(self, product_nr, name, shortdesc, longdesc, price, category_id, featured=True):
         self.product_nr = product_nr
         self.name = name
         self.shortdesc = shortdesc
         self.longdesc = longdesc
-        # self.category_id = category_id
+        self.category_id = category_id
         self.featured = featured
         self.price = price
 
