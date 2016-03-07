@@ -20,14 +20,13 @@
 {% block content %}{% endblock %}
 {% block footer %}{% include 'official/footer.html' ignore missing %}{% endblock %}
     <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:100,300,400">
 {#    <link rel="stylesheet" href="/assets/css/ie_fix.css" type="text/css" property="stylesheet">#}
 {% block css %}{% endblock %}
 
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+{#    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>#}
+    <script type="text/javascript" src="{{ url_for('static', filename='/plugins/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/bootstrap/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src={{ url_for('static', filename='/assets/js/main.js') }}></script>
     <script>
