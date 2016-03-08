@@ -142,11 +142,11 @@ function LoadFineUploader(callback){
 //
 function LoadXChartScript(callback){
 	function LoadXChart(){
-		$.getScript('plugins/xcharts/xcharts.min.js', callback);
+		$.getScript('../plugins/xcharts/xcharts.min.js', callback);
 	}
 	function LoadD3Script(){
 		if (!$.fn.d3){
-			$.getScript('plugins/d3/d3.min.js', LoadXChart)
+			$.getScript('../plugins/d3/d3.min.js', LoadXChart)
 		}
 		else {
 			LoadXChart();
@@ -3356,7 +3356,7 @@ $(document).ready(function () {
 	});
 	var ajax_url = location.hash.replace(/^#/, '');
 	if (ajax_url.length < 1) {
-		ajax_url = 'ajax/dashboard.html';
+		ajax_url = '../ajax/dashboard.html';
 	}
 	LoadAjaxContent(ajax_url);
 	$('.main-menu').on('click', 'a', function (e) {

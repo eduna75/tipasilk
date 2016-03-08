@@ -1,89 +1,31 @@
 __author__ = 'justus'
-__created__ = '29-01-2016'
-__copyright__ = 'copyright @ Justus Ouwerling'
 
 from app import app, db
-from flask import render_template, request, send_from_directory, g, redirect, url_for, session, flash, jsonify, \
-    send_file
-from app.admin.models import Blog, Products, Images, Faq, Users, Emails, Categories
+from flask import render_template, request, url_for, redirect, session, jsonify, send_file, Blueprint, g
+from app.admin.models import Emails, Blog, Images, Products, Categories, Faq, Users
 from app.decorators import requires_login
+from setuptools.compat import BytesIO
 from werkzeug.security import check_password_hash
 import base64
-from PIL import Image
 import StringIO
 from datetime import timedelta
-from io import BytesIO
+from PIL import Image
 
 
-template = 'official/'
+mod = Blueprint('admin', __name__, template_folder='templates', url_prefix='/admin')
 
 
-@app.route('/')
-def index():
-    return render_template(template + 'index.html')
-
-
-@app.route('/blog')
-def blog():
-    return render_template(template + 'blog.html')
-
-
-@app.route('/post/<int:post_id>')
-def post(post_id=None):
-    posts = Blog.query.filter_by(id=post_id).first()
-    return render_template(template + 'post.html', post=posts)
-
-
-@app.route('/about')
-def about():
-    return render_template(template + 'about.html')
-
-
-@app.route('/contact', methods=['POST', 'GET'])
-def contact():
-    if request.method == 'POST':
-        print request.remote_addr
-        email = Emails(name=request.form['name'], email=request.form['email'], body=request.form['body'],
-                       senders_ip=request.remote_addr)
-        db.session.add(email)
-        db.session.commit()
-        flash(u'Your message has been send, thank you and have a great day.!')
-        return redirect(url_for('contact'))
-    return render_template(template + 'contact.html')
-
-
-@app.route('/product')
-def product():
-    data = Products.query.all()
-    return render_template(template + 'product.html', products=data)
-
-
-@app.route('/product-spec/<int:prod_id>')
-def product_spec(prod_id=None):
-    data = Products.query.filter_by(id=prod_id)
-
-    return render_template(template + 'product-single.html', data=data)
-
-
-@app.route('/faq')
-def faq():
-    faqs = Faq.query.all()
-    return render_template(template + 'faq.html', faqs=faqs)
-
-
-@app.route('/robots.txt')
-def robots():
-    return send_from_directory(app.static_folder, request.path[1:])
-
-
-# google site verification
-@app.route('/google91fe3a6d5fb60907.html')
-def google():
-    return send_from_directory(app.static_folder, request.path[1:])
+@app.before_request
+def before_request():
+    g.posts = Blog.query.all()
+    g.thumbnail = Images.query.all()
+    g.user = None
+    if 'user_id' in session:
+        g.user = Users.query.get(session['user_id'])
 
 
 # Admin related content
-@app.route('/admin')
+@mod.route('/')
 @requires_login
 def admin():
     admin_menu = app.config['ADMIN_MENU']  # will show more or less options depending on development / production
@@ -91,7 +33,7 @@ def admin():
     return render_template('admin/index.html', emails=email, admin_menu=admin_menu)
 
 
-@app.route('/create-blog', methods=['POST', 'GET'])
+@mod.route('/create-blog', methods=['POST', 'GET'])
 def create_blog():
     if request.method == 'POST':
         post_title = request.form['title']
@@ -110,7 +52,7 @@ def create_blog():
     return render_template('admin/tipasilk/create-blog.html')
 
 
-@app.route('/update-blog', methods=['GET', 'POST'])
+@mod.route('/update-blog', methods=['GET', 'POST'])
 def update_blog():
     if request.method == 'POST':
         posts = Blog.query.get(request.form['post_id'])
@@ -123,7 +65,7 @@ def update_blog():
         return render_template('admin/tipasilk/update-blog.html', data=data)
 
 
-@app.route('/delete-blog', methods=['POST', 'GET'])
+@mod.route('/delete-blog', methods=['POST', 'GET'])
 def delete_blog():
     print request.form
     if request.method == 'POST':
@@ -133,17 +75,17 @@ def delete_blog():
     return redirect(url_for('admin', _anchor='/update-blog'))
 
 
-@app.route('/orders')
+@mod.route('/orders')
 def orders():
     return render_template('admin/tipasilk/orders.html')
 
 
-@app.route('/products')
+@mod.route('/products')
 def products():
     return render_template('admin/tipasilk/products.html')
 
 
-@app.route('/create-product', methods=['GET', 'POST'])
+@mod.route('/create-product', methods=['GET', 'POST'])
 def create_product():
     product_list = Products.query.all()
     category = Categories.query.all()
@@ -170,7 +112,7 @@ def create_product():
     return render_template('admin/tipasilk/create-products.html', product=product_list, category=category)
 
 
-@app.route('/update-product', methods=['GET', 'POST'])
+@mod.route('/update-product', methods=['GET', 'POST'])
 def update_product():
     if request.method == 'POST':
         try:
@@ -190,7 +132,7 @@ def update_product():
     return render_template('admin/tipasilk/update-product.html', data=data)
 
 
-@app.route('/delete-product', methods=['GET', 'POST'])
+@mod.route('/delete-product', methods=['GET', 'POST'])
 def delete_product():
     if request.method == 'POST':
         product_data = Products.query.get(request.form['product_id'])
@@ -199,7 +141,7 @@ def delete_product():
     return redirect(url_for('admin', _anchor='update-product'))
 
 
-@app.route('/add-image', methods=['GET', 'POST'])
+@mod.route('/add-image', methods=['GET', 'POST'])
 def add_image():
     if request.method == 'POST':
         page = request.form['page']
@@ -214,7 +156,7 @@ def add_image():
     return redirect(url_for('admin', _anchor=page))
 
 
-@app.route('/delete-image', methods=['GET', 'POST'])
+@mod.route('/delete-image', methods=['GET', 'POST'])
 def delete_image():
     if request.method == "POST":
         page = request.form['page']
@@ -224,18 +166,18 @@ def delete_image():
     return redirect(url_for('admin', _anchor=page))
 
 
-@app.route('/settings')
+@mod.route('/settings')
 def settings():
     return render_template('admin/tipasilk/settings.html')
 
 
-@app.route('/emails')
+@mod.route('/emails')
 def emails():
     email = Emails.query.all()
     return render_template('admin/tipasilk/emails.html', email=email)
 
 
-@app.route('/edit-faq', methods=['POST', 'GET'])
+@mod.route('/edit-faq', methods=['POST', 'GET'])
 def edit_faq():
     if request.method == 'POST':
         if 'add-faq' in request.form:
@@ -251,19 +193,19 @@ def edit_faq():
 
 
 # login and logout
-@app.route('/login', methods=['POST', 'GET'])
+@mod.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
         user = Users.query.filter_by(email=request.form['username']).first()
         if user and check_password_hash(user.password, request.form['password']):
             session.permanent = True
-            app.permanent_session_lifetime = timedelta(minutes=10)
+            admin.permanent_session_lifetime = timedelta(minutes=10)
             session['user_id'] = user.id
         return redirect(url_for('admin'))
     return render_template('admin/login.html')
 
 
-@app.route('/logout')
+@mod.route('/logout')
 def logout():
     if session:
         session.pop('user_id', None)
@@ -294,7 +236,7 @@ def resize_image(data):
 
 
 # AJAX response to load image in product page
-@app.route('/load-image')
+@mod.route('/load-image')
 def load_image():
     a = request.args.get('a', 0, type=str)
     a = int(a.replace('thumbnail-', ''))
@@ -303,7 +245,7 @@ def load_image():
     return jsonify(result=image)
 
 
-@app.route('/image/<size>/<int:img_id>.jpg')
+@mod.route('/image/<size>/<int:img_id>.jpg')
 def image(size, img_id=None):
     img = Images.query.filter_by(id=img_id)
     th = []
@@ -321,7 +263,7 @@ def image(size, img_id=None):
     return send_file(byte_io, mimetype='image/jpeg')
 
 
-@app.route('/add-category')
+@mod.route('/add-category')
 def add_category():
     a = request.args.get('a', 0, type=str)
     db.session.add(Categories(name=a))
@@ -334,21 +276,16 @@ def add_category():
     return jsonify(result=result)
 
 
-@app.errorhandler(400)
-@app.errorhandler(401)
-@app.errorhandler(402)
-@app.errorhandler(403)
-@app.errorhandler(404)
-@app.errorhandler(405)
-@app.errorhandler(406)
-@app.errorhandler(407)
-@app.errorhandler(408)
-@app.errorhandler(409)
-@app.errorhandler(410)
-@app.errorhandler(500)
-@app.errorhandler(501)
-@app.errorhandler(502)
-@app.errorhandler(503)
-@app.errorhandler(504)
+@mod.errorhandler(400)
+@mod.errorhandler(401)
+@mod.errorhandler(402)
+@mod.errorhandler(403)
+@mod.errorhandler(404)
+@mod.errorhandler(405)
+@mod.errorhandler(406)
+@mod.errorhandler(407)
+@mod.errorhandler(408)
+@mod.errorhandler(409)
+@mod.errorhandler(410)
 def error(e):
-    return render_template(template + 'error.html', e=e), 404
+    return render_template('error.html', e=e), 404

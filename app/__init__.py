@@ -15,3 +15,6 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 db = SQLAlchemy(app)
 
 from app import view
+from app.admin.view import mod as admin
+
+app.register_blueprint(admin)
