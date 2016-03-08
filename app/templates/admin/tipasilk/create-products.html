@@ -78,10 +78,10 @@
                             <label class="col-sm-2 control-label">Category</label>
 
                             <div class="col-sm-4">
-                                <select class="form-control" name="category">
+                                <select class="form-control" id="category" name="category">
                                     <option disabled="" selected="">-- select category --</option>
                                     {% for categories in category %}
-                                    <option value="{{ categories.id }}">{{ categories.name }}</option>
+                                        <option value="{{ categories.id }}">{{ categories.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -89,8 +89,9 @@
                             <label class="col-sm-2 control-label">Add Category</label>
 
                             <div class="col-sm-4">
-                                <input type="text" name="add-category" placeholder="add a category">
-                                <button class="btn btn-xs btn-primary" name="add-cat" value="Add">Add</button>
+                                <input type="text" id="cat-text" name="add-category" placeholder="add a category">
+                                <button class="btn btn-xs btn-primary" id="add-cat" name="add-cat" value="Add">Add
+                                </button>
                                 <p class="help-block">Add a new category!</p>
                             </div>
                         </div>
@@ -206,34 +207,26 @@
 {% endblock %}
 
 {% block script %}
-
     <script type="text/javascript">
+        $('#add-cat').click(function () {
+            $.getJSON($SCRIPT_ROOT + '/add-category', {
+                a: $('#cat-text').val()
+            }, function (data) {
+                var selectbox = $('#category');
+                selectbox.empty();
+                var list = '';
+                for (var j = 0; j < data.result.length; j++) {
+                    list += "<option value='" + data.result[j][0] + "'>" + data.result[j][1] + "</option>";
+                }
+                selectbox.html(list);
+                $("#category").attr('value', data.result);
+            });
+            return false;
+        });
 
         $(document).ready(function () {
-            // Run Select2 plugin on elements
-            function DemoSelect2() {
-                $('#s2_with_tag').select2({placeholder: "Select OS"});
-                $('#s2_country').select2();
-            }
-
-// Run timepicker
-            function DemoTimePicker() {
-                $('#input_time').timepicker({setDate: new Date()});
-            }
-
             // Create Wysiwig editor for textare
             TinyMCEStart('[id^=wysiwig_]', null);
-            // Add slider for change test input length
-            FormLayoutExampleInputLength($(".slider-style"));
-            // Initialize datepicker
-            $('#input_date').datepicker({setDate: new Date()});
-            // Load Timepicker plugin
-            LoadTimePickerScript(DemoTimePicker);
-            // Add tooltip to form-controls
-            $('.form-control').tooltip();
-            LoadSelect2Script(DemoSelect2);
-            // Load example of form validation
-            LoadBootstrapValidatorScript(DemoFormValidator);
             // Add drag-n-drop feature to boxes
             WinMove();
         });

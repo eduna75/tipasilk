@@ -1,0 +1,23 @@
+{% extends 'official/base.html' %}
+
+{% block content %}
+    <header id=header class="home-parallax home-fade dark-bg header-inner">
+        <div class=color-overlay></div>
+        <div class=container>
+            <h1>{{ e }}</h1>
+
+            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a
+                    href=#>{{ e }}</a>
+            </div>
+        </div>
+    </header>
+    <section id=contact class="section contact">
+        <div class="container">
+            <div class="section-content">
+                <div class="well-large">
+                <h1>{{ e }}</h1>
+            </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

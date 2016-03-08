@@ -318,3 +318,36 @@ def image(size, img_id=None):
     i.save(byte_io, 'JPEG')
     byte_io.seek(0)
     return send_file(byte_io, mimetype='image/jpeg')
+
+
+@app.route('/add-category')
+def add_category():
+    a = request.args.get('a', 0, type=str)
+    db.session.add(Categories(name=a))
+    db.session.commit()
+    cat = Categories.query.all()
+    result = []
+    for c in cat:
+        result.append((c.id, c.name))
+    print result
+    return jsonify(result=result)
+
+
+@app.errorhandler(400)
+@app.errorhandler(401)
+@app.errorhandler(402)
+@app.errorhandler(403)
+@app.errorhandler(404)
+@app.errorhandler(405)
+@app.errorhandler(406)
+@app.errorhandler(407)
+@app.errorhandler(408)
+@app.errorhandler(409)
+@app.errorhandler(410)
+@app.errorhandler(500)
+@app.errorhandler(501)
+@app.errorhandler(502)
+@app.errorhandler(503)
+@app.errorhandler(504)
+def error(e):
+    return render_template(template + 'error.html', e=e), 404

@@ -95,6 +95,9 @@ class Categories(db.Model):
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    def __init__(self, name):
+        self.name = name
+
 
 # should be many to many relationship/ many Products can have many Tags.
 class Tags(db.Model):
