@@ -4,7 +4,7 @@ from app import app, db
 from flask import render_template, request, url_for, redirect, session, jsonify, send_file, Blueprint, g
 from app.admin.models import Emails, Blog, Images, Products, Categories, Faq, Users
 from app.decorators import requires_login
-from setuptools.compat import BytesIO
+from io import BytesIO
 from werkzeug.security import check_password_hash
 import base64
 import StringIO
