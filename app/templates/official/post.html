@@ -6,9 +6,12 @@
         <div class=color-overlay></div>
         <div class=container>
             <h1>Post</h1>
-
-            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a
-                    href={{ url_for('blog') }}>Blog</a> <i class="fa fa-angle-double-right"></i> <a href=#>Post</a>
+            <div class=breadcrumb>
+                <ol class="breadcrumb">
+                    <li><a href={{ url_for('index') }}>Home</a></li>
+                    <li><a href={{ url_for('blog') }}>Blog</a></li>
+                    <li class="active">{{ post.title }}</li>
+                </ol>
             </div>
         </div>
     </header>

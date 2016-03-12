@@ -10,8 +10,12 @@
         <div class=container>
             <h1>About us</h1>
 
-            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i> <a
-                    href=#>About us</a></div>
+            <div>
+                <ol class="breadcrumb">
+                    <li><a href={{ url_for('index') }}>Home</a></li>
+                    <li class="active">About us</li>
+                </ol>
+            </div>
         </div>
     </header>
     <section id=about-us class="section about-us">

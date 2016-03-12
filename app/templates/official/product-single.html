@@ -6,9 +6,13 @@
         <div class="container">
             <h1>Product Details</h1>
 
-            <div class="breadcrumb"><a href="{{ url_for('index') }}">Home</a> <i class="fa fa-angle-double-right"></i>
-                <a href="{{ url_for('product') }}">Products</a> <i class="fa fa-angle-double-right"></i><a href="#">Product
-                    details</a></div>
+            <div>
+                <ol class="breadcrumb">
+                    <li><a href={{ url_for('index') }}>Home</a></li>
+                    <li><a href={{ url_for('product') }}>Products</a></li>
+                    <li class="active">{% for title in data %}{{ title.name }}{% endfor %}</li>
+                </ol>
+            </div>
         </div>
     </header>
 
@@ -29,9 +33,9 @@
                             <div class="col-sm-8 col-md-6">
                                 <div id="basicExample">
                                     {% for image in products.images %}
-{#                                          <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
+                                        {#                                          <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
                                         <a href="{{ url_for('image', size='image', img_id=image.id) }}" class="fancybox" rel="gallery" title="{{ products.shortdesc }}">
-                                        <img src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
+                                            <img src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
                                         </a>
                                     {% endfor %}
                                 </div>
@@ -103,36 +107,36 @@
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/justified-gallery/jquery.justifiedGallery.min.js') }}"></script>
 
-{#    <script type="text/javascript">#}
-{#        $("[id^=thumbnail-]").click('[id^=thumbnail-]', function () {#}
-{#            $.getJSON($SCRIPT_ROOT + '/load-image', {#}
-{#                a: $(this).attr('id')#}
-{#            }, function (data) {#}
-{#                $("#product-image").attr('src', 'data:image/jpg;base64,' + data.result);#}
-{#            });#}
-{#            return false;#}
-{#        });#}
-{#    </script>#}
+    {#    <script type="text/javascript">#}
+    {#        $("[id^=thumbnail-]").click('[id^=thumbnail-]', function () {#}
+    {#            $.getJSON($SCRIPT_ROOT + '/load-image', {#}
+    {#                a: $(this).attr('id')#}
+    {#            }, function (data) {#}
+    {#                $("#product-image").attr('src', 'data:image/jpg;base64,' + data.result);#}
+    {#            });#}
+    {#            return false;#}
+    {#        });#}
+    {#    </script>#}
 
     <script type="text/javascript">
-    $("#basicExample").justifiedGallery({
-        rowHeight : 200,
-        margins : 3
-    })
+        $("#basicExample").justifiedGallery({
+            rowHeight: 200,
+            margins: 3
+        })
     </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
             $(".fancybox").fancybox({
-                prevEffect : 'none',
-                nextEffect : 'none',
+                prevEffect: 'none',
+                nextEffect: 'none',
                 helpers: {
                     title: {
                         type: 'inside'
                     },
                     thumbs: {
-                      width : 50,
-                        height : 50
+                        width: 50,
+                        height: 50
                     },
                     overlay: {
                         css: {

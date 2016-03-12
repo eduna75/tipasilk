@@ -7,9 +7,11 @@
         <div class=color-overlay></div>
         <div class=container>
             <h1>Products</h1>
-
-            <div class=breadcrumb><a href={{ url_for('index') }}>Home</a> <i class="fa fa-angle-double-right"></i>
-                <a href=#>Products</a>
+            <div>
+                <ol class="breadcrumb">
+                    <li><a href={{ url_for('index') }}>Home</a></li>
+                    <li class="active">Products</li>
+                </ol>
             </div>
         </div>
     </header>
@@ -29,47 +31,26 @@
         </div>
         <div class="container">
             <div id="mygallery">
-                {% for product in products %}
-                    <a href="{{ url_for('product_spec', prod_id=product.id) }}">
-                        {% for image in product.images[0:1] %}
-                            <img src="{{ url_for('image', size='image', img_id=image.id) }}" alt="{{ product.shortdesc }}">
-                            <div class="caption">
-                            <strong>{{ product.shortdesc }}</strong>
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <a href="{{ url_for('product_spec', prod_id=product.id) }}">
+                                    {% for image in product.images[0:1] %}
+                                        <img src="{{ url_for('image', size='image', img_id=image.id) }}" alt="{{ product.shortdesc }}">
+                                        <div class="caption">
+                                            <strong>{{ product.shortdesc }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                </a>
                             </div>
-                        {% endfor %}
-                    </a>
-                {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </section>
 
 {% endblock %}
-{% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='/plugins/justified-gallery/justifiedGallery.min.css') }}"/>
-{% endblock %}
-{% block script %}
-    <script src="{{ url_for('static', filename='/plugins/justified-gallery/jquery.justifiedGallery.min.js') }}"></script>
-    <script type="text/javascript">
-        $("#mygallery").justifiedGallery({
-            rowHeight : 404,
-            margin : 3,
-            captions : true,
-            maxRowHeight: 0,
-				margins: 1,
-				border: 0,
-				rel : 'liveDemo',
-				lastRow: 'nojustify',
-				fixedHeight: false,
-				captions: true,
-				randomize: false,
-				sizeRangeSuffixes: {
-                    lt100: '_t',
-                    lt240: '_m',
-                    lt320: '_n',
-                    lt500: '',
-                    lt640: '_z',
-                    lt1024: '_b'
-                }
-        })
-    </script>
-{% endblock %}
+{% block css %}{% endblock %}
+{% block script %}{% endblock %}

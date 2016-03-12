@@ -1171,8 +1171,8 @@ blockquote p {
 }
 
 .header-inner .breadcrumb {
-    background-color: transparent;
-    color: rgba(254, 254, 255, .7)
+    /*background-color: transparent;*/
+    /*color: rgba(254, 254, 255, .7)*/
 }
 
 .header-inner .breadcrumb a {
@@ -3362,4 +3362,12 @@ blockquote p {
 
 .four-o-four .four-o-four-inner h1 {
     font-weight: 700
+}
+
+a:hover{
+    color: white;
+}
+
+.breadcrumb{
+    margin-bottom: 0;
 }
