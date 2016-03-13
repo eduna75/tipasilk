@@ -82,7 +82,8 @@ def orders():
 
 @mod.route('/products')
 def products():
-    return render_template('admin/tipasilk/products.html')
+    product = Products.query.all()
+    return render_template('admin/tipasilk/products.html', product=product)
 
 
 @mod.route('/create-product', methods=['GET', 'POST'])
