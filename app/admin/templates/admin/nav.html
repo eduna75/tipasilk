@@ -42,18 +42,6 @@
                             <a href="{{ url_for('admin') }}" class="style1"></a>
                             <ul class="nav navbar-nav pull-right panel-menu">
                                 <li class="hidden-xs">
-                                    <a href="{{ url_for('admin') }}" class="modal-link">
-                                        <i class="fa fa-bell"></i>
-                                        <span class="badge">7</span>
-                                    </a>
-                                </li>
-                                <li class="hidden-xs">
-                                    <a class="ajax-link" href="{{ url_for('static', filename='ajax/calendar.html') }}">
-                                        <i class="fa fa-calendar"></i>
-                                        <span class="badge">7</span>
-                                    </a>
-                                </li>
-                                <li class="hidden-xs">
                                     <a href="{{ url_for('emails') }}"
                                        class="ajax-link">
                                         <i class="fa fa-envelope"></i>
@@ -75,7 +63,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">
+                                            <a class="ajax-link" href="#">
                                                 <i class="fa fa-user"></i>
                                                 <span>Profile</span>
                                             </a>
@@ -88,21 +76,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ url_for('static', filename='ajax/gallery_simple.html') }}"
-                                               class="ajax-link">
-                                                <i class="fa fa-picture-o"></i>
-                                                <span>Albums</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url_for('static', filename='ajax/calendar.html') }}"
-                                               class="ajax-link">
-                                                <i class="fa fa-tasks"></i>
-                                                <span>Tasks</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
+                                            <a class="ajax-link" href="{{ url_for('admin.settings') }}">
                                                 <i class="fa fa-cog"></i>
                                                 <span>Settings</span>
                                             </a>
