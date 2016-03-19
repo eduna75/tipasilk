@@ -17,11 +17,13 @@
 
 <body id="null" data-spy=scroll data-target=#main-nav-collapse data-offset=100>
 {% block nav %}{% include 'official/nav.html' ignore missing %}{% endblock %}
+{% include 'official/modal.html' ignore missing %}
 {% block content %}{% endblock %}
 {% block footer %}{% include 'official/footer.html' ignore missing %}{% endblock %}
     <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:100,300,400">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/assets/css/ie_fix.css" type="text/css" property="stylesheet">
 {% block css %}{% endblock %}
 

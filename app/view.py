@@ -31,7 +31,7 @@ def blog():
 @app.route('/post/<int:post_id>')
 def post(post_id=None):
     posts = Blog.query.filter_by(id=post_id).first()
-    return render_template(template + 'post.html', post=posts)
+    return render_template(template + 'post.html', post=posts, session=session)
 
 
 @app.route('/about')

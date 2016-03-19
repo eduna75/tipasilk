@@ -16,5 +16,7 @@ db = SQLAlchemy(app)
 
 from app import view
 from app.admin.view import mod as admin
+from app.store.view import mod as store
 
 app.register_blueprint(admin)
+app.register_blueprint(store)

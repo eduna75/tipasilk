@@ -4,6 +4,7 @@
     <header class="home-parallax home-fade dark-bg header-inner" id="header">
         <div class="color-overlay"></div>
         <div class="container">
+
             <h1>Product Details</h1>
 
             <div>
@@ -15,7 +16,6 @@
             </div>
         </div>
     </header>
-
     <section id=about-us class="section about-us">
         <div class=container>
 
@@ -33,7 +33,7 @@
                             <div class="col-sm-8 col-md-6">
                                 <div id="basicExample">
                                     {% for image in products.images %}
-                                        {#                                          <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
+                                        {# <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
                                         <a href="{{ url_for('image', size='image', img_id=image.id) }}" class="fancybox" rel="gallery" title="{{ products.shortdesc }}">
                                             <img src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
                                         </a>
@@ -68,13 +68,15 @@
                                         </div>
 
                                         <div id="product-price">
-                                            <p id="product-price-price">{{ products.price|int }} <span>฿</span></p>
+                                            <p id="product-price-price"><span>฿</span> {{ products.price|int }}</p>
 
                                             <p id="product-longdesc">{{ products.longdesc|striptags|capitalize }}</p>
                                         </div>
                                         <div class="add-to-cart">
-                                            <form>
-                                                <input type="submit" class="btn btn-primary" value="ADD TO CART">
+                                            <form id="add" method="POST" action="{{ url_for('store.cart') }}">
+                                                <input type="hidden" name="product" value="{{ products.id }}"/>
+                                                <input type="number" value=1 name="quantity"/>
+                                                <input type="submit" class="btn btn-primary" value="ADD TO CART" />
                                             </form>
                                         </div>
                                     </div>
