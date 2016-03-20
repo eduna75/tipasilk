@@ -1,14 +1,17 @@
 <div class="container">
-    <div id="shopping-cart">
+    <div id="shopping-cart" data-toggle="modal" data-target=".bs-example-modal-sm">
         {% if 'cart' in session %}
-            <div id="cart" data-toggle="modal" data-target=".bs-example-modal-sm" style="width: 180px; border: solid white 1px; border-radius: 5px;color: white; padding: 3px; background-color: rgba(123, 0, 0, 0.6); margin-bottom: 2px;">
+            <div id="cart" style="width: 180px; border: solid white 1px; border-radius: 5px;color: white; padding: 3px; background-color: rgba(123, 0, 0, 0.6); margin-bottom: 2px;cursor: pointer;">
                 {% set products = [0] %}
+                {% set price = [0] %}
                 {% for item in session['cart'] %}
                     {% for key, value in item.iteritems() %}
-                        {% if products.append(products.pop() + value) %}{% endif %}
+                        {% if products.append(products.pop() + value[0]) %}{% endif %}
+                        {% if price.append(price.pop() + value[1]*value[0]) %}{% endif %}
                     {% endfor %}
                 {% endfor %}
-                Total: {{ products }} Products
+                <small>{{ products[0] }} Products in cart!<br/></small>
+                <small>Total price: ฿ {{ price[0] }}</small>
             </div>
         {% else %}
         {% endif %}

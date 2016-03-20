@@ -1,13 +1,42 @@
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
-            {% for item in session['cart'] %}
-                {% for key, value in item.iteritems() %}
-                    [<a href="#">x</a>] {{ key }} {{ value|int }} {% if value <= 1 %}Piece{% else %}
-                    Pieces
-                {% endif %}<br/>
-                {% endfor %}
-            {% endfor %}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Shopping Cart</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Product</th>
+                        <th>Amount</th>
+                        <th>Price</th>
+                    </tr>
+                {% set price = [0] %}
+                    {% for item in session['cart'] %}
+                        {% for key, value in item.iteritems() %}
+                            {% if price.append(price.pop() + value[1]*value[0]) %}{% endif %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value[0] }} x ฿{{ value[1] }}</td>
+                                <td>฿ {{ value[0]*value[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                <tr class="info">
+                    <td></td>
+                    <td>total</td>
+                    <td>฿ {{ price[0] }}</td>
+                </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Checkout</button>
+            </div>
         </div>
+        <!-- /.modal-content -->
     </div>
-</div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->

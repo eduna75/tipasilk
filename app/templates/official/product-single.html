@@ -75,8 +75,11 @@
                                         <div class="add-to-cart">
                                             <form id="add" method="POST" action="{{ url_for('store.cart') }}">
                                                 <input type="hidden" name="product" value="{{ products.id }}"/>
-                                                <input type="number" value=1 name="quantity"/>
-                                                <input type="submit" class="btn btn-primary" value="ADD TO CART" />
+                                                <input type="hidden" name="price" value="{{ products.price }}"
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" min="0" value=1 name="quantity" aria-label="...">
+                                                </div>
+                                                <input type="submit" class="btn btn-primary" value="ADD TO CART">
                                             </form>
                                         </div>
                                     </div>
@@ -108,18 +111,6 @@
     <script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/justified-gallery/jquery.justifiedGallery.min.js') }}"></script>
-
-    {#    <script type="text/javascript">#}
-    {#        $("[id^=thumbnail-]").click('[id^=thumbnail-]', function () {#}
-    {#            $.getJSON($SCRIPT_ROOT + '/load-image', {#}
-    {#                a: $(this).attr('id')#}
-    {#            }, function (data) {#}
-    {#                $("#product-image").attr('src', 'data:image/jpg;base64,' + data.result);#}
-    {#            });#}
-    {#            return false;#}
-    {#        });#}
-    {#    </script>#}
-
     <script type="text/javascript">
         $("#basicExample").justifiedGallery({
             rowHeight: 200,
