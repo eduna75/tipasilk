@@ -23,6 +23,14 @@ def cart():
                     d.update((k, [int(request.form['quantity']), int(float(request.form['price']))]) for k, v in d.items() if k == product.name)
         else:
             session['cart'.format(id)] = [{product.name: [int(request.form['quantity']), int(float(request.form['price']))]}]
-        if 'delete' in request.form:
-            pass
+    return redirect(request.referrer)
+
+
+@mod.route('/delete', methods=['POST', 'GET'])
+def delete():
+    if request.method == 'POST':
+        print request.form
+        if request.form['delete']:
+            for d in session['cart']:
+                d.pop(request.form['id'], None)
     return redirect(request.referrer)

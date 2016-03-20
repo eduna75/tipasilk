@@ -58,6 +58,7 @@
                                         <div id="options">
                                             options goes in here!
                                             <div class="col-md-6">
+                                                <label for="options-select">Select Option</label>
                                                 <select id="options-select" class="form-control">
                                                     <optgroup label="select size">
                                                         <option>SM</option>
@@ -75,9 +76,10 @@
                                         <div class="add-to-cart">
                                             <form id="add" method="POST" action="{{ url_for('store.cart') }}">
                                                 <input type="hidden" name="product" value="{{ products.id }}"/>
-                                                <input type="hidden" name="price" value="{{ products.price }}"
+                                                <input type="hidden" name="price" value="{{ products.price }}">
                                                 <div class="input-group">
-                                                    <input type="number" class="form-control" min="0" value=1 name="quantity" aria-label="...">
+                                                    <label for="number">Qty</label>
+                                                    <input type="number" id="number" class="form-control" min="0" value=1 name="quantity" aria-label="Quantity">
                                                 </div>
                                                 <input type="submit" class="btn btn-primary" value="ADD TO CART">
                                             </form>
