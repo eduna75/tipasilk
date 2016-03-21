@@ -1,6 +1,6 @@
 __author__ = 'justus'
 
-from flask import Blueprint, request, session, redirect, url_for
+from flask import Blueprint, request, session, redirect, url_for, render_template
 from app.admin.models import Products
 
 mod = Blueprint('store', __name__, static_folder='static', url_prefix='/store')
@@ -29,7 +29,6 @@ def cart():
 @mod.route('/delete', methods=['POST', 'GET'])
 def delete():
     if request.method == 'POST':
-        print request.form
         if request.form['delete']:
             for d in session['cart']:
                 d.pop(request.form['id'], None)

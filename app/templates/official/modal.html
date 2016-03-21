@@ -22,7 +22,7 @@
                                 <td>
                                     <form method="POST" action="{{ url_for('store.delete') }}">
                                         <input type="hidden" name="id" value="{{ key }}">
-                                        <input type="submit" class="btn btn-default" name="delete" value="X">
+                                        <button type="submit" class="btn btn-default" name="delete" value="X">X</button>
                                     </form>
                                 </td>
                                 <td>{{ key }}</td>
@@ -40,11 +40,30 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Checkout</button>
+
+                <form name="checkoutForm" method="POST" action="checkout" class="form-inline">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="description" value="Product order ฿{{ price[0]*100 }}"/>
+                    <script type="text/javascript" src="https://cdn.omise.co/card.js"
+                            data-key="YOUR_PUBLIC_KEY"
+                            data-frame-label="Tipasilk"
+                            data-button-label="Checkout"
+                            data-submit-label="Submit"
+                            data-location="yes"
+                            data-amount="{{ price[0]*100 }}"
+                            data-currency="thb"
+                            >
+                    </script>
+                    <!--the script will render <input type="hidden" name="omiseToken"> for you automatically-->
+                </form>
             </div>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script type="text/javascript">
+    var link = document.getElementsByTagName("BUTTON");
+    link[link.length-1].className = "btn btn-primary";
+</script>

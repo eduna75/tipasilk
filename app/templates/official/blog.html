@@ -37,7 +37,7 @@
                                     <div class=post-meta><span>By <a href=#>Tipasilk</a></span>
                                         <span>{{ post.created_on.strftime('%d/%m/%y') }}</span>
                                     </div>
-                                    <p>{{ post.body|safe|truncate(178) }}</p>
+                                    <span>{{ post.body|safe|truncate(178) }}</span>
                                 </div>
                             </div>
                         </div>
