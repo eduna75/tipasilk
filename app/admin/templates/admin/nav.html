@@ -42,7 +42,7 @@
                             <a href="{{ url_for('admin.admin') }}" class="style1"></a>
                             <ul class="nav navbar-nav pull-right panel-menu">
                                 <li class="hidden-xs">
-                                    <a href="{{ url_for('emails') }}"
+                                    <a href="{{ url_for('admin.emails') }}"
                                        class="ajax-link">
                                         <i class="fa fa-envelope"></i>
                                         <span class="badge">{{ emails|int }}</span>
@@ -69,7 +69,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ url_for('emails') }}"
+                                            <a href="{{ url_for('admin.emails') }}"
                                                class="ajax-link">
                                                 <i class="fa fa-envelope"></i>
                                                 <span>Messages</span>

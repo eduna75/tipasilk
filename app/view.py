@@ -82,54 +82,6 @@ def google():
     return send_from_directory(app.static_folder, request.path[1:])
 
 
-@app.route('/products')
-def products():
-    return render_template('admin/tipasilk/products.html')
-
-
-@app.route('/emails')
-def emails():
-    email = Emails.query.all()
-    return render_template('admin/tipasilk/emails.html', email=email)
-
-
-@app.route('/edit-faq', methods=['POST', 'GET'])
-def edit_faq():
-    if request.method == 'POST':
-        if 'add-faq' in request.form:
-            faq_data = Faq(title=request.form['title'], body=request.form['body'], section=request.form['section'])
-            db.session.add(faq_data)
-            db.session.commit()
-        elif 'delete-faq' in request.form:
-            db.session.delete(Faq.query.get(request.form['delete-faq']))
-            db.session.commit()
-        return redirect(url_for('admin', _anchor='edit-faq'))
-    faqs = Faq.query.all()
-    return render_template('admin/tipasilk/edit-faq.html', faqs=faqs)
-
-
-# not a view but a function
-def resize_image(data):
-    try:
-        size = (450, 600)
-        image = Image.open(data)
-        image.thumbnail(size)
-        result = StringIO.StringIO()
-        image.save(result, format='JPEG')
-
-        small_size = (150, 200)
-        thumbnail = Image.open(data)
-        thumbnail.thumbnail(small_size)
-        result2 = StringIO.StringIO()
-        thumbnail.save(result2, format='JPEG')
-
-        reply = [result.getvalue(), result2.getvalue()]
-    except BaseException as e:
-        print e, ' resize image:'
-
-    return reply
-
-
 # AJAX response to load image in product page
 @app.route('/load-image')
 def load_image():
@@ -156,19 +108,6 @@ def image(size, img_id=None):
     i.save(byte_io, 'JPEG')
     byte_io.seek(0)
     return send_file(byte_io, mimetype='image/jpeg')
-
-
-@app.route('/add-category')
-def add_category():
-    a = request.args.get('a', 0, type=str)
-    db.session.add(Categories(name=a))
-    db.session.commit()
-    cat = Categories.query.all()
-    result = []
-    for c in cat:
-        result.append((c.id, c.name))
-    print result
-    return jsonify(result=result)
 
 
 @app.errorhandler(400)
