@@ -12,7 +12,7 @@
                         <div class="text-center">
                             <h3 class="page-header">Tipasilk Login Page</h3>
                         </div>
-                        <form name="login" method="POST" action="login">
+                        <form name="login" method="POST" action="{{ url_for('login') }}">
                             <div class="form-group">
                                 <label class="control-label">Username</label>
                                 <input type="text" class="form-control" name="username"/>

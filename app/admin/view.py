@@ -48,7 +48,7 @@ def create_blog():
             db.session.add(image)
             db.session.commit()
 
-        return redirect(url_for('admin', _anchor='/create-blog'))
+        return redirect(url_for('admin.admin', _anchor='/create-blog'))
     return render_template('admin/tipasilk/create-blog.html')
 
 
@@ -59,7 +59,7 @@ def update_blog():
         posts.title = request.form['title']
         posts.body = request.form['body']
         db.session.commit()
-        return redirect(url_for('admin', _anchor='/update-blog'))
+        return redirect(url_for('admin.admin', _anchor='/update-blog'))
     else:
         data = Blog.query.all()
         return render_template('admin/tipasilk/update-blog.html', data=data)
@@ -72,7 +72,7 @@ def delete_blog():
         db.session.delete(Blog.query.get(request.form['post_id']))
         db.session.commit()
 
-    return redirect(url_for('admin', _anchor='/update-blog'))
+    return redirect(url_for('admin.admin', _anchor='/update-blog'))
 
 
 @mod.route('/orders')
@@ -106,10 +106,10 @@ def create_product():
                 prod_id = [prod.id for prod in Products.query.filter_by(name=prod_name)]
                 db.session.add(Images(image=product_image, product_id=prod_id[0], thumbnail=thumbnail))
                 db.session.commit()
-            return redirect(url_for('admin', _anchor='/create-product'))
+            return redirect(url_for('admin.admin', _anchor='/create-product'))
         except BaseException as e:
             print e, ' Something didn\'t worked that well'
-            return redirect(url_for('admin', _anchor='/create-product'))
+            return redirect(url_for('admin.admin', _anchor='/create-product'))
     return render_template('admin/tipasilk/create-products.html', product=product_list, category=category)
 
 
@@ -127,7 +127,7 @@ def update_product():
             db.session.commit()
         except BaseException as e:
             print e
-        return redirect(url_for('admin', _anchor='update-product'))
+        return redirect(url_for('admin.admin', _anchor='update-product'))
     else:
         data = Products.query.all()
     return render_template('admin/tipasilk/update-product.html', data=data)
@@ -202,7 +202,7 @@ def login():
             session.permanent = True
             admin.permanent_session_lifetime = timedelta(minutes=10)
             session['user_id'] = user.id
-        return redirect(url_for('admin'))
+        return redirect(url_for('admin.admin'))
     return render_template('admin/login.html')
 
 
