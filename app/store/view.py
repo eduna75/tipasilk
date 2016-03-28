@@ -24,7 +24,7 @@ def cart():
             elif any(product.name in d for d in session['cart']):
                 for d in session['cart']:
                     d.update(
-                        (k, [int(request.form['quantity']), int(float(request.form['price']))]) for k, v in d.items() if
+                        (k, [int(request.form['quantity']), int(float(request.form['price'])), product.product_nr, product.id]) for k, v in d.items() if
                         k == product.name)
         else:
             session['cart'.format(id)] = [{product.name: [int(request.form['quantity']),
