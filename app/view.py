@@ -61,8 +61,9 @@ def product():
 @app.route('/product-spec/<int:prod_id>')
 def product_spec(prod_id=None):
     data = Products.query.filter_by(id=prod_id)
+    products = Products.query.all()
 
-    return render_template(template + 'product-single.html', data=data)
+    return render_template(template + 'product-single.html', data=data, products=products)
 
 
 @app.route('/faq')

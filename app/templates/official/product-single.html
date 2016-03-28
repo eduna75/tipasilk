@@ -22,100 +22,336 @@
             <div class=section-content>
                 {% for products in data %}
                     <div class="productInfo">
-                        <div class="product-header-wrapper">
-                            <div class="header-title">
-                                <strong><a href="#">{{ products.name|safe|title }} </a>
-                                    <small>{{ products.shortdesc|safe|capitalize }}</small>
-                                </strong>
-                            </div>
+                    <div class="product-header-wrapper">
+                        <div class="header-title">
+                            <strong><a href="#">{{ products.name|safe|title }} </a>
+                                <small>{{ products.shortdesc|safe|capitalize }}</small>
+                            </strong>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-8 col-md-6">
-                                <div id="basicExample">
-                                    {% for image in products.images %}
-                                        {# <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
-                                        <a href="{{ url_for('image', size='image', img_id=image.id) }}" class="fancybox" rel="gallery" title="{{ products.shortdesc }}">
-                                            <img src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
-                                        </a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div class="product-content-wrapper">
-                                    <div class="product-left-content">
-                                        <div class="product-content">
-                                            <ul id="tags">
-                                                <li>test</li>
-                                                <li>test</li>
-                                            </ul>
-                                        </div>
-
-                                        <div id="promotions">
-                                            <span class="fa fa-gift"></span> if any promotions show here! and no where
-                                            else.
-                                        </div>
-
-                                        <div id="options">
-                                            <div class="col-md-6">
-                                                <label for="options-select">Select Option</label>
-                                                <select id="options-select" class="form-control">
-                                                    <optgroup label="select size">
-                                                        <option>SM</option>
-                                                        <option>LG</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div id="product-price">
-                                            <p id="product-price-price"><span>฿</span> {{ products.price|int }}</p>
-
-                                            <p id="product-longdesc">{{ products.longdesc|striptags|capitalize }}</p>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <form id="add" method="POST" action="{{ url_for('store.cart') }}">
-                                                <input type="hidden" name="product" value="{{ products.id }}"/>
-                                                <input type="hidden" name="price" value="{{ products.price }}">
-
-                                                <div class="input-group">
-                                                    {% if 'cart' in session %}
-                                                            {% for item in session['cart'] %}
-                                                                {% for key, value in item.iteritems() %}
-                                                                    {% if key == products.name %}
-                                                                    <p><strong><small>you have {{ value[0] }} {% if value[0] <= 1 %}item{% else %}items{% endif %} in the cart.</small></strong></p>
-                                                                    {% endif %}
-                                                                {% endfor %}
-                                                            {% endfor %}
-                                                    {% else %}
-                                                    {% endif %}
-                                                    <label for="number">Qty</label>
-                                                    <input type="number" id="number" class="form-control" min="0" value=1 name="quantity" aria-label="Quantity">
-                                                </div>
-                                                <input type="submit" class="btn btn-primary" value="ADD TO CART">
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="product-right-content">
-                                        <div class="right-content">
-                                            <div class="side-header">
-                                                <p>Some text about how to order should be here!</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    </div>
+                    <div class="row">
+                    <div class="img-thumb">
+                        <div class="col-sm-8 col-md-6">
+                            <div id="basicExample">
+                                {% for image in products.images %}
+                                    {# <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
+                                    <a href="{{ url_for('image', size='image', img_id=image.id) }}" class="fancybox" rel="gallery" title="{{ products.shortdesc }}">
+                                        <img src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
+                                    </a>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
+                        <div class="col-sm-6 padding-right">
+                            <div class="product-details"><!--product-details-->
+                                <div class="col-sm-12">
+                                    <div class="product-information"><!--/product-information-->
+                                        <form id="add" method="POST" action="{{ url_for('store.cart') }}">
+                                            <h2>{{ products.name }}</h2>
+
+                                            <p>Web ID: {{ products.product_nr }}</p>
+								            <span>
+                                                <input type="hidden" name="product" value="{{ products.id }}"/>
+                                                <input type="hidden" name="price" value="{{ products.price }}">
+                                                <span>THB ${{ products.price|int }}</span>
+                                                <label>Quantity:</label>
+                                                <input type="text" id="number" class="form-control" min="0" value=1 name="quantity" aria-label="Quantity">
+
+                                                <button type="submit" class="btn btn-default cart">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    Add to cart
+                                                </button>
+                                            </span>
+
+                                            <p><b>Availability:</b> In Stock</p>
+
+                                            <p><b>Condition:</b> New</p>
+
+                                            <p><b>Brand:</b> Tipasilk</p>
+                                        </form>
+                                    </div>
+                                    <!--/product-information-->
+                                </div>
+                            </div>
+                            <!--/product-details-->
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="category-tab shop-details-tab"><!--category-tab-->
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+                                <li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
+                                <li><a href="#tag" data-toggle="tab">Tag</a></li>
+                                <li class=""><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="details">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-justify">
+                                            <span>{{ products.longdesc|safe }}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="companyprofile">
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/home/gallery1.jpg" alt="">
+
+                                                <h2>$56</h2>
+
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/home/gallery3.jpg" alt="">
+
+                                                <h2>$56</h2>
+
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/home/gallery2.jpg" alt="">
+
+                                                <h2>$56</h2>
+
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/home/gallery4.jpg" alt="">
+
+                                                <h2>$56</h2>
+
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tag">
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/home/gallery1.jpg" alt="">
+
+                                                <h2>$56</h2>
+
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/home/gallery2.jpg" alt="">
+
+                                                <h2>$56</h2>
+
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/home/gallery3.jpg" alt="">
+
+                                                <h2>$56</h2>
+
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="images/home/gallery4.jpg" alt="">
+
+                                                <h2>$56</h2>
+
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="reviews">
+                                <div class="col-sm-12">
+                                    <ul>
+                                        <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
+                                        <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+                                        <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim
+                                        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                        aliquip ex ea commodo consequat.Duis aute irure dolor in
+                                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                        pariatur.</p>
+
+                                    <p><b>Write Your Review</b></p>
+
+                                    <form action="#">
+										<span>
+											<input placeholder="Your Name" type="text">
+											<input placeholder="Email Address" type="email">
+										</span>
+                                        <textarea name=""></textarea>
+                                        <b>Rating: </b> <img src="images/product-details/rating.png" alt="">
+                                        <button type="button" class="btn btn-default pull-right">
+                                            Submit
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/category-tab-->
+
                 {% endfor %}
+                <div class="recommended_items"><!--recommended_items-->
+                    <h2 class="title text-center">recommended items</h2>
+
+                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                {% for product in products[0:3] %}
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <a href="{{ url_for('product_spec', prod_id=product.id) }}">
+                                                        {% for image in product.images[0:1] %}
+                                                            <img src="{{ url_for('image', size='image', img_id=image.id) }}" alt="{{ product.shortdesc }}">
+                                                            <div class="caption">
+                                                                <strong>{{ product.shortdesc }}</strong>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </a>
+
+                                                    <h2>${{ product.price|int }}</h2>
+
+                                                    <p>{{ product.name }}</p>
+                                                    <button type="button" class="btn btn-default add-to-cart">
+                                                        <i class="fa fa-shopping-cart"></i>Add to cart
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="item">
+                                {% for product in products[3:] %}
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <a href="{{ url_for('product_spec', prod_id=product.id) }}">
+                                                        {% for image in product.images[0:1] %}
+                                                            <img src="{{ url_for('image', size='image', img_id=image.id) }}" alt="{{ product.shortdesc }}">
+                                                            <div class="caption">
+                                                                <strong>{{ product.shortdesc }}</strong>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </a>
+
+                                                    <h2>${{ product.price|int }}</h2>
+
+                                                    <p>{{ product.name }}</p>
+                                                    <button type="button" class="btn btn-default add-to-cart">
+                                                        <i class="fa fa-shopping-cart"></i>Add to cart
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--/recommended_items-->
+                </div>
+                </div>
             </div>
         </div>
     </section>
 
 {% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/product-temp.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/product-temp.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='/plugins/fancybox/jquery.fancybox.css') }}" media="screen"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='/plugins/justified-gallery/justifiedGallery.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/animate.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/prettyPhoto.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/price-range.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/responsive.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/main-shop.css') }}"/>
 {% endblock %}
 
 {% block script %}
@@ -123,6 +359,9 @@
     <script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/justified-gallery/jquery.justifiedGallery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/assets/js/shop/main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/assets/js/shop/price-range.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/assets/js/shop/contact.js') }}"></script>
     <script type="text/javascript">
         $("#basicExample").justifiedGallery({
             rowHeight: 200,

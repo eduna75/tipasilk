@@ -7,6 +7,7 @@
         <div class=color-overlay></div>
         <div class=container>
             <h1>Products</h1>
+
             <div>
                 <ol class="breadcrumb">
                     <li><a href={{ url_for('index') }}>Home</a></li>
@@ -16,41 +17,44 @@
         </div>
     </header>
     <section id=portfolio class="section portfolio">
-        <div class=container>
-            <div class=section-content>
-                <div class=main_content>
-                    <div class=isotop-filter id=filters>
-                        <button type=button class="btn btn-isotop is-checked" data-filter=*>All</button>
-                        <button type=button class="btn btn-isotop" data-filter=.design>Web</button>
-                        <button type=button class="btn btn-isotop" data-filter=.wordpress>WordPress</button>
-                        <button type=button class="btn btn-isotop" data-filter=.marketing>Marketing</button>
-                        <button type=button class="btn btn-isotop" data-filter=.brandidentity>Brand Identity</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container">
-            <div id="mygallery">
-                <div class="row">
-                    {% for product in products %}
-                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-                            <div class="thumbnail">
-                                <a href="{{ url_for('product_spec', prod_id=product.id) }}">
-                                    {% for image in product.images[0:1] %}
-                                        <img src="{{ url_for('image', size='image', img_id=image.id) }}" alt="{{ product.shortdesc }}">
-                                        <div class="caption">
-                                            <strong>{{ product.shortdesc }}</strong>
-                                        </div>
-                                    {% endfor %}
-                                </a>
+            <div class="features_items"><!--features_items-->
+                <h2 class="title text-center">Features Items</h2>
+                {% for product in products %}
+                    <div class="col-sm-4">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <a href="{{ url_for('product_spec', prod_id=product.id) }}">
+                                        {% for image in product.images[0:1] %}
+                                            <img src="{{ url_for('image', size='image', img_id=image.id) }}" alt="{{ product.shortdesc }}">
+                                            <div class="caption">
+                                                <strong>{{ product.shortdesc }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    </a>
+
+                                    <h2>${{ product.price|int }}</h2>
+
+                                    <p>{{ product.name }}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                                        to cart</a>
+                                </div>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                {% endfor %}
             </div>
+            <!--features_items-->
         </div>
     </section>
 
 {% endblock %}
-{% block css %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/animate.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/prettyPhoto.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/price-range.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/responsive.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/main-shop.css') }}"/>
+{% endblock %}
 {% block script %}{% endblock %}
