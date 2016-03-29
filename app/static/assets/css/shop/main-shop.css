@@ -2441,6 +2441,10 @@ h2.title {
   color: #8D8D8D;
 }
 
+#number.form-control{
+  display: inherit;
+}
+
 #contact-page .form-control {
   background-color: #fff;
   border: 1px solid #ddd;

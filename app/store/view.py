@@ -13,7 +13,6 @@ def index():
 
 @mod.route('/cart', methods=['GET', 'POST'])
 def cart():
-    print session['cart']
     if request.method == 'POST':
         product = Products.query.get(request.form['product'])
         if 'cart' in session:
@@ -37,7 +36,9 @@ def cart():
 @mod.route('/delete', methods=['POST', 'GET'])
 def delete():
     if request.method == 'POST':
-        if request.form['delete']:
+        if request.form['clear']:
+            session.pop('cart', None)
+        elif request.form['delete']:
             for d in session['cart']:
                 d.pop(request.form['id'], None)
     return redirect(request.referrer)

@@ -72,6 +72,16 @@ def faq():
     return render_template(template + 'faq.html', faqs=faqs)
 
 
+@app.route('/checkout')
+def checkout():
+    return render_template(template + 'checkout.html')
+
+
+@app.route('/omise')
+def omise():
+    return render_template(template + 'checkout-omise.html')
+
+
 @app.route('/robots.txt')
 def robots():
     return send_from_directory(app.static_folder, request.path[1:])
