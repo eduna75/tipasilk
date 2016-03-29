@@ -37,6 +37,15 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto', sans-serif;
 }
 
+.btn::before{
+  background: rgba(0, 0, 0, 0);
+}
+
+.btn-default:active, .btn-default:focus, .btn-default:hover{
+  background: #fe980f none repeat scroll 0 0;
+  color: #000;
+}
+
 .btn:hover, 
 .btn:focus{
   outline: none;
@@ -340,7 +349,7 @@ ul.sub-menu {
 *******Footer CSS******
 **************************/
 
-#footer {
+#footer-shop {
   background: #F0F0E9;
 }
 
@@ -878,7 +887,7 @@ h2.title {
 }
 
 .productinfo img{
-  max-height: 450px;
+  max-height: 330px;
 }
 
 .productinfo{
@@ -1211,7 +1220,7 @@ h2.title {
   border: 1px solid #F7F7F0;
   overflow: hidden;
   padding-bottom: 60px;
-  padding-left: 60px;
+  /*padding-left: 60px;*/
   padding-top: 60px;
   position: relative;
 }
