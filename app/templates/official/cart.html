@@ -1,19 +1,26 @@
 <div class="container">
-    <div id="shopping-cart" data-toggle="modal" data-target=".bs-example-modal-lg">
-        {% if 'cart' in session %}
-            <div id="cart" style="width: 180px; border: solid white 1px; border-radius: 5px;color: white; padding: 3px; background-color: rgba(123, 0, 0, 0.6); margin-bottom: 2px;cursor: pointer;">
-                {% set products = [0] %}
-                {% set price = [0] %}
-                {% for item in session['cart'] %}
-                    {% for key, value in item.iteritems() %}
-                        {% if products.append(products.pop() + value[0]) %}{% endif %}
-                        {% if price.append(price.pop() + value[1]*value[0]) %}{% endif %}
-                    {% endfor %}
-                {% endfor %}
-                <small>{{ products[0] }} Products in cart!<br/></small>
-                <small>Total price: ฿ {{ price[0] }}</small>
+    <div id="shopping-cart" data-toggle="modal" data-target=".bs-example-modal-lg" style="cursor: pointer;">
+        <div class="row">
+            <div class="col-sm-1">
+                {% if 'cart' in session %}
+                    <div id="cart" style="width: 180px; border: solid orange 1px; color: white; padding: 3px; margin-bottom: 2px; background-color: rgba(255, 153, 0, 0.3)">
+                        {% set products = [0] %}
+                        {% set price = [0] %}
+                        {% for item in session['cart'] %}
+                            {% for key, value in item.iteritems() %}
+                                {% if products.append(products.pop() + value[0]) %}{% endif %}
+                                {% if price.append(price.pop() + value[1]*value[0]) %}{% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        <small>{{ products[0] }} {% if products[0] <= 1 %}Product {% else %}Products{% endif %} in cart!<br/></small>
+                        <small>Total price: ฿ {{ price[0] }}</small>
+                    </div>
+                {% else %}
+                {% endif %}
             </div>
-        {% else %}
-        {% endif %}
+            <div class="col-sm-1">
+                <i class="fa fa-shopping-cart" style="font-size: 3.5em; color: #e38d13; padding-left: 15px;"></i>
+            </div>
+        </div>
     </div>
 </div>

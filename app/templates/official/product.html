@@ -28,9 +28,6 @@
                                     <a href="{{ url_for('product_spec', prod_id=product.id) }}">
                                         {% for image in product.images[0:1] %}
                                             <img src="{{ url_for('image', size='image', img_id=image.id) }}" alt="{{ product.shortdesc }}">
-                                            <div class="caption">
-                                                <strong>{{ product.shortdesc }}</strong>
-                                            </div>
                                         {% endfor %}
                                     </a>
 

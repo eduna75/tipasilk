@@ -19,7 +19,6 @@
                                 <td class="price">Price</td>
                                 <td class="quantity">Quantity</td>
                                 <td class="total">Total</td>
-                                <td></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -29,7 +28,11 @@
                                     {% if price.append(price.pop() + value[1]*value[0]) %}{% endif %}
                                     <tr>
                                         <td class="cart_product">
-                                            <a href=""><img src="" alt=""></a>
+                                            <form method="POST" action="{{ url_for('store.delete') }}">
+                                                <input type="hidden" name="id" value="{{ key }}">
+                                                <button type="submit" class="btn btn-default delete" name="delete" value="X">X
+                                                </button>
+                                            </form>
                                         </td>
                                         <td class="cart_description">
                                             <h4><a href="{{ url_for('product_spec', prod_id=value[3]) }}">{{ key }}</a></h4>
@@ -48,14 +51,6 @@
                                         </td>
                                         <td class="cart_total">
                                             <p class="cart_total_price">฿ {{ value[0]*value[1] }}</p>
-                                        </td>
-                                        <td class="cart_delete">
-
-                                            <form method="POST" action="{{ url_for('store.delete') }}">
-                                                <input type="hidden" name="id" value="{{ key }}">
-                                                <button type="submit" class="btn btn-default" name="delete" value="X">X
-                                                </button>
-                                            </form>
                                         </td>
                                     </tr>
                                 {% endfor %}
