@@ -31,7 +31,7 @@
                                         {% endfor %}
                                     </a>
 
-                                    <h2>${{ product.price|int }}</h2>
+                                    <h2>฿{{ product.price|int }}</h2>
 
                                     <p>{{ product.name }}</p>
 
@@ -55,10 +55,6 @@
     </section>
 {% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/animate.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/prettyPhoto.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/price-range.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/responsive.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/main-shop.css') }}"/>
 {% endblock %}
 {% block script %}{% endblock %}

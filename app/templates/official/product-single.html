@@ -31,13 +31,15 @@
                     </div>
                     <div class="row">
                         <div class="img-thumb">
-                            <div class="col-sm-8 col-md-7">
-                                <div id="basicExample">
+                            <div id="carousel" class="col-sm-8 col-md-7">
+                                <div class="owl-carousel owl-theme owl-responsive-1000 breakpoint owl-loaded">
                                     {% for image in products.images %}
-                                        {# <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
-                                        <a href="{{ url_for('image', size='image', img_id=image.id) }}" class="fancybox" rel="gallery" title="{{ products.shortdesc }}">
-                                            <img class="image-responsive" src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
-                                        </a>
+                                        <div class="owl-item">
+                                            {# <img class="thumbnail-img" id="thumbnail-{{ image.id }}" src="data:image/jpg;base64,{{ image.thumbnail }}">#}
+                                            <a href="{{ url_for('image', size='image', img_id=image.id) }}" class="fancybox" rel="gallery" title="{{ products.shortdesc }}">
+                                                <img class="image-responsive" src="{{ url_for('image', size='thumbnail', img_id=image.id) }}" alt="{{ products.name }}"/>
+                                            </a>
+                                        </div>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -52,7 +54,7 @@
 								            <span>
                                                 <input type="hidden" name="product" value="{{ products.id }}"/>
                                                 <input type="hidden" name="price" value="{{ products.price }}">
-                                                <span>THB ${{ products.price|int }}</span>
+                                                <span>THB ฿{{ products.price|int }}</span>
                                                 <label>Quantity:</label>
                                                 <input type="text" id="number" class="form-control" min="0" value=1 name="quantity" aria-label="Quantity">
 
@@ -102,7 +104,8 @@
                                             <div class="single-products">
                                                 <div class="productinfo text-justify">
                                                     <img src="images/home/gallery1.jpg" alt="">
-                                                    {% if products.details %}Something goes here.{% else %}N.V.T.{% endif %}
+                                                    {% if products.details %}Something goes here.{% else %}
+                                                        N.V.T.{% endif %}
                                                 </div>
                                             </div>
                                         </div>
@@ -124,19 +127,19 @@
                                 <div class="tab-pane fade" id="reviews">
                                     <div class="col-sm-12">
                                         {% if products.review %}
-                                        <ul>
-                                            <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-                                            <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-                                            <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-                                        </ul>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                            eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim
-                                            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                            aliquip ex ea commodo consequat.Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                            pariatur.</p>
+                                            <ul>
+                                                <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
+                                                <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+                                                <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+                                            </ul>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim
+                                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                aliquip ex ea commodo consequat.Duis aute irure dolor in
+                                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                                pariatur.</p>
                                         {% else %}
-                                        <p><strong>This item has no reviews yet.</strong></p>
+                                            <p><strong>This item has no reviews yet.</strong></p>
                                         {% endif %}
 
                                         <p><b>Write Your Review</b></p>
@@ -181,7 +184,7 @@
                                                         {% endfor %}
                                                     </a>
 
-                                                    <h2>${{ product.price|int }}</h2>
+                                                    <h2>฿{{ product.price|int }}</h2>
 
                                                     <p>{{ product.name }}</p>
 
@@ -215,7 +218,7 @@
                                                         {% endfor %}
                                                     </a>
 
-                                                    <h2>${{ product.price|int }}</h2>
+                                                    <h2>฿{{ product.price|int }}</h2>
 
                                                     <p>{{ product.name }}</p>
                                                     <button type="button" class="btn btn-default add-to-cart">
@@ -242,18 +245,18 @@
         </div>
         </div>
     </section>
-
 {% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/product-temp.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/lib/owlcarousel/owl-carousel/assets/owl.carousel.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/lib/owlcarousel/owl-carousel/owl.theme.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='/plugins/fancybox/jquery.fancybox.css') }}" media="screen"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/animate.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/main-shop.css') }}"/>
 {% endblock %}
 
 {% block script %}
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/jquery/jquery.min.js') }}"></script>
-    <script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/assets/lib/owlcarousel/owl-carousel/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='/plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='/assets/js/shop/main.js') }}"></script>
     <script type="text/javascript">
@@ -277,5 +280,36 @@
                 }
             });
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                center: true,
+                items: 4,
+                loop: true,
+                margin: 5,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    360: {
+                        items: 2,
+                        nav: true
+                    },
+                    600: {
+                        items: 3,
+                        nav: true
+                    },
+                    768: {
+                        items: 4,
+                        nav: true,
+                        loop: false,
+                        margin: 5
+                    }
+                }
+            })
+        })
     </script>
 {% endblock %}

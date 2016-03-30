@@ -21,11 +21,11 @@
 {% block content %}{% endblock %}
 {% block footer %}{% include 'official/footer.html' ignore missing %}{% endblock %}
     <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/ie_fix.css" type="text/css" property="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/font-awesome.min.css') }}"/>
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:100,300,400">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/assets/css/ie_fix.css" type="text/css" property="stylesheet"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/assets/css/shop/font-awesome.min.css') }}"/>
 {% block css %}{% endblock %}
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>

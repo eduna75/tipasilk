@@ -3371,3 +3371,7 @@ blockquote p {
 #mailto a{
     color: #cbc9cf;
 }
+
+#carousel{
+    padding-top: 45px;
+}
