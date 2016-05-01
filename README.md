@@ -24,3 +24,7 @@ INSTALL
     for installation make sure you have the following settings
         system variables DATABASE_URL
             export DATABASE_URL="postgresql://user:passwd@location/database"
+            export SECRET_KEY="yoursecretkeygoeshere"
+            
+            for DevelopmentConfig add:
+            export DATABASE_URL_TS="postgresql://user:passwd@location/database"
