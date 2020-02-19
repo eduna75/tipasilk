@@ -1,4 +1,4 @@
-# tipasilk
+# tipasilk[![Build Status][travis-badge]][travis] [![Coverage Status][coveralls-badge]][coveralls]
 tipasilk website 
 
 
