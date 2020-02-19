@@ -1,4 +1,4 @@
-# tipasilk[![Build Status][travis-badge]][travis] [![Coverage Status][coveralls-badge]][coveralls]
+# tipasilk [![Build Status](https://travis-ci.com/eduna75/tipasilk.svg?branch=master)](https://travis-ci.com/eduna75/tipasilk)
 tipasilk website 
 
 
