@@ -3,3 +3,5 @@ python:
   - "3.5"
 virtualenv:
   system_site_packages: true
+before_script:
+  - psql -c "CREATE USER skateparks WITH PASSWORD 'skateparks';" -U postgres
