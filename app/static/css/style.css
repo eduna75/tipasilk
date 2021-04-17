@@ -1381,7 +1381,7 @@ a:focus {
   }
 }
 .main-header .hero-header {
-  background: url(../img/company-logo/home-bg.jpg) center no-repeat;
+  background: url(https://bangupjobs.com/img/company-logo/home-bg.jpg) center no-repeat;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
   -o-background-size: 100%;
@@ -1412,7 +1412,7 @@ a:focus {
 .main-header .hero-header:after {
   content: "";
   position: absolute;
-  background: url(../img/company-logo/home-bgblur.jpg) center no-repeat;
+  background: url(https://bangupjobs.com/img/company-logo/home-bgblur.jpg) center no-repeat;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
   -o-background-size: 100%;
@@ -1476,7 +1476,7 @@ a:focus {
 }
 .main-header .form-search-home:before {
   content: "";
-  background: url(../img/company-logo/cloud-1.png) no-repeat;
+  background: url(https://bangupjobs.com/img/company-logo/cloud-1.png) no-repeat;
   position: absolute;
   width: 235px;
   height: 110px;
@@ -1485,7 +1485,7 @@ a:focus {
 }
 .main-header .form-search-home:after {
   content: "";
-  background: url(../img/company-logo/cloud-2.png) no-repeat;
+  background: url(https://bangupjobs.com/img/company-logo/cloud-2.png) no-repeat;
   position: absolute;
   width: 235px;
   height: 110px;
@@ -2015,7 +2015,7 @@ a:focus {
 }
 .map-area-detail {
   border-top: 1px solid #e1e1e1;
-  background: #f5f5f5 url(../img/company-logo/preloader.gif) center no-repeat;
+  background: #f5f5f5 url(https://bangupjobs.com/img/company-logo/preloader.gif) center no-repeat;
   position: relative;
 }
 .map-area-detail:before {
